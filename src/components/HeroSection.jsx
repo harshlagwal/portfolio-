@@ -7,7 +7,7 @@ import ResumeModal from './ResumeModal';
 
 const HeroSection = () => {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-  const resumeLink = "https://drive.google.com/file/d/1uxFg6god5P-uLiUbt5E1TZAEmNvA3raq/view?usp=drivesdk";
+  const resumeLink = "https://drive.google.com/file/d/1BFWWx7w31DVlc4bStGS13Olq3lJMDJzo/view?usp=drive_link";
 
   return (
     <section id="home" className="relative min-h-[85vh] w-full overflow-hidden flex flex-col justify-between pt-40 pb-8 bg-white dark:bg-[#0b0f1a] transition-colors duration-500">

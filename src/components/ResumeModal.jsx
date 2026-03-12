@@ -14,7 +14,8 @@ const ResumeModal = ({ isOpen, onClose, resumeLink }) => {
   }, [isOpen]);
 
   // Convert the drive link to a preview link and download link if possible
-  const previewLink = resumeLink.replace('/view?usp=drivesdk', '/preview');
+  // Robustly convert any Drive share URL → embed preview URL
+  const previewLink = resumeLink.replace(/\/view.*$/, '/preview');
   
   // Extract ID and create a direct download link
   const fileIdMatch = resumeLink.match(/\/d\/([a-zA-Z0-9_-]+)/);
