@@ -5,6 +5,18 @@ import { Github } from 'lucide-react';
 const Projects = () => {
   const projects = [
     {
+      title: "WanderLust.ai",
+      description: [
+        "🌍 AI Travel Planner – Discover, plan, and organize trips with intelligent itineraries",
+        "🗺️ Smart Itinerary Generation – Powered by Google Gemini AI, tailored to preferences, budget, and duration",
+        "💾 Trip Management – Save, revisit, and share travel plans with ease",
+        "🎨 Modern UI/UX – Interactive maps, responsive design, immersive visuals",
+        "👥 Admin Dashboard – Manage users, itineraries, and search analytics"
+      ],
+      tech: ["Node.js", "Express", "MongoDB", "React", "TypeScript", "Tailwind CSS", "Firebase", "Gemini AI"],
+      github: "https://github.com/harshlagwal/WanderLust.ai"
+    },
+    {
       title: "Healthcare Assistant Chatbot",
       subtitle: "Developed during AI Transformative Learning Internship (Edunet Foundation)",
       description: [
