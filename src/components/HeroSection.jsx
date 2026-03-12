@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Github, Linkedin, Mail, Download } from 'lucide-react';
 import Navbar from './Navbar';
 import ResumeModal from './ResumeModal';
+import ParticleBackground from './ParticleBackground';
 
 
 const HeroSection = () => {
@@ -17,6 +18,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-0 opacity-100 dark:opacity-40 transition-opacity duration-500 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 grid-pattern dark:opacity-20 opacity-60"></div>
         <div className="mesh-glow"></div>
+        <ParticleBackground />
         
         {/* Soft Blur Circles */}
         <motion.div 

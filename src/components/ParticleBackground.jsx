@@ -1,173 +1,199 @@
 import React, { useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
-// Pre-render glow sprite into an offscreen canvas ONCE.
-// Every particle just calls drawImage() — zero per-frame gradient cost.
-function buildSprite(glowColor, coreColor, size) {
-  const oc    = document.createElement('canvas');
-  oc.width    = size;
-  oc.height   = size;
-  const oc2   = oc.getContext('2d');
-  const cx    = size / 2;
+/**
+ * Premium AI-Style Particle Background
+ * Features:
+ * - Floating glowing nodes (Neural Network style)
+ * - Proximity-based connecting lines
+ * - Subtle cursor repulsion and attraction
+ * - High-performance Canvas 2D optimized with sprites
+ * - Theme-aware colors and intensities
+ */
 
-  // Soft outer glow
-  const g = oc2.createRadialGradient(cx, cx, 0, cx, cx, cx);
-  g.addColorStop(0,    glowColor);
-  g.addColorStop(0.25, glowColor);
-  g.addColorStop(0.7,  glowColor.replace('1)', '0.2)'));
-  g.addColorStop(1,    glowColor.replace('1)', '0)'));
-  oc2.beginPath();
-  oc2.arc(cx, cx, cx, 0, Math.PI * 2);
-  oc2.fillStyle = g;
-  oc2.fill();
+function buildNodeSprite(color, size) {
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const center = size / 2;
 
-  // Crisp bright core + shadow for extra shine
-  oc2.beginPath();
-  oc2.arc(cx, cx, Math.max(1, size * 0.09), 0, Math.PI * 2);
-  oc2.fillStyle    = coreColor;
-  oc2.shadowColor  = coreColor;
-  oc2.shadowBlur   = size * 0.35;
-  oc2.fill();
+  // Small, sharp glowing dot
+  const gradient = ctx.createRadialGradient(center, center, 0, center, center, center);
+  gradient.addColorStop(0, color);
+  gradient.addColorStop(0.3, color.replace('1)', '0.8)'));
+  gradient.addColorStop(0.6, color.replace('1)', '0.2)'));
+  gradient.addColorStop(1, 'rgba(0,0,0,0)');
 
-  return oc;
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(center, center, center, 0, Math.PI * 2);
+  ctx.fill();
+
+  return canvas;
 }
 
 const ParticleBackground = () => {
   const canvasRef = useRef(null);
   const { isDark } = useTheme();
+  const mouseRef = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const ctx = canvas.getContext('2d');
     let animationFrameId = null;
-    let outerRafId       = null;
-    let innerRafId       = null;
-    let listeners        = [];         // track event listeners for cleanup
+    let particles = [];
+    let w, h;
+    
+    // Config
+    const PARTICLE_COUNT = 140; 
+    const CONNECTION_DISTANCE = 110;
+    const MOUSE_DISTANCE = 150;
+    const NODE_SIZE = 12; // Canvas sprite size
 
-    // Double-rAF: defer ALL canvas work until after the browser's first paint.
-    // This means hero text renders instantly; particles start 2 frames later.
-    outerRafId = requestAnimationFrame(() => {
-      innerRafId = requestAnimationFrame(() => {
+    // Thematic Colors
+    const colors = isDark 
+      ? { node: 'rgba(56, 189, 248, 1)', line: 'rgba(56, 189, 248, 0.15)' } // Sky Blue
+      : { node: 'rgba(37, 99, 235, 1)', line: 'rgba(37, 99, 235, 0.1)' };   // Vibrant Blue
 
-        const ctx    = canvas.getContext('2d');
-        const SPRITE  = 48;   // sprite canvas size in logical px
+    const nodeSprite = buildNodeSprite(colors.node, NODE_SIZE * (window.devicePixelRatio || 1));
 
-        // Build sprites once — shared by every particle (fast bitmap blit)
-        const darkSprite = buildSprite(
-          'rgba(200,225,255,1)',   // cool-white glow
-          '#ffffff',
-          SPRITE
-        );
-        const lightSprite = buildSprite(
-          'rgba(79,70,229,1)',     // indigo glow
-          '#a5b4fc',              // bright indigo core
-          SPRITE
-        );
-        const sprite = isDark ? darkSprite : lightSprite;
+    class Particle {
+      constructor() {
+        this.reset();
+      }
 
-        let logicalW = 0;
-        let logicalH = 0;
-        let particles = [];
+      reset() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.vx = (Math.random() - 0.5) * 0.4; // Slow, smooth movement
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.radius = Math.random() * 1.5 + 0.8;
+        this.baseRadius = this.radius;
+      }
 
-        // ── Particle ─────────────────────────────────────────────
-        class Particle {
-          constructor(spreadY) {
-            this.reset(spreadY);
-          }
-          reset(spreadY = false) {
-            this.x         = Math.random() * logicalW;
-            this.y         = spreadY
-              ? Math.random() * logicalH
-              : logicalH + Math.random() * 40;
-            this.scale     = Math.random() * 0.5 + 0.15;
-            this.half      = (SPRITE * this.scale) / 2;
-            this.speed     = Math.random() * 0.38 + 0.1;
-            this.drift     = (Math.random() - 0.5) * 0.12;
-            this.opacity   = 0;
-            this.maxOp     = Math.random() * 0.55 + 0.38;
-            this.fadeIn    = Math.random() * 0.005 + 0.002;
-            this.growing   = true;
-            this.fadingOut = false;
-          }
-          update() {
-            this.y -= this.speed;
-            this.x += this.drift;
+      update(mouseX, mouseY) {
+        // Organic floating motion
+        this.x += this.vx;
+        this.y += this.vy;
 
-            // Fade in
-            if (this.growing) {
-              this.opacity = Math.min(this.opacity + this.fadeIn, this.maxOp);
-              if (this.opacity >= this.maxOp) this.growing = false;
-            }
-            // Fade out near top 18%
-            if (!this.growing && this.y < logicalH * 0.18) {
-              this.fadingOut = true;
-            }
-            if (this.fadingOut) {
-              this.opacity = Math.max(this.opacity - this.fadeIn * 2, 0);
-            }
-            // Recycle
-            if (this.y < -SPRITE || this.opacity <= 0) {
-              this.reset(false);
-            }
-          }
-          draw() {
-            if (this.opacity <= 0) return;
-            const s = SPRITE * this.scale;
-            ctx.save();
-            ctx.globalAlpha = this.opacity;
-            ctx.drawImage(sprite, this.x - this.half, this.y - this.half, s, s);
-            ctx.restore();
+        // Wrap around edges
+        if (this.x < 0) this.x = w;
+        if (this.x > w) this.x = 0;
+        if (this.y < 0) this.y = h;
+        if (this.y > h) this.y = 0;
+
+        // Cursor interaction (Repulsion / Gentle push)
+        const dx = this.x - mouseX;
+        const dy = this.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < MOUSE_DISTANCE) {
+          const force = (MOUSE_DISTANCE - dist) / MOUSE_DISTANCE;
+          this.x += (dx / dist) * force * 1.5;
+          this.y += (dy / dist) * force * 1.5;
+          this.radius = this.baseRadius + force * 1.2;
+        } else {
+          this.radius = this.baseRadius;
+        }
+      }
+
+      draw() {
+        const s = NODE_SIZE;
+        ctx.drawImage(nodeSprite, this.x - s/2, this.y - s/2, s, s);
+      }
+    }
+
+    const init = () => {
+      const parent = canvas.parentElement;
+      w = parent ? parent.offsetWidth : window.innerWidth;
+      h = parent ? parent.offsetHeight : window.innerHeight;
+
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.scale(dpr, dpr);
+
+      particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
+    };
+
+    const drawLine = (p1, p2, alpha) => {
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+      ctx.strokeStyle = colors.line.replace('0.1', alpha.toString());
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, w, h);
+      
+      const mouse = mouseRef.current;
+
+      // Update and draw connections
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+        p1.update(mouse.x, mouse.y);
+        p1.draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < CONNECTION_DISTANCE) {
+            const alpha = (1 - (dist / CONNECTION_DISTANCE)) * 0.2;
+            drawLine(p1, p2, alpha);
           }
         }
 
-        // ── Init canvas size + particles ─────────────────────────
-        const init = () => {
-          const parent = canvas.parentElement;
-          logicalW = parent ? parent.offsetWidth  : window.innerWidth;
-          logicalH = parent ? parent.offsetHeight : window.innerHeight;
+        // Connection to mouse
+        const dxm = p1.x - mouse.x;
+        const dym = p1.y - mouse.y;
+        const distM = Math.sqrt(dxm * dxm + dym * dym);
+        if (distM < MOUSE_DISTANCE) {
+          const alphaM = (1 - (distM / MOUSE_DISTANCE)) * 0.3;
+          drawLine(p1, mouse, alphaM);
+        }
+      }
 
-          const dpr = window.devicePixelRatio || 1;
-          canvas.width        = logicalW * dpr;
-          canvas.height       = logicalH * dpr;
-          canvas.style.width  = logicalW + 'px';
-          canvas.style.height = logicalH + 'px';
-          ctx.scale(dpr, dpr);
+      animationFrameId = requestAnimationFrame(animate);
+    };
 
-          const count = Math.min(
-            Math.floor((logicalW * logicalH) / 4500),
-            280
-          );
-          particles = [];
-          for (let i = 0; i < count; i++) {
-            particles.push(new Particle(true));
-          }
-        };
+    const handleMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    };
 
-        // ── Animation loop ────────────────────────────────────────
-        const animate = () => {
-          ctx.clearRect(0, 0, logicalW, logicalH);
-          particles.forEach(p => { p.update(); p.draw(); });
-          animationFrameId = requestAnimationFrame(animate);
-        };
+    const handleMouseLeave = () => {
+      mouseRef.current = { x: -1000, y: -1000 };
+    };
 
-        // ── Resize handler ────────────────────────────────────────
-        const handleResize = () => init();
-        window.addEventListener('resize', handleResize);
-        listeners.push(['resize', handleResize]);
+    const handleResize = () => {
+      init();
+    };
 
-        init();
-        animate();
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove);
+    canvas.parentElement?.addEventListener('mouseleave', handleMouseLeave);
 
-      }); // end inner rAF
-    });   // end outer rAF
+    init();
+    animate();
 
-    // Cleanup — cancel everything regardless of which stage we're in
     return () => {
-      cancelAnimationFrame(outerRafId);
-      cancelAnimationFrame(innerRafId);
       cancelAnimationFrame(animationFrameId);
-      listeners.forEach(([ev, fn]) => window.removeEventListener(ev, fn));
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      canvas.parentElement?.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [isDark]);
 
@@ -176,8 +202,8 @@ const ParticleBackground = () => {
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none z-[1]"
       style={{
-        opacity: isDark ? 0.92 : 0.65,
-        willChange: 'transform',   // promotes canvas to its own GPU layer
+        opacity: isDark ? 0.7 : 0.5,
+        mixBlendMode: isDark ? 'screen' : 'multiply'
       }}
     />
   );
