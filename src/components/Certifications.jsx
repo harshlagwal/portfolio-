@@ -47,6 +47,12 @@ const certificates = [
     logo: "https://i.postimg.cc/7hv7Kbcq/Download-Tata-logo-vector-Tata-icon-free-vector.jpg",
     link: "https://drive.google.com/file/d/1XWAbgsq4b2I5ZTERwjL01xqNXDNT2Zfs/view",
   },
+  {
+    title: "AI Transformative Learning Intern Certificate",
+    company: "Edunet Foundation",
+    logo: "https://i.postimg.cc/XqN2KP0r/edunet-foundation.jpg",
+    link: "https://drive.google.com/file/d/1scilZSa8bJNOJCDlpnINwLbfBrjUsjZL/view?usp=drivesdk",
+  },
 ];
 
 const Certifications = () => {
