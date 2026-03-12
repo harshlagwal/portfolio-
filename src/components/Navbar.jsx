@@ -59,17 +59,17 @@ const Navbar = () => {
       className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-[95%] max-w-6xl"
     >
       <div 
-        className={`rounded-3xl md:rounded-full px-5 py-3 md:px-8 md:py-4 flex justify-between items-center transition-all duration-500 border
+        className={`rounded-3xl md:rounded-full px-4 py-2.5 md:px-8 md:py-4 flex justify-between items-center border transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500
           ${isScrolled 
-            ? 'bg-white/80 dark:bg-slate-900/80 shadow-xl backdrop-blur-[20px] border-white/30 dark:border-white/10' 
-            : 'bg-white/60 dark:bg-slate-900/60 shadow-lg backdrop-blur-[12px] border-white/20 dark:border-white/5'
+            ? 'bg-white/90 dark:bg-slate-900/90 shadow-xl backdrop-blur-[20px] border-white/30 dark:border-white/10' 
+            : 'bg-white/70 dark:bg-slate-900/70 shadow-lg backdrop-blur-[12px] border-white/20 dark:border-white/10'
           }`}
       >
-        <a href="#home" className="flex items-center gap-1.5 hover:opacity-80 transition-all duration-300 group z-50">
-          <span className="text-lg md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white font-display transition-colors duration-500">
+        <a href="#home" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity duration-300 group z-50">
+          <span className="text-lg md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white font-display leading-none">
             Harsh
           </span>
-          <span className="text-lg md:text-2xl font-bold tracking-tight text-vibrant-blue font-display transition-colors duration-500">
+          <span className="text-lg md:text-2xl font-bold tracking-tight text-vibrant-blue font-display leading-none">
             Lagwal
           </span>
         </a>
@@ -80,7 +80,7 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href}
-              className="text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-all duration-300 font-sans relative group"
+              className="text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 font-sans relative group"
             >
               {link.name}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-vibrant-blue transition-all duration-300 group-hover:w-full"></span>
@@ -92,7 +92,7 @@ const Navbar = () => {
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 md:p-2.5 rounded-full bg-white/70 dark:bg-slate-800/70 text-gray-900 dark:text-white hover:scale-105 active:scale-95 transition-all duration-500 shadow-sm border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-md"
+            className="p-2 md:p-2.5 rounded-full bg-white/70 dark:bg-slate-800/70 text-gray-900 dark:text-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-md flex items-center justify-center"
             aria-label="Toggle Dark Mode"
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -102,6 +102,7 @@ const Navbar = () => {
                 animate={{ rotate: 0, opacity: 1, scale: 1 }}
                 exit={{ rotate: 180, opacity: 0, scale: 0.5 }}
                 transition={{ duration: 0.5, ease: "backOut" }}
+                className="flex items-center justify-center"
               >
                 {isDark ? <Sun size={18} className="text-yellow-400" /> : <Moon size={18} className="text-gray-900" />}
               </motion.div>
@@ -111,7 +112,7 @@ const Navbar = () => {
           {/* Hire Me - Hidden on mobile, visible on small and up */}
           <a 
             href="#contact" 
-            className="hidden sm:flex items-center justify-center px-5 py-2 rounded-full bg-gray-900 dark:bg-white text-white dark:text-[#0b0f1a] text-sm font-medium transition-colors duration-500 shadow-md font-sans hover:scale-105 active:scale-95"
+            className="hidden sm:flex items-center justify-center px-5 py-2 rounded-full bg-gray-900 dark:bg-white text-white dark:text-[#0b0f1a] text-sm font-medium transition-colors duration-500 shadow-md font-sans hover:scale-105 active:scale-95 h-10"
           >
             Hire Me
           </a>
@@ -119,13 +120,14 @@ const Navbar = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="flex md:hidden p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white transition-all duration-300 border border-gray-200 dark:border-gray-700"
+            className="flex md:hidden p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white transition-all duration-300 border border-gray-200 dark:border-gray-700 flex items-center justify-center"
             aria-label="Toggle Mobile Menu"
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
+
 
       {/* Mobile Menu Dropdown */}
       <AnimatePresence>
