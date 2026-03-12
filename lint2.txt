@@ -1,0 +1,33 @@
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\About.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\Certifications.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\Contact.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\Experience.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\Footer.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\HeroSection.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\Navbar.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\Projects.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\components\Skills.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\harsh\OneDrive\Desktop\portfolio harsh lagwal\src\context\ThemeContext.jsx
+  26:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+✖ 10 problems (10 errors, 0 warnings)
+
