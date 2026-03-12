@@ -38,7 +38,7 @@ const CertificateModal = ({ isOpen, onClose, certificateLink }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="relative w-full max-w-4xl max-h-[90vh] flex flex-col bg-white dark:bg-[#0b0f1a] border border-gray-200 dark:border-gray-700/50 rounded-2xl shadow-2xl overflow-hidden z-10"
+            className="relative w-full max-w-4xl max-h-[90vh] max-h-[90dvh] flex flex-col bg-white dark:bg-[#0b0f1a] border border-gray-200 dark:border-gray-700/50 rounded-2xl shadow-2xl overflow-hidden z-10"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-[#0b0f1a]/50">
@@ -55,7 +55,7 @@ const CertificateModal = ({ isOpen, onClose, certificateLink }) => {
             </div>
 
             {/* Iframe Container */}
-            <div className="flex-1 w-full bg-gray-100 dark:bg-gray-900 overflow-hidden min-h-[50vh] md:min-h-[60vh] relative">
+            <div className="flex-1 w-full bg-gray-100 dark:bg-gray-900 overflow-hidden min-h-[50vh] min-h-[50dvh] md:min-h-[60vh] md:min-h-[60dvh] relative">
               <iframe 
                 src={previewLink} 
                 className="absolute inset-0 w-full h-full border-0"

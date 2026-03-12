@@ -25,14 +25,17 @@ const AppContent = () => {
   const { isDark } = useTheme();
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 dark:bg-[#0b0f1a] dark:text-white selection:bg-primary/10 selection:text-primary font-sans transition-colors duration-500">
+    <div className="min-h-[100vh] min-h-[100dvh] bg-white text-gray-900 dark:bg-[#0b0f1a] dark:text-white selection:bg-primary/10 selection:text-primary font-sans transition-colors duration-500">
       <main>
         {/* Hero loads immediately — no lazy */}
         <HeroSection />
 
         {/* Everything else is lazy — loads after hero paints */}
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="h-[140px]" />}>
           <ScrollingSkills />
+        </Suspense>
+        
+        <Suspense fallback={null}>
           <About />
           <Skills />
           <Projects />

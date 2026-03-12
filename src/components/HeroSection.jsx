@@ -11,7 +11,7 @@ const HeroSection = () => {
   const resumeLink = "https://drive.google.com/file/d/1BFWWx7w31DVlc4bStGS13Olq3lJMDJzo/view?usp=drive_link";
 
   return (
-    <section id="home" className="relative min-h-screen w-full overflow-hidden flex flex-col justify-between pt-24 md:pt-40 pb-8 bg-white dark:bg-[#0b0f1a] transition-colors duration-500">
+    <section id="home" className="relative min-h-[100vh] min-h-[100dvh] w-full overflow-hidden flex flex-col justify-between pt-24 md:pt-40 pb-8 bg-white dark:bg-[#0b0f1a] transition-colors duration-500">
       <Navbar />
 
       {/* Background Effects */}

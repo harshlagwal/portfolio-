@@ -139,8 +139,15 @@ const ParticleBackground = () => {
 
     const init = () => {
       const parent = canvas.parentElement;
-      w = parent ? parent.offsetWidth : window.innerWidth;
-      h = parent ? parent.offsetHeight : window.innerHeight;
+      if (!parent) return;
+      w = parent.offsetWidth;
+      h = parent.offsetHeight;
+
+      // Ensure we have valid dimensions
+      if (w === 0 || h === 0) {
+        w = window.innerWidth;
+        h = window.innerHeight;
+      }
 
       const dpr = window.devicePixelRatio || 1;
       canvas.width = w * dpr;
@@ -181,10 +188,14 @@ const ParticleBackground = () => {
     window.addEventListener('mousemove', handleMouseMove);
     canvas.parentElement?.addEventListener('mouseleave', handleMouseLeave);
 
-    init();
-    animate();
+    // Initial delay to let layout settle
+    const timer = setTimeout(() => {
+      init();
+      animate();
+    }, 50);
 
     return () => {
+      clearTimeout(timer);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
