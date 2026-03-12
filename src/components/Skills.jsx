@@ -38,7 +38,7 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
           {skillCategories.map((category, idx) => (
             <motion.div
               key={idx}
@@ -46,20 +46,20 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-8 rounded-3xl hover:border-vibrant-blue/30 transition-all duration-500 group"
+              className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 md:p-8 rounded-3xl hover:border-vibrant-blue/30 transition-all duration-500 group shadow-sm"
             >
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-6 md:mb-8">
                 <div className="p-3 bg-sky/30 dark:bg-vibrant-blue/20 rounded-2xl group-hover:bg-vibrant-blue/10 transition-all text-vibrant-blue">
                   {category.icon}
                 </div>
                 <h3 className="text-xl font-semibold font-display tracking-tight text-gray-900 dark:text-white transition-colors duration-500">{category.title}</h3>
               </div>
               
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-2 md:gap-3">
                 {category.skills.map((skill, sIdx) => (
                    <span 
                     key={sIdx}
-                    className="px-5 py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-full text-xs font-bold font-sans text-gray-600 dark:text-gray-400 hover:bg-vibrant-blue/10 dark:hover:bg-vibrant-blue/20 hover:text-vibrant-blue dark:hover:text-vibrant-blue hover:border-vibrant-blue/30 transition-all cursor-default uppercase tracking-widest shadow-sm duration-300 min-w-[100px] text-center flex items-center justify-center h-10"
+                    className="px-4 md:px-5 py-2 md:py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-full text-[10px] md:text-xs font-bold font-sans text-gray-600 dark:text-gray-400 hover:bg-vibrant-blue/10 dark:hover:bg-vibrant-blue/20 hover:text-vibrant-blue dark:hover:text-vibrant-blue hover:border-vibrant-blue/30 transition-all cursor-default uppercase tracking-widest shadow-sm duration-300 min-w-[80px] md:min-w-[100px] text-center flex items-center justify-center h-8 md:h-10"
                   >
                     {skill}
                   </span>
@@ -68,6 +68,7 @@ const Skills = () => {
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

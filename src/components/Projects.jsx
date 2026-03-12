@@ -98,7 +98,7 @@ const Projects = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {projects.map((project, idx) => (
             <motion.div
               key={idx}
@@ -106,31 +106,31 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group relative bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:border-vibrant-blue/30 transition-all duration-500 flex flex-col shadow-sm hover:shadow-md hover:-translate-y-[6px] p-8"
+              className="group relative bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:border-vibrant-blue/30 transition-all duration-500 flex flex-col shadow-sm hover:shadow-md hover:-translate-y-[6px] p-6 md:p-8"
             >
               <div className="flex flex-col justify-between flex-grow">
                 <div>
-                  <h3 className="text-2xl font-bold mb-2 group-hover:text-vibrant-blue transition-colors font-display tracking-tight text-gray-900 dark:text-white duration-500">
+                  <h3 className="text-xl md:text-2xl font-bold mb-2 group-hover:text-vibrant-blue transition-colors font-display tracking-tight text-gray-900 dark:text-white duration-500">
                     {project.title}
                   </h3>
                   
                   {project.subtitle && (
-                    <p className="text-vibrant-blue text-sm font-semibold mb-6 italic tracking-tight opacity-90">
+                    <p className="text-vibrant-blue text-[11px] md:text-sm font-semibold mb-6 italic tracking-tight opacity-90">
                       {project.subtitle}
                     </p>
                   )}
 
-                  {!project.subtitle && <div className="h-6"></div>}
+                  {!project.subtitle && <div className="h-4 md:h-6"></div>}
 
-                  <ul className="text-gray-600 dark:text-gray-400 text-sm mb-8 font-sans leading-relaxed transition-colors duration-500 space-y-2 list-disc pl-4">
+                  <ul className="text-gray-600 dark:text-gray-400 text-sm mb-6 md:mb-8 font-sans leading-relaxed transition-colors duration-500 space-y-2 list-disc pl-4">
                     {project.description.map((bullet, i) => (
                       <li key={i}>{bullet}</li>
                     ))}
                   </ul>
                   
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
                     {project.tech.map((t, i) => (
-                      <span key={i} className="text-xs px-3 py-1 bg-white dark:bg-[#0b0f1a] rounded-md border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-mono font-medium tracking-wide shadow-sm transition-colors duration-500">
+                      <span key={i} className="text-[10px] md:text-xs px-2 md:px-3 py-1 bg-white dark:bg-[#0b0f1a] rounded-md border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-mono font-medium tracking-wide shadow-sm transition-colors duration-500">
                         {t}
                       </span>
                     ))}
@@ -142,7 +142,7 @@ const Projects = () => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg font-semibold hover:scale-105 hover:shadow-lg transition-all duration-300"
+                    className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold text-sm md:text-base hover:scale-105 hover:shadow-lg transition-all duration-300"
                   >
                     <Github size={18} /> View on GitHub
                   </a>
@@ -151,6 +151,7 @@ const Projects = () => {
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -34,7 +34,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-16 md:py-20 relative bg-white dark:bg-[#0b0f1a] transition-colors duration-500">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -43,29 +43,29 @@ const Contact = () => {
             <h2 className="text-3xl md:text-4xl font-semibold mb-5 font-display tracking-tight text-gray-900 dark:text-white transition-colors duration-500">
               Let's Build Something <span className="text-gradient-focus">Intelligent</span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg mb-10 font-sans leading-relaxed transition-colors duration-500">
+            <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-8 md:mb-10 font-sans leading-relaxed transition-colors duration-500">
               I'm always open to discussing AI projects, research collaborations, or opportunities in the AI/ML landscape. Reach out and let's start a conversation.
             </p>
 
             <div className="space-y-6">
-              <div className="flex items-center gap-6 group">
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl group-hover:bg-vibrant-blue/10 transition-all text-vibrant-blue">
-                  <Mail size={24} />
+              <div className="flex items-center gap-5 md:gap-6 group">
+                <div className="p-3.5 md:p-4 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl group-hover:bg-vibrant-blue/10 transition-all text-vibrant-blue">
+                  <Mail size={22} />
                 </div>
                 <div>
                   <p className="text-[10px] text-gray-600 dark:text-gray-400 uppercase font-bold font-mono tracking-widest transition-colors duration-500">Email</p>
-                  <p className="text-gray-900 dark:text-white text-lg font-medium hover:text-vibrant-blue transition-colors font-sans duration-500">
+                  <p className="text-gray-900 dark:text-white text-base md:text-lg font-medium hover:text-vibrant-blue transition-colors font-sans duration-500">
                     Harshlagwal2005@gmail.com
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-6 group">
-                <div className="p-4 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl group-hover:bg-vibrant-blue/5 transition-all text-vibrant-blue">
-                  <MapPin size={24} />
+              <div className="flex items-center gap-5 md:gap-6 group">
+                <div className="p-3.5 md:p-4 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl group-hover:bg-vibrant-blue/5 transition-all text-vibrant-blue">
+                  <MapPin size={22} />
                 </div>
                 <div>
                   <p className="text-[10px] text-gray-600 dark:text-gray-400 uppercase font-bold font-mono tracking-widest transition-colors duration-500">Location</p>
-                  <p className="text-gray-900 dark:text-white text-lg font-medium font-sans transition-colors duration-500">Himachal Pradesh, India</p>
+                  <p className="text-gray-900 dark:text-white text-base md:text-lg font-medium font-sans transition-colors duration-500">Himachal Pradesh, India</p>
                 </div>
               </div>
             </div>
@@ -75,49 +75,50 @@ const Contact = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-10 rounded-[2.5rem] transition-colors duration-500 shadow-lg"
+            className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] transition-colors duration-500 shadow-lg"
           >
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 font-sans">
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>
-                  <label className="block text-xs font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest font-mono mb-2 transition-colors duration-500">Name</label>
+                  <label className="block text-[10px] font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest font-mono mb-2 transition-colors duration-500">Name</label>
                   <input 
                     type="text" 
                     name="user_name"
                     required
-                    className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl px-6 py-4 focus:border-vibrant-blue outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500 font-sans shadow-sm text-gray-900 dark:text-white"
+                    className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-3 md:px-6 md:py-4 focus:border-vibrant-blue outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500 font-sans shadow-sm text-gray-900 dark:text-white text-sm md:text-base"
                     placeholder="Your Name"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest font-mono mb-2 transition-colors duration-500">Email</label>
+                  <label className="block text-[10px] font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest font-mono mb-2 transition-colors duration-500">Email</label>
                   <input 
                     type="email" 
                     name="user_email"
                     required
-                    className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl px-6 py-4 focus:border-vibrant-blue outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500 font-sans shadow-sm text-gray-900 dark:text-white"
+                    className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-3 md:px-6 md:py-4 focus:border-vibrant-blue outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500 font-sans shadow-sm text-gray-900 dark:text-white text-sm md:text-base"
                     placeholder="Your Email"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest font-mono mb-2 transition-colors duration-500">Message</label>
+                <label className="block text-[10px] font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest font-mono mb-2 transition-colors duration-500">Message</label>
                 <textarea 
                   name="message"
                   required
                   rows="4"
-                  className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl px-6 py-4 focus:border-vibrant-blue outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500 font-sans shadow-sm resize-none text-gray-900 dark:text-white"
+                  className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-3 md:px-6 md:py-4 focus:border-vibrant-blue outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500 font-sans shadow-sm resize-none text-gray-900 dark:text-white text-sm md:text-base"
                   placeholder="Your Message..."
                 ></textarea>
               </div>
               <button 
                 type="submit"
                 disabled={isSending}
-                className="w-full py-5 rounded-2xl bg-gray-900 dark:bg-vibrant-blue font-medium text-white shadow-xl hover:bg-gray-800 dark:hover:bg-vibrant-blue/95 transition-all flex items-center justify-center gap-2 group font-sans text-lg duration-500 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full py-4 md:py-5 rounded-2xl bg-gray-900 dark:bg-vibrant-blue font-bold text-white shadow-xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2 group font-sans text-base md:text-lg duration-500 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSending ? "Sending..." : "Send Message"} 
-                {!isSending && <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
+                {!isSending && <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
               </button>
+
 
               <AnimatePresence>
                 {status === 'success' && (

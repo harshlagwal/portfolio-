@@ -82,7 +82,7 @@ const Certifications = () => {
         </div>
 
         {/* Cards */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 md:gap-4">
           {certificates.map((cert, idx) => (
             <motion.div
               key={idx}
@@ -91,22 +91,22 @@ const Certifications = () => {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: idx * 0.07, ease: 'easeOut' }}
               whileHover={{ y: -3, boxShadow: '0 12px 40px -8px rgba(37,99,235,0.15)' }}
-              className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4
+              className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 md:gap-4
                          bg-gray-50 dark:bg-gray-800/70
                          border border-gray-200/80 dark:border-gray-700/60
-                         rounded-[20px] px-5 py-4 sm:px-6 sm:py-4
+                         rounded-2xl md:rounded-[20px] px-4 py-3 sm:px-6 sm:py-4
                          hover:border-vibrant-blue/40
-                         transition-all duration-400 cursor-default"
+                         transition-all duration-400 cursor-default shadow-sm"
               style={{
                 backdropFilter: 'blur(4px)',
               }}
             >
               {/* ── LEFT: logo + text ─────────────────────────── */}
-              <div className="flex items-center gap-4 min-w-0">
+              <div className="flex items-center gap-3 md:gap-4 min-w-0">
 
-                {/* Circular logo container — Matches Experience section style exactly */}
+                {/* Circular logo container */}
                 <div
-                  className="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-gray-200 dark:border-gray-700 p-1 bg-white dark:bg-[#0b0f1a] shadow-sm overflow-hidden transition-all duration-500 group-hover:border-vibrant-blue/50"
+                  className="shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-gray-200 dark:border-gray-700 p-1 bg-white dark:bg-[#0b0f1a] shadow-sm overflow-hidden transition-all duration-500 group-hover:border-vibrant-blue/50"
                 >
                   <img
                     src={cert.logo}
@@ -125,7 +125,7 @@ const Certifications = () => {
                                  transition-colors duration-300 truncate">
                     {cert.title}
                   </h3>
-                  <p className="mt-0.5 text-[10px] font-bold font-mono text-gray-400 dark:text-gray-500
+                  <p className="mt-0.5 text-[9px] md:text-[10px] font-bold font-mono text-gray-400 dark:text-gray-500
                                 uppercase tracking-widest">
                     {cert.company}
                   </p>
@@ -133,19 +133,19 @@ const Certifications = () => {
               </div>
 
               {/* ── RIGHT: button ─────────────────────────────── */}
-              <div className="shrink-0 sm:ml-4">
+              <div className="shrink-0">
                 <button
                   onClick={() => setSelected(cert.link)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold font-sans
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 md:py-2 rounded-xl text-[10px] md:text-xs font-bold font-sans
                              bg-white dark:bg-[#0b0f1a]
                              border border-gray-200 dark:border-gray-700
                              text-gray-600 dark:text-gray-400
                              hover:border-vibrant-blue hover:text-vibrant-blue dark:hover:text-vibrant-blue
-                             hover:shadow-sm transition-all duration-300 group/btn whitespace-nowrap"
+                             hover:shadow-sm transition-all duration-300 group/btn whitespace-nowrap w-full sm:w-auto justify-center"
                 >
                   View Certificate
                   <ExternalLink
-                    size={12}
+                    size={10}
                     className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300"
                   />
                 </button>
@@ -153,6 +153,7 @@ const Certifications = () => {
             </motion.div>
           ))}
         </div>
+
       </div>
 
       {/* Reuse existing modal */}

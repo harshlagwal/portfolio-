@@ -11,7 +11,7 @@ const HeroSection = () => {
   const resumeLink = "https://drive.google.com/file/d/1BFWWx7w31DVlc4bStGS13Olq3lJMDJzo/view?usp=drive_link";
 
   return (
-    <section id="home" className="relative min-h-[85vh] w-full overflow-hidden flex flex-col justify-between pt-40 pb-8 bg-white dark:bg-[#0b0f1a] transition-colors duration-500">
+    <section id="home" className="relative min-h-screen w-full overflow-hidden flex flex-col justify-between pt-24 md:pt-40 pb-8 bg-white dark:bg-[#0b0f1a] transition-colors duration-500">
       <Navbar />
 
       {/* Background Effects */}
@@ -20,32 +20,29 @@ const HeroSection = () => {
         <div className="mesh-glow"></div>
         <ParticleBackground />
         
-        {/* Soft Blur Circles */}
+        {/* Soft Blur Circles - Reduced size for mobile */}
         <motion.div 
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+          animate={{ x: [0, 30, 0], y: [0, 20, 0] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="blur-circle w-[400px] h-[400px] bg-sky/20 dark:bg-vibrant-blue/10 top-[-100px] left-[-100px]"
+          className="blur-circle w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-sky/20 dark:bg-vibrant-blue/10 top-[-50px] left-[-50px]"
         />
         <motion.div 
-          animate={{ x: [0, -40, 0], y: [0, 50, 0] }}
+          animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="blur-circle w-[500px] h-[500px] bg-vibrant-blue/5 dark:bg-vibrant-blue/10 bottom-[-150px] right-[-100px]"
+          className="blur-circle w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-vibrant-blue/5 dark:bg-vibrant-blue/10 bottom-[-100px] right-[-50px]"
         />
-        
-        {/* Centered Subtle Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-vibrant-blue/5 dark:bg-vibrant-blue/10 rounded-full blur-[120px] pointer-events-none" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 w-full flex flex-col items-center text-center font-sans z-10 flex-grow justify-center mt-12">
+      <div className="max-w-6xl mx-auto px-6 w-full flex flex-col items-center text-center font-sans z-10 flex-grow justify-center mt-8 md:mt-12">
         {/* Tagline */}
         <motion.div
            initial={{ opacity: 0, y: 10 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.8 }}
-           className="mb-5 flex justify-center"
+           className="mb-6 md:mb-8 flex justify-center w-full"
         >
-          <span className="px-6 py-2 rounded-full bg-sky/30 dark:bg-vibrant-blue/20 backdrop-blur border border-sky/50 dark:border-vibrant-blue/30 text-vibrant-blue dark:text-vibrant-blue text-sm font-medium tracking-wide font-mono transition-colors duration-500 shadow-sm leading-relaxed">
-            AI Engineer • AI Full Stack Engineer • Generative AI • Machine Learning
+          <span className="px-4 md:px-6 py-2 rounded-full bg-sky/30 dark:bg-vibrant-blue/20 backdrop-blur border border-sky/50 dark:border-vibrant-blue/30 text-vibrant-blue dark:text-vibrant-blue text-[10px] md:text-sm font-semibold tracking-wide font-mono transition-colors duration-500 shadow-sm leading-relaxed max-w-[90%] md:max-w-none">
+            AI Engineer • AI Full Stack Engineer • Generative AI
           </span>
         </motion.div>
 
@@ -54,13 +51,14 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="space-y-6 mb-10"
+          className="space-y-4 md:space-y-6 mb-8 md:mb-12"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-[88px] font-bold tracking-tight text-gray-900 dark:text-white leading-[1.05] font-display transition-colors duration-500">
-            Building Intelligent <br />
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[88px] font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1] md:leading-[1.05] font-display transition-colors duration-500"
+              style={{ fontSize: 'clamp(2.25rem, 8vw, 5.5rem)' }}>
+            Building Intelligent <br className="hidden sm:block" />
             <span className="text-gradient-focus">AI Systems</span> for the Future
           </h1>
-          <div className="text-xl md:text-2xl font-semibold text-vibrant-blue italic font-sans tracking-tight">
+          <div className="text-lg md:text-2xl font-semibold text-vibrant-blue italic font-sans tracking-tight">
             AI That Solves Real-World Problems
           </div>
         </motion.div>
@@ -70,31 +68,31 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl font-normal leading-relaxed font-sans mb-12 transition-colors duration-500"
+          className="text-base md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl font-normal leading-relaxed font-sans mb-10 md:mb-14 transition-colors duration-500"
         >
-          Hi, I'm Harsh Lagwal — an AI Engineer passionate about building intelligent systems using Machine Learning, Generative AI, NLP, and AI automation. I build AI solutions that solve real-world problems.
+          Hi, I'm Harsh Lagwal — an AI Engineer passionate about building intelligent systems using Machine Learning, Generative AI, NLP, and AI automation.
         </motion.p>
 
         {/* Buttons & Socials Container */}
-        <div className="flex flex-col items-center gap-14 w-full">
+        <div className="flex flex-col items-center gap-10 md:gap-14 w-full">
           {/* Action Buttons */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-center gap-6"
+            className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 w-full sm:w-auto"
           >
             <a 
               href="#projects" 
-              className="px-10 py-5 rounded-full bg-gray-900 dark:bg-vibrant-blue text-white font-medium text-lg hover:scale-105 transition-all shadow-xl flex items-center gap-3 font-sans w-full sm:w-auto justify-center"
+              className="px-8 md:px-10 py-4 md:py-5 rounded-full bg-gray-900 dark:bg-vibrant-blue text-white font-bold text-base md:text-lg hover:scale-105 active:scale-95 transition-all shadow-xl flex items-center gap-3 font-sans w-full sm:w-auto justify-center"
             >
-              View Projects <ArrowRight size={22} />
+              View Projects <ArrowRight size={20} />
             </a>
             <button 
               onClick={() => setIsResumeModalOpen(true)}
-              className="px-10 py-5 rounded-full bg-white dark:bg-[#0b0f1a] text-gray-900 dark:text-white font-medium text-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-105 hover:shadow-lg transition-all duration-500 font-sans shadow-sm flex items-center gap-3 w-full sm:w-auto justify-center"
+              className="px-8 md:px-10 py-4 md:py-5 rounded-full bg-white dark:bg-[#0b0f1a] text-gray-900 dark:text-white font-bold text-base md:text-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-105 active:scale-95 transition-all duration-500 font-sans shadow-sm flex items-center gap-3 w-full sm:w-auto justify-center"
             >
-              Download Resume <Download size={22} className="opacity-80"/>
+              Download Resume <Download size={20} className="opacity-80"/>
             </button>
           </motion.div>
 
@@ -103,30 +101,36 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex items-center gap-8"
+            className="flex items-center gap-6 md:gap-8"
           >
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="relative flex items-center justify-center p-3 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:-translate-y-1 hover:border-vibrant-blue/20 hover:text-vibrant-blue dark:hover:text-white shadow-sm hover:shadow-lg transition-all duration-500 group">
-              <Github size={24} className="group-hover:scale-110 transition-transform" />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="relative flex items-center justify-center p-3 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:-translate-y-1 hover:border-vibrant-blue/20 hover:text-vibrant-blue dark:hover:text-white shadow-sm hover:shadow-lg transition-all duration-500 group">
-              <Linkedin size={24} className="group-hover:scale-110 transition-transform" />
-            </a>
-            <a href="mailto:Harshlagwal2005@gmail.com" className="relative flex items-center justify-center p-3 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:-translate-y-1 hover:border-vibrant-blue/20 hover:text-vibrant-blue dark:hover:text-white shadow-sm hover:shadow-lg transition-all duration-500 group">
-              <Mail size={24} className="group-hover:scale-110 transition-transform" />
-            </a>
+            {[
+              { icon: Github, href: "https://github.com/harshlagwal" },
+              { icon: Linkedin, href: "https://linkedin.com/in/harsh-lagwal" },
+              { icon: Mail, href: "mailto:Harshlagwal2005@gmail.com" }
+            ].map((social, i) => (
+              <a 
+                key={i}
+                href={social.href} 
+                target={social.href.startsWith('mailto') ? '_self' : '_blank'} 
+                rel="noopener noreferrer" 
+                className="relative flex items-center justify-center p-3.5 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:-translate-y-1 hover:border-vibrant-blue/20 hover:text-vibrant-blue dark:hover:text-white shadow-sm hover:shadow-lg transition-all duration-500 group"
+              >
+                <social.icon size={22} className="group-hover:scale-110 transition-transform" />
+              </a>
+            ))}
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator - Pushed to bottom */}
+      {/* Scroll Indicator - Hidden on very small screens */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
-        className="mt-12 flex flex-col items-center gap-4 w-full"
+        className="mt-8 md:mt-12 hidden sm:flex flex-col items-center gap-4 w-full"
       >
         <span className="text-[10px] text-gray-600 dark:text-gray-400 uppercase tracking-[0.4em] font-bold font-mono opacity-80 transition-colors duration-500">Scroll to explore</span>
-        <div className="w-1 h-16 bg-gray-200/50 dark:bg-white/10 rounded-full overflow-hidden relative">
+        <div className="w-1 h-12 md:h-16 bg-gray-200/50 dark:bg-white/10 rounded-full overflow-hidden relative">
           <motion.div 
             animate={{ y: [-64, 64] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
@@ -134,6 +138,7 @@ const HeroSection = () => {
           />
         </div>
       </motion.div>
+      
       {/* Resume Modal */}
       <ResumeModal 
         isOpen={isResumeModalOpen} 
@@ -145,3 +150,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+

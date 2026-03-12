@@ -84,9 +84,9 @@ const Experience = () => {
 
         <div className="relative max-w-5xl mx-auto">
           {/* Central Vertical Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 dark:bg-gray-700 -translate-x-1/2 transition-colors duration-500" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 dark:bg-gray-700 -translate-x-1/2 transition-colors duration-500" />
 
-          <div className="space-y-10">
+          <div className="space-y-8 md:space-y-12">
             {experiences.map((exp, idx) => (
               <motion.div
                 key={idx}
@@ -97,25 +97,25 @@ const Experience = () => {
                 className={`relative flex items-center md:justify-between ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
               >
                 {/* Timeline Connector Dot */}
-                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-[#0b0f1a] border-4 border-vibrant-blue z-20 transition-colors duration-500" />
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-[#0b0f1a] border-4 border-vibrant-blue z-20 transition-colors duration-500" />
 
                 {/* Content Card */}
-                <div className="w-full md:w-[46%] ml-16 md:ml-0">
+                <div className="w-full md:w-[46%] ml-12 md:ml-0">
                   <motion.div 
                     whileHover={{ y: -5 }}
-                    className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-8 rounded-3xl hover:border-vibrant-blue/30 transition-all duration-500 group shadow-md"
+                    className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 md:p-8 rounded-3xl hover:border-vibrant-blue/30 transition-all duration-500 group shadow-md"
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                      <span className="flex items-center gap-2 px-3 py-1 bg-vibrant-blue/10 dark:bg-vibrant-blue/20 text-vibrant-blue text-[10px] font-bold font-mono rounded-full uppercase tracking-wider transition-colors">
-                        <Calendar size={12} /> {exp.duration}
+                    <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 mb-4 md:mb-6">
+                      <span className="flex items-center gap-1.5 px-3 py-1 bg-vibrant-blue/10 dark:bg-vibrant-blue/20 text-vibrant-blue text-[9px] md:text-[10px] font-bold font-mono rounded-full uppercase tracking-wider transition-colors">
+                        <Calendar size={10} /> {exp.duration}
                       </span>
-                      <span className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400 text-[10px] font-bold font-sans uppercase tracking-widest transition-colors duration-500">
-                         <Globe size={12} /> {exp.type}
+                      <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400 text-[9px] md:text-[10px] font-bold font-sans uppercase tracking-widest transition-colors duration-500">
+                         <Globe size={10} /> {exp.type}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-5 mb-6">
-                       <div className="w-14 h-14 rounded-full border-2 border-gray-200 dark:border-gray-700 p-1 bg-white dark:bg-[#0b0f1a] shadow-md shrink-0 overflow-hidden transition-all duration-500 group-hover:border-vibrant-blue/50">
+                    <div className="flex items-center gap-4 md:gap-5 mb-4 md:mb-6">
+                       <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-gray-200 dark:border-gray-700 p-1 bg-white dark:bg-[#0b0f1a] shadow-md shrink-0 overflow-hidden transition-all duration-500 group-hover:border-vibrant-blue/50">
                           <img 
                             src={exp.logo} 
                             alt={exp.company} 
@@ -124,16 +124,16 @@ const Experience = () => {
                           />
                        </div>
                        <div>
-                          <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white font-display tracking-tight group-hover:text-vibrant-blue transition-colors duration-500">
+                          <h3 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white font-display tracking-tight group-hover:text-vibrant-blue transition-colors duration-500">
                             {exp.role}
                           </h3>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm font-semibold font-display tracking-wide uppercase transition-colors duration-500">
+                          <p className="text-[11px] md:text-sm font-semibold text-gray-600 dark:text-gray-400 font-display tracking-wide uppercase transition-colors duration-500">
                             {exp.company}
                           </p>
                        </div>
                     </div>
                     
-                    <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed font-sans transition-colors duration-500 mb-6">
+                    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed font-sans transition-colors duration-500 mb-4 md:mb-6">
                       {exp.description}
                     </p>
                     
@@ -141,9 +141,9 @@ const Experience = () => {
                       <div className="flex justify-end">
                         <button 
                           onClick={() => setSelectedCertificate(exp.certificate)}
-                          className="group/cert inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 relative font-sans"
+                          className="group/cert inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 relative font-sans"
                         >
-                          View Certificate <ExternalLink size={12} className="group-hover/cert:translate-x-0.5 group-hover/cert:-translate-y-0.5 transition-transform" />
+                          View Certificate <ExternalLink size={10} className="group-hover/cert:translate-x-0.5 group-hover/cert:-translate-y-0.5 transition-transform" />
                           <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-vibrant-blue transition-all duration-300 group-hover/cert:w-full"></span>
                         </button>
                       </div>
@@ -159,6 +159,7 @@ const Experience = () => {
             ))}
           </div>
         </div>
+
       </div>
 
       {/* Certificate Modal */}

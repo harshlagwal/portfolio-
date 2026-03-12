@@ -25,12 +25,14 @@ const ParticleBackground = () => {
     let w, h;
     
     // Config
-    const PARTICLE_COUNT = 160; 
-    const MOUSE_RADIUS = 150;
+    const isMobile = window.innerWidth < 768;
+    const PARTICLE_COUNT = isMobile ? 60 : 160; 
+    const MOUSE_RADIUS = isMobile ? 80 : 150;
     const CLUSTER_CHANCE = 0.003;
     const COLORS = isDark 
       ? ['rgba(56, 189, 248, 1)', 'rgba(168, 85, 247, 1)', 'rgba(34, 211, 238, 1)'] 
       : ['rgba(37, 99, 235, 1)', 'rgba(126, 34, 206, 1)', 'rgba(8, 145, 178, 1)'];
+
 
     // Sharper node sprite with solid core
     function buildSharpNodeSprite(color, size) {
