@@ -15,7 +15,7 @@ const certificates = [
     title: "Google For Startups Certificate",
     company: "Google & Scalar",
     logo: "https://i.postimg.cc/02krPppm/g-download-(3).jpg",
-    link: "https://drive.google.com/file/d/1scilZSa8bJNOJCDlpnINwLbfBrjUsjZL/view?usp=drivesdk",
+    link: "https://drive.google.com/file/d/1soVOoJWsWXyNXMqSV7qYnGn2Wi1FiXEU/view?usp=drivesdk",
   },
   {
     title: "ChatGPT for Everyday Certificate",
