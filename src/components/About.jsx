@@ -36,11 +36,14 @@ const About = () => {
               Innovating at the <span className="text-vibrant-blue">Intersection</span> of Human Intelligence and AI
             </h2>
             <div className="mb-10">
-              <p className="text-gray-600 dark:text-gray-400 text-lg mb-4 leading-relaxed font-normal transition-colors duration-500">
-                I am Harsh Lagwal, an AI Engineer dedicated to crafting intelligent systems. My expertise lies in Generative AI, Machine Learning, and creating AI solutions that bridge the gap between complex data and actionable insights.
+              <p className="text-gray-600 dark:text-gray-400 text-lg mb-6 leading-relaxed font-normal transition-colors duration-500">
+                I’m <strong>Harsh Lagwal</strong>, an AI Engineer passionate about building intelligent systems that solve real-world problems. My work focuses on <strong>Generative AI, Machine Learning, and AI-driven automation</strong>, where I design solutions that transform complex data into meaningful and actionable insights.
+              </p>
+              <p className="text-gray-600 dark:text-gray-400 text-lg mb-6 leading-relaxed font-normal transition-colors duration-500">
+                I have worked on multiple AI projects, developing <strong>innovative applications, intelligent tools, and automation systems</strong> that improve efficiency and enable smarter decision-making. My approach combines strong technical expertise with a practical problem-solving mindset to create scalable and impactful AI solutions.
               </p>
               <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-normal transition-colors duration-500">
-                Whether it's developing healthcare chatbots that provide critical guidance or building autonomous AI agents for automation, my goal is to create technology that makes a tangible impact.
+                I’m driven by the vision of leveraging artificial intelligence to <strong>build smarter technologies, enhance productivity, and deliver real value through intelligent systems.</strong>
               </p>
             </div>
             
