@@ -151,23 +151,24 @@ const Navbar = () => {
           </a>
 
           {/* Hamburger — tablet/mobile only (<1024px) */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle mobile menu"
-            className="lg:hidden"
-            style={{
-              width: '36px', height: '36px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              borderRadius: '50%',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)'}`,
-              background: isDark ? 'rgba(30,41,59,0.7)' : 'rgba(243,244,246,0.9)',
-              color: isDark ? '#ffffff' : '#111827',
-              cursor: 'pointer',
-              flexShrink: 0,
-            }}
-          >
-            {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
+          {/* Wrapper div carries lg:hidden; button inline style no longer fights it */}
+          <div className="lg:hidden" style={{ flexShrink: 0 }}>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle mobile menu"
+              style={{
+                width: '36px', height: '36px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                borderRadius: '50%',
+                border: `1px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)'}`,
+                background: isDark ? 'rgba(30,41,59,0.7)' : 'rgba(243,244,246,0.9)',
+                color: isDark ? '#ffffff' : '#111827',
+                cursor: 'pointer',
+              }}
+            >
+              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
+          </div>
 
         </div>
       </div>
