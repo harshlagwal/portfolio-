@@ -81,7 +81,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+        <div className="hidden lg:flex items-center gap-6 lg:gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -128,10 +128,10 @@ const Navbar = () => {
             </AnimatePresence>
           </button>
 
-          {/* Hire Me — sm and up, hidden on mobile */}
+          {/* Hire Me — desktop only */}
           <a
             href="#contact"
-            className="hidden sm:flex"
+            className="hidden lg:flex"
             style={{
               height: '36px',
               padding: '0 16px',
@@ -150,11 +150,11 @@ const Navbar = () => {
             Hire Me
           </a>
 
-          {/* Hamburger — mobile only */}
+          {/* Hamburger — tablet/mobile only (<1024px) */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
-            className="flex md:hidden"
+            className="lg:hidden"
             style={{
               width: '36px', height: '36px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
