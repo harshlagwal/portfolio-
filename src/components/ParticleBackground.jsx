@@ -36,7 +36,7 @@ function buildNodeSprite(color, size) {
 const ParticleBackground = () => {
   const canvasRef = useRef(null);
   const { isDark } = useTheme();
-  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const mouseRef = useRef({ x: -1000, y: -1000, active: false });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -45,20 +45,19 @@ const ParticleBackground = () => {
     const ctx = canvas.getContext('2d');
     let animationFrameId = null;
     let particles = [];
+    let clusters = [];
     let w, h;
     
     // Config
-    const PARTICLE_COUNT = 140; 
-    const CONNECTION_DISTANCE = 110;
-    const MOUSE_DISTANCE = 150;
-    const NODE_SIZE = 12; // Canvas sprite size
+    const PARTICLE_COUNT = 180; 
+    const MOUSE_RADIUS = 180;
+    const CLUSTER_CHANCE = 0.005;
+    const COLORS = isDark 
+      ? ['rgba(56, 189, 248, 1)', 'rgba(168, 85, 247, 1)', 'rgba(34, 211, 238, 1)'] // Sky Blue, Purple, Cyan
+      : ['rgba(37, 99, 235, 1)', 'rgba(126, 34, 206, 1)', 'rgba(8, 145, 178, 1)'];  // Darker variants
 
-    // Thematic Colors
-    const colors = isDark 
-      ? { node: 'rgba(56, 189, 248, 1)', line: 'rgba(56, 189, 248, 0.15)' } // Sky Blue
-      : { node: 'rgba(37, 99, 235, 1)', line: 'rgba(37, 99, 235, 0.1)' };   // Vibrant Blue
-
-    const nodeSprite = buildNodeSprite(colors.node, NODE_SIZE * (window.devicePixelRatio || 1));
+    // Pre-render sprites for performance
+    const sprites = COLORS.map(color => buildNodeSprite(color, 16));
 
     class Particle {
       constructor() {
@@ -68,41 +67,81 @@ const ParticleBackground = () => {
       reset() {
         this.x = Math.random() * w;
         this.y = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * 0.4; // Slow, smooth movement
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.radius = Math.random() * 1.5 + 0.8;
-        this.baseRadius = this.radius;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.sprite = sprites[Math.floor(Math.random() * sprites.length)];
+        this.size = Math.random() * 2 + 1;
+        this.baseSize = this.size;
+        this.angle = Math.random() * Math.PI * 2;
+        this.spin = (Math.random() - 0.5) * 0.02;
+        this.target = null;
+        this.glowIntensity = 0.4;
       }
 
-      update(mouseX, mouseY) {
-        // Organic floating motion
+      update(mouse) {
+        // Organic flow
+        this.angle += this.spin;
+        this.vx += Math.cos(this.angle) * 0.01;
+        this.vy += Math.sin(this.angle) * 0.01;
+
+        // Apply target attraction (Clustering)
+        if (this.target) {
+          const dx = this.target.x - this.x;
+          const dy = this.target.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist > 5) {
+            this.vx += dx * 0.001;
+            this.vy += dy * 0.001;
+          } else {
+            this.target = null; // Disperse
+          }
+        }
+
+        // Speed limit
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const maxSpeed = 1.2;
+        if (speed > maxSpeed) {
+          this.vx = (this.vx / speed) * maxSpeed;
+          this.vy = (this.vy / speed) * maxSpeed;
+        }
+
         this.x += this.vx;
         this.y += this.vy;
 
-        // Wrap around edges
+        // Wrap around
         if (this.x < 0) this.x = w;
         if (this.x > w) this.x = 0;
         if (this.y < 0) this.y = h;
         if (this.y > h) this.y = 0;
 
-        // Cursor interaction (Repulsion / Gentle push)
-        const dx = this.x - mouseX;
-        const dy = this.y - mouseY;
+        // Elastic Cursor Interaction
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < MOUSE_DISTANCE) {
-          const force = (MOUSE_DISTANCE - dist) / MOUSE_DISTANCE;
-          this.x += (dx / dist) * force * 1.5;
-          this.y += (dy / dist) * force * 1.5;
-          this.radius = this.baseRadius + force * 1.2;
+        if (dist < MOUSE_RADIUS) {
+          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+          
+          // Repel if too close, attract slightly if mid-range
+          if (dist < 60) {
+            this.vx += (dx / dist) * force * 0.8;
+            this.vy += (dy / dist) * force * 0.8;
+          } else {
+            this.vx -= (dx / dist) * force * 0.1;
+            this.vy -= (dy / dist) * force * 0.1;
+          }
+          
+          this.size = this.baseSize + force * 2;
+          this.glowIntensity = 0.5 + force * 0.5;
         } else {
-          this.radius = this.baseRadius;
+          this.size = this.baseSize;
+          this.glowIntensity = 0.4;
         }
       }
 
       draw() {
-        const s = NODE_SIZE;
-        ctx.drawImage(nodeSprite, this.x - s/2, this.y - s/2, s, s);
+        ctx.globalAlpha = this.glowIntensity;
+        ctx.drawImage(this.sprite, this.x - this.size * 2, this.y - this.size * 2, this.size * 4, this.size * 4);
       }
     }
 
@@ -121,47 +160,23 @@ const ParticleBackground = () => {
       particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
     };
 
-    const drawLine = (p1, p2, alpha) => {
-      ctx.beginPath();
-      ctx.moveTo(p1.x, p1.y);
-      ctx.lineTo(p2.x, p2.y);
-      ctx.strokeStyle = colors.line.replace('0.1', alpha.toString());
-      ctx.lineWidth = 0.6;
-      ctx.stroke();
-    };
-
     const animate = () => {
       ctx.clearRect(0, 0, w, h);
       
       const mouse = mouseRef.current;
 
-      // Update and draw connections
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
-        p1.update(mouse.x, mouse.y);
-        p1.draw();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < CONNECTION_DISTANCE) {
-            const alpha = (1 - (dist / CONNECTION_DISTANCE)) * 0.2;
-            drawLine(p1, p2, alpha);
-          }
-        }
-
-        // Connection to mouse
-        const dxm = p1.x - mouse.x;
-        const dym = p1.y - mouse.y;
-        const distM = Math.sqrt(dxm * dxm + dym * dym);
-        if (distM < MOUSE_DISTANCE) {
-          const alphaM = (1 - (distM / MOUSE_DISTANCE)) * 0.3;
-          drawLine(p1, mouse, alphaM);
-        }
+      // Randomly create clusters
+      if (Math.random() < CLUSTER_CHANCE) {
+        const clusterPoint = { x: Math.random() * w, y: Math.random() * h };
+        particles.forEach(p => {
+          if (Math.random() < 0.15) p.target = clusterPoint;
+        });
       }
+
+      particles.forEach(p => {
+        p.update(mouse);
+        p.draw();
+      });
 
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -170,17 +185,16 @@ const ParticleBackground = () => {
       const rect = canvas.getBoundingClientRect();
       mouseRef.current = {
         x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        y: e.clientY - rect.top,
+        active: true
       };
     };
 
     const handleMouseLeave = () => {
-      mouseRef.current = { x: -1000, y: -1000 };
+      mouseRef.current = { x: -1000, y: -1000, active: false };
     };
 
-    const handleResize = () => {
-      init();
-    };
+    const handleResize = () => init();
 
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
