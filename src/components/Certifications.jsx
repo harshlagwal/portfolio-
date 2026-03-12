@@ -9,7 +9,7 @@ const certificates = [
     title: "Model Context Protocol Certificate",
     company: "Anthropic",
     logo: "https://i.postimg.cc/hG7JzcyH/Anthropic-Logo-PNG-Vector-(SVG)-Free-Download.jpg",
-    link: "https://drive.google.com/file/d/1yFA0V5VbBI9OTmgT3_lJAbOqEx3qkBa0/view?usp=drivesdk",
+    link: "https://drive.google.com/file/d/1-vLv3rkLdm5cTH7fReVC0eJYZ9X9XrBw/view?usp=drivesdk",
   },
   {
     title: "Google For Startups Certificate",
