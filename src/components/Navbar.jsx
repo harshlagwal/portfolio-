@@ -47,10 +47,11 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
       className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-[95%] max-w-6xl"
+      style={{ willChange: 'transform' }}
     >
       {/* ─── Pill Container ─────────────────────────────────────────────────────── */}
       {/*
@@ -142,7 +143,7 @@ const Navbar = () => {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
-            className="flex md:hidden w-9 h-9 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-slate-800 items-center justify-center text-gray-900 dark:text-white hover:scale-105 active:scale-95 transition-transform duration-200"
+            className="flex md:hidden w-9 h-9 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-slate-800 items-center justify-center text-gray-900 dark:text-white hover:scale-105 active:scale-95 transition-transform duration-200 shrink-0"
           >
             {isMobileMenuOpen ? <X size={19} /> : <Menu size={19} />}
           </button>
