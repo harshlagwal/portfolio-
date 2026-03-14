@@ -56,12 +56,12 @@ const Navbar = () => {
       style={{
         position: 'fixed',
         top: '16px',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: 0,
+        right: 0,
+        margin: '0 auto',
         zIndex: 50,
         width: '92%',
         maxWidth: '1152px',
-        willChange: 'transform',   /* GPU layer for sub-pixel centering */
       }}
     >
       {/* ── Pill ─────────────────────────────────────────────────────────────── */}
