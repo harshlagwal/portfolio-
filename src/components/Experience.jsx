@@ -13,7 +13,11 @@ const Experience = () => {
       duration: "Present",
       type: "Remote",
       logo: "https://i.postimg.cc/9MC1Vk0Y/upto-skill.jpg",
-      description: "Working on cutting-edge AI/ML solutions, implementing advanced algorithms and fine-tuning models for real-world applications."
+      description: "Working on cutting-edge AI/ML solutions, implementing advanced algorithms and fine-tuning models for real-world applications.",
+      certificates: [
+        { label: "Experience Letter", link: "https://drive.google.com/file/d/16dbN9y3l5rsR2Y70AeaLxqIT20_tEKma/view?usp=drive_link" },
+        { label: "Certificate", link: "https://drive.google.com/file/d/1nlus1dHLJ44rN04BLj5MgpA2lEaH6mp6/view?usp=drive_link" }
+      ]
     },
     {
       role: "Campus Ambassador",
@@ -137,8 +141,8 @@ const Experience = () => {
                       {exp.description}
                     </p>
                     
-                    {exp.certificate && (
-                      <div className="flex justify-end">
+                    <div className="flex flex-wrap justify-end gap-x-4 md:gap-x-6 gap-y-2 mt-4 md:mt-6">
+                      {exp.certificate && (
                         <button 
                           onClick={() => setSelectedCertificate(exp.certificate)}
                           className="group/cert inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 relative font-sans"
@@ -146,8 +150,18 @@ const Experience = () => {
                           View Certificate <ExternalLink size={10} className="group-hover/cert:translate-x-0.5 group-hover/cert:-translate-y-0.5 transition-transform" />
                           <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-vibrant-blue transition-all duration-300 group-hover/cert:w-full"></span>
                         </button>
-                      </div>
-                    )}
+                      )}
+                      {exp.certificates && exp.certificates.map((cert, cIdx) => (
+                        <button 
+                          key={cIdx}
+                          onClick={() => setSelectedCertificate(cert.link)}
+                          className="group/cert inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 relative font-sans"
+                        >
+                          View {cert.label} <ExternalLink size={10} className="group-hover/cert:translate-x-0.5 group-hover/cert:-translate-y-0.5 transition-transform" />
+                          <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-vibrant-blue transition-all duration-300 group-hover/cert:w-full"></span>
+                        </button>
+                      ))}
+                    </div>
                   </motion.div>
                 </div>
 
