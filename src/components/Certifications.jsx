@@ -6,6 +6,12 @@ import { useTheme } from '../context/ThemeContext';
 
 const certificates = [
   {
+    title: "Build with AI Mohali Bootcamp",
+    company: "Google & Hack2Skills",
+    logo: "https://i.postimg.cc/02krPppm/g-download-(3).jpg",
+    link: "https://drive.google.com/file/d/1atFwqxAHDX24JzzekEqOFNUnUJTGA2aw/view?usp=drive_link",
+  },
+  {
     title: "Model Context Protocol Certificate",
     company: "Anthropic",
     logo: "https://i.postimg.cc/hG7JzcyH/Anthropic-Logo-PNG-Vector-(SVG)-Free-Download.jpg",
