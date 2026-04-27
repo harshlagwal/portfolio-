@@ -10,7 +10,7 @@ const Experience = () => {
     {
       role: "AI / ML Intern",
       company: "Upto Skills",
-      duration: "Present",
+      duration: "Jan 10, 2026 – Apr 10, 2026",
       type: "Remote",
       logo: "https://i.postimg.cc/9MC1Vk0Y/upto-skill.jpg",
       description: "Working on cutting-edge AI/ML solutions, implementing advanced algorithms and fine-tuning models for real-world applications.",
