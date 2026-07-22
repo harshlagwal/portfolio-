@@ -22,8 +22,22 @@ const Navbar = () => {
     { name: 'Skills',     href: '#skills' },
     { name: 'Projects',   href: '#projects' },
     { name: 'Experience', href: '#experience' },
+    { name: 'Education',  href: '#education' },
     { name: 'Contact',    href: '#contact' },
   ];
+
+  const handleScroll = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const elem = document.getElementById(targetId);
+    if (elem) {
+      elem.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      window.history.pushState(null, '', href);
+    }
+  };
 
   // ─── Visual-only style (no layout properties change) ────────────────────────
   const pillStyle = {
@@ -33,17 +47,17 @@ const Navbar = () => {
     justifyContent: 'space-between',
     padding: '10px 16px',
     borderRadius: '999px',
-    border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'}`,
-    backdropFilter: 'blur(20px)',
-    WebkitBackdropFilter: 'blur(20px)',
+    border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.45)'}`,
+    backdropFilter: 'blur(24px)',
+    WebkitBackdropFilter: 'blur(24px)',
     // === VISUAL — transitions on scroll ===
     backgroundColor: isScrolled
-      ? (isDark ? 'rgba(15,23,42,0.94)' : 'rgba(255,255,255,0.94)')
-      : (isDark ? 'rgba(15,23,42,0.72)' : 'rgba(255,255,255,0.72)'),
+      ? (isDark ? 'rgba(11, 15, 26, 0.65)' : 'rgba(255, 255, 255, 0.65)')
+      : (isDark ? 'rgba(11, 15, 26, 0.45)' : 'rgba(255, 255, 255, 0.45)'),
     boxShadow: isScrolled
-      ? '0 8px 32px rgba(0,0,0,0.22)'
-      : '0 2px 12px rgba(0,0,0,0.08)',
-    transition: 'background-color 350ms ease, box-shadow 350ms ease',
+      ? (isDark ? '0 12px 40px rgba(0, 0, 0, 0.4)' : '0 12px 40px rgba(31, 38, 135, 0.08)')
+      : (isDark ? '0 4px 20px rgba(0, 0, 0, 0.2)' : '0 4px 20px rgba(31, 38, 135, 0.04)'),
+    transition: 'background-color 350ms ease, box-shadow 350ms ease, border-color 350ms ease',
   };
 
   return (
@@ -70,6 +84,7 @@ const Navbar = () => {
         {/* Logo */}
         <a
           href="#home"
+          onClick={(e) => handleScroll(e, '#home')}
           style={{ display: 'flex', alignItems: 'center', lineHeight: 1, gap: '2px', textDecoration: 'none' }}
         >
           <span className="text-xl font-bold font-display tracking-tight text-gray-900 dark:text-white leading-none">
@@ -86,6 +101,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleScroll(e, link.href)}
               className="text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 font-sans relative group"
             >
               {link.name}
@@ -131,6 +147,7 @@ const Navbar = () => {
           {/* Hire Me — desktop only */}
           <a
             href="#contact"
+            onClick={(e) => handleScroll(e, '#contact')}
             className="hidden lg:flex"
             style={{
               height: '36px',
@@ -187,8 +204,8 @@ const Navbar = () => {
               left: 0,
               right: 0,
               borderRadius: '24px',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'}`,
-              background: isDark ? 'rgba(10,18,35,0.97)' : 'rgba(255,255,255,0.97)',
+              border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.45)'}`,
+              background: isDark ? 'rgba(10, 18, 35, 0.75)' : 'rgba(255, 255, 255, 0.75)',
               backdropFilter: 'blur(24px)',
               WebkitBackdropFilter: 'blur(24px)',
               padding: '24px',
@@ -201,7 +218,10 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    handleScroll(e, link.href);
+                    setIsMobileMenuOpen(false);
+                  }}
                   className="text-lg font-semibold text-gray-900 dark:text-white hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 font-display flex items-center justify-between group"
                 >
                   {link.name}
@@ -212,7 +232,10 @@ const Navbar = () => {
               <div className="pt-4 border-t border-gray-100 dark:border-white/10">
                 <a
                   href="#contact"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    handleScroll(e, '#contact');
+                    setIsMobileMenuOpen(false);
+                  }}
                   className="flex items-center justify-center w-full py-4 rounded-2xl bg-vibrant-blue text-white font-bold text-base shadow-lg hover:bg-blue-600 transition-colors duration-300"
                 >
                   Get In Touch
