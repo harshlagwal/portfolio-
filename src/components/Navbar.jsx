@@ -1,29 +1,42 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X, Terminal, Search, Mail, ArrowUpRight } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import harshPhoto from '../assets/Harsh-portfolio.jpg';
 
-const Navbar = () => {
+const Navbar = ({ onOpenCommandPalette, onOpenTerminal }) => {
   const { isDark, toggleTheme } = useTheme();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pillRef = useRef(null);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const update = () => setIsScrolled(window.scrollY > 20);
-    update(); // run immediately on mount
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
+    const handleScroll = () => {
+      const sections = ['home', 'projects', 'about', 'skills', 'experience', 'education', 'contact'];
+      const scrollPosition = window.scrollY + 120;
+
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Home',       href: '#home' },
-    { name: 'About',      href: '#about' },
-    { name: 'Skills',     href: '#skills' },
-    { name: 'Projects',   href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Education',  href: '#education' },
-    { name: 'Contact',    href: '#contact' },
+    { name: 'Work',       href: '#projects',   id: 'projects' },
+    { name: 'About',      href: '#about',      id: 'about' },
+    { name: 'Skills',     href: '#skills',     id: 'skills' },
+    { name: 'Experience', href: '#experience', id: 'experience' },
+    { name: 'Education',  href: '#education',  id: 'education' },
   ];
 
   const handleScroll = (e, href) => {
@@ -39,214 +52,230 @@ const Navbar = () => {
     }
   };
 
-  // ─── Visual-only style (no layout properties change) ────────────────────────
-  const pillStyle = {
-    // === LAYOUT — never changes ===
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '10px 16px',
-    borderRadius: '999px',
-    border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.45)'}`,
-    backdropFilter: 'blur(24px)',
-    WebkitBackdropFilter: 'blur(24px)',
-    // === VISUAL — transitions on scroll ===
-    backgroundColor: isScrolled
-      ? (isDark ? 'rgba(11, 15, 26, 0.65)' : 'rgba(255, 255, 255, 0.65)')
-      : (isDark ? 'rgba(11, 15, 26, 0.45)' : 'rgba(255, 255, 255, 0.45)'),
-    boxShadow: isScrolled
-      ? (isDark ? '0 12px 40px rgba(0, 0, 0, 0.4)' : '0 12px 40px rgba(31, 38, 135, 0.08)')
-      : (isDark ? '0 4px 20px rgba(0, 0, 0, 0.2)' : '0 4px 20px rgba(31, 38, 135, 0.04)'),
-    transition: 'background-color 350ms ease, box-shadow 350ms ease, border-color 350ms ease',
-  };
-
   return (
-    /*
-      ⚠️ NO Framer Motion on <nav> — plain element so browser positions it
-         correctly on the very first paint. No transform animation that could
-         fight with left:50% + translateX(-50%) on mobile.
-    */
-    <nav
-      style={{
-        position: 'fixed',
-        top: '16px',
-        left: 0,
-        right: 0,
-        margin: '0 auto',
-        zIndex: 50,
-        width: '92%',
-        maxWidth: '1152px',
-      }}
-    >
-      {/* ── Pill ─────────────────────────────────────────────────────────────── */}
-      <div ref={pillRef} style={pillStyle}>
-
-        {/* Logo */}
+    <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[96vw]">
+      {/* Floating Capsule Bar with full Light & Dark mode support */}
+      <nav className="bg-white/90 dark:bg-[#18181b]/95 text-gray-800 dark:text-white rounded-full p-1.5 pl-2 pr-2 shadow-xl shadow-gray-300/40 dark:shadow-2xl dark:shadow-black/50 border border-gray-200/90 dark:border-white/10 flex items-center gap-1 sm:gap-2 backdrop-blur-xl transition-colors duration-300">
+        
+        {/* Left: Circular Avatar Badge */}
         <a
           href="#home"
           onClick={(e) => handleScroll(e, '#home')}
-          style={{ display: 'flex', alignItems: 'center', lineHeight: 1, gap: '2px', textDecoration: 'none' }}
+          title="Harsh Lagwal - AI Engineer"
+          className="w-9 h-9 rounded-full bg-white dark:bg-white p-0.5 shrink-0 overflow-hidden flex items-center justify-center border border-gray-200/80 dark:border-white/20 shadow-xs hover:scale-105 transition-transform"
         >
-          <span className="text-xl font-bold font-display tracking-tight text-gray-900 dark:text-white leading-none">
-            Harsh
-          </span>
-          <span className="text-xl font-bold font-display tracking-tight text-vibrant-blue leading-none">
-            &nbsp;Lagwal
-          </span>
+          <img 
+            src={harshPhoto} 
+            alt="Harsh Lagwal" 
+            className="w-full h-full object-cover object-top rounded-full" 
+          />
         </a>
 
-        {/* Desktop nav links */}
-        <div className="hidden lg:flex items-center gap-6 lg:gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleScroll(e, link.href)}
-              className="text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 font-sans relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-vibrant-blue transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+        {/* Center: Clean Text Navigation Links */}
+        <div className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleScroll(e, link.href)}
+                className={`px-3 sm:px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-150 ${
+                  isActive
+                    ? 'text-gray-950 dark:text-white bg-gray-100 dark:bg-white/15 font-semibold'
+                    : 'text-gray-600 dark:text-white/75 hover:text-gray-950 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </div>
 
-        {/* Right actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+        {/* Utility Icon Actions (⌘K Search, Terminal, Theme Toggle) */}
+        <div className="flex items-center gap-1">
+          
+          {/* Quick Search Palette (⌘K) */}
+          {onOpenCommandPalette && (
+            <button
+              onClick={onOpenCommandPalette}
+              title="Search (Ctrl+K)"
+              className="hidden lg:flex items-center justify-center w-8 h-8 rounded-full text-gray-600 dark:text-white/70 hover:text-gray-950 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-xs"
+            >
+              <Search size={14} />
+            </button>
+          )}
 
-          {/* Theme toggle */}
+          {/* Terminal CLI Shortcut */}
+          {onOpenTerminal && (
+            <button
+              onClick={onOpenTerminal}
+              title="Open Terminal"
+              className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full text-gray-600 dark:text-white/70 hover:text-gray-950 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+            >
+              <Terminal size={14} />
+            </button>
+          )}
+
+          {/* WhatsApp Direct Connect */}
+          <a
+            href="https://wa.me/916230624011?text=Hi%20Harsh,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Chat on WhatsApp (+91 6230624011)"
+            className="w-8 h-8 flex items-center justify-center rounded-full text-gray-600 dark:text-white/75 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/15 transition-all select-none"
+          >
+            <svg 
+              viewBox="0 0 24 24" 
+              width="15" 
+              height="15" 
+              fill="currentColor"
+            >
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08s.89 2.41 1.02 2.58c.13.17 1.76 2.68 4.26 3.76.6.26 1.06.41 1.42.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.17-.48-.29z"/>
+            </svg>
+          </a>
+
+          {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
             aria-label="Toggle dark mode"
-            style={{
-              width: '36px', height: '36px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              borderRadius: '50%',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)'}`,
-              background: isDark ? 'rgba(30,41,59,0.7)' : 'rgba(255,255,255,0.7)',
-              cursor: 'pointer',
-              flexShrink: 0,
-            }}
+            className="w-8 h-8 flex items-center justify-center rounded-full text-gray-600 dark:text-white/70 hover:text-gray-950 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={isDark ? 'dark' : 'light'}
-                initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
+                initial={{ opacity: 0, rotate: -60, scale: 0.7 }}
                 animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
-                transition={{ duration: 0.3, ease: 'backOut' }}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                exit={{ opacity: 0, rotate: 60, scale: 0.7 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center justify-center"
               >
-                {isDark
-                  ? <Sun size={17} className="text-yellow-400" />
-                  : <Moon size={17} className="text-gray-800" />
-                }
+                {isDark ? (
+                  <Sun size={15} className="text-yellow-400" />
+                ) : (
+                  <Moon size={15} className="text-gray-700" />
+                )}
               </motion.span>
             </AnimatePresence>
           </button>
-
-          {/* Hire Me — desktop only */}
-          <a
-            href="#contact"
-            onClick={(e) => handleScroll(e, '#contact')}
-            className="hidden lg:flex"
-            style={{
-              height: '36px',
-              padding: '0 16px',
-              borderRadius: '999px',
-              background: isDark ? '#ffffff' : '#111827',
-              color: isDark ? '#111827' : '#ffffff',
-              fontSize: '14px',
-              fontWeight: 600,
-              alignItems: 'center',
-              justifyContent: 'center',
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
-            }}
-          >
-            Hire Me
-          </a>
-
-          {/* Hamburger — tablet/mobile only (<1024px) */}
-          {/* Wrapper div carries lg:hidden; button inline style no longer fights it */}
-          <div className="lg:hidden" style={{ flexShrink: 0 }}>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle mobile menu"
-              style={{
-                width: '36px', height: '36px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                borderRadius: '50%',
-                border: `1px solid ${isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.12)'}`,
-                background: isDark ? 'rgba(30,41,59,0.7)' : 'rgba(243,244,246,0.9)',
-                color: isDark ? '#ffffff' : '#111827',
-                cursor: 'pointer',
-              }}
-            >
-              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
-
         </div>
-      </div>
 
-      {/* ── Mobile dropdown ──────────────────────────────────────────────────── */}
+
+        {/* Right: Distinct High-Contrast Email / Contact Pill Button */}
+        <a
+          href="#contact"
+          onClick={(e) => handleScroll(e, '#contact')}
+          className="bg-gray-900 hover:bg-gray-800 text-white dark:bg-white dark:text-gray-950 dark:hover:bg-gray-100 font-semibold px-4 py-2 rounded-full text-xs sm:text-sm transition-all shrink-0 shadow-sm flex items-center gap-1.5 select-none hover:scale-[1.02] active:scale-95 ml-1"
+        >
+          <span className="hidden sm:inline">Harshlagwal2005@gmail.com</span>
+          <span className="sm:hidden">Contact</span>
+          <ArrowUpRight size={13} className="text-gray-300 dark:text-gray-700" />
+        </a>
+
+        {/* Mobile Menu Toggle Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+          className="md:hidden w-8 h-8 flex items-center justify-center rounded-full text-gray-700 dark:text-white/80 hover:text-gray-950 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+        >
+          {isMobileMenuOpen ? <X size={17} /> : <Menu size={17} />}
+        </button>
+
+      </nav>
+
+      {/* Mobile Drawer Dropdown Sheet */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.97 }}
+            initial={{ opacity: 0, y: -8, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.97 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            style={{
-              position: 'absolute',
-              top: 'calc(100% + 8px)',
-              left: 0,
-              right: 0,
-              borderRadius: '24px',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.45)'}`,
-              background: isDark ? 'rgba(10, 18, 35, 0.75)' : 'rgba(255, 255, 255, 0.75)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              padding: '24px',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.25)',
-              zIndex: 49,
-            }}
+            exit={{ opacity: 0, y: -8, scale: 0.96 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="mt-2 p-4 rounded-3xl bg-white/95 dark:bg-[#18181b]/95 backdrop-blur-2xl border border-gray-200/90 dark:border-white/10 text-gray-900 dark:text-white shadow-2xl"
           >
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => {
-                    handleScroll(e, link.href);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="text-lg font-semibold text-gray-900 dark:text-white hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 font-display flex items-center justify-between group"
-                >
-                  {link.name}
-                  <span className="w-8 h-[2px] bg-vibrant-blue scale-x-0 group-hover:scale-x-100 transition-transform origin-right" />
-                </a>
-              ))}
+            <div className="flex flex-col gap-1.5">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      handleScroll(e, link.href);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-between ${
+                      isActive 
+                        ? 'bg-gray-100 dark:bg-white/15 text-gray-950 dark:text-white font-semibold'
+                        : 'text-gray-600 dark:text-white/80 hover:bg-gray-50 dark:hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    {isActive && <div className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-cyan-400" />}
+                  </a>
+                );
+              })}
 
-              <div className="pt-4 border-t border-gray-100 dark:border-white/10">
+              <div className="pt-3 mt-1 border-t border-gray-100 dark:border-white/10 flex gap-2">
+                {onOpenCommandPalette && (
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      onOpenCommandPalette();
+                    }}
+                    className="flex-1 py-2.5 rounded-xl bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-white font-mono text-xs flex items-center justify-center gap-1.5"
+                  >
+                    <Search size={13} /> ⌘K Search
+                  </button>
+                )}
+                {onOpenTerminal && (
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      onOpenTerminal();
+                    }}
+                    className="flex-1 py-2.5 rounded-xl bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-white font-mono text-xs flex items-center justify-center gap-1.5"
+                  >
+                    <Terminal size={13} /> Terminal
+                  </button>
+                )}
+              </div>
+
+              <div className="pt-2 flex flex-col gap-2">
+                <a
+                  href="https://wa.me/916230624011?text=Hi%20Harsh,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-all shadow-xs"
+                >
+                  <span>Chat on WhatsApp (+91 6230624011)</span>
+                </a>
+
                 <a
                   href="#contact"
                   onClick={(e) => {
                     handleScroll(e, '#contact');
                     setIsMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-center w-full py-4 rounded-2xl bg-vibrant-blue text-white font-bold text-base shadow-lg hover:bg-blue-600 transition-colors duration-300"
+                  className="flex items-center justify-center w-full py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-black font-semibold text-xs transition-all shadow-sm"
                 >
-                  Get In Touch
+                  Contact Harsh
                 </a>
               </div>
+
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </div>
   );
+
 };
 
 export default Navbar;
+
+
+
+
+

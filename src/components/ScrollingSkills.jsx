@@ -1,5 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { Cpu } from 'lucide-react';
+import TechIcon from './TechIcon';
 
 const ScrollingSkills = () => {
   const skills = [
@@ -7,45 +8,45 @@ const ScrollingSkills = () => {
     "Machine Learning",
     "Generative AI",
     "Prompt Engineering",
-    "Natural Language Processing",
+    "NLP",
     "TensorFlow",
     "PyTorch",
     "Data Analysis",
     "MongoDB",
     "Streamlit",
     "Postman",
-    "Computer Vision",
-    "AI Automation",
-    "Agentic Ai",
+    "Deep Learning",
     "SQL",
-    "AI Full Stack"
+    "VS Code",
+    "Git",
+    "GitHub"
   ];
 
-  // Duplicate the array to create a seamless infinite loop effect
-  const duplicatedSkills = [...skills, ...skills];
+  const duplicatedSkills = [...skills, ...skills, ...skills];
 
   return (
-    <section className="py-6 bg-white dark:bg-[#0b0f1a] overflow-hidden border-y border-gray-100 dark:border-gray-800/50 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-        <h3 className="text-center text-sm font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 font-mono transition-colors duration-500 flex items-center justify-center gap-4">
-          <span className="w-12 h-[1px] bg-gray-300 dark:bg-gray-700"></span>
-          Skills & Technologies
-          <span className="w-12 h-[1px] bg-gray-300 dark:bg-gray-700"></span>
+    <section className="py-6 bg-white dark:bg-[#060913] overflow-hidden border-y border-gray-200/80 dark:border-white/10 transition-colors duration-500 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+        <h3 className="text-center text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 font-mono flex items-center justify-center gap-2.5">
+          <span className="w-8 h-[1px] bg-gray-200 dark:bg-white/10" />
+          <span>Core Technologies & AI Infrastructure</span>
+          <span className="w-8 h-[1px] bg-gray-200 dark:bg-white/10" />
         </h3>
       </div>
 
       <div className="relative w-full overflow-hidden group flex items-center">
-        {/* Subtle Fade Contextual Gradients for edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white dark:from-[#0b0f1a] to-transparent z-10 pointer-events-none transition-colors duration-500" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white dark:from-[#0b0f1a] to-transparent z-10 pointer-events-none transition-colors duration-500" />
+        {/* Edge Fade Gradients */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-white dark:from-[#060913] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-white dark:from-[#060913] to-transparent z-10 pointer-events-none" />
 
         <div className="flex w-max animate-scroll group-hover:[animation-play-state:paused]">
           {duplicatedSkills.map((skill, idx) => (
             <div 
               key={idx}
-              className="px-6 py-3 mx-3 flex items-center justify-center bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full shadow-sm hover:shadow-md hover:border-vibrant-blue/30 dark:hover:border-vibrant-blue/30 transition-all duration-300 whitespace-nowrap"
+              className="px-4 py-2 mx-2 flex items-center gap-2.5 bg-gray-50 dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/10 rounded-full shadow-xs hover:border-blue-400 dark:hover:border-cyan-400/70 transition-all duration-200 whitespace-nowrap cursor-default"
             >
-              <span className="text-sm font-medium text-gray-900 dark:text-white font-sans transition-colors duration-500 tracking-wide">
+              <TechIcon name={skill} size={15} />
+              <span className="text-xs font-semibold text-gray-800 dark:text-gray-200 font-sans tracking-tight">
                 {skill}
               </span>
             </div>
@@ -57,3 +58,5 @@ const ScrollingSkills = () => {
 };
 
 export default ScrollingSkills;
+
+

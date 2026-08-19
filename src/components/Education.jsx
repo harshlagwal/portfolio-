@@ -46,117 +46,112 @@ const Education = () => {
   ];
 
   return (
-    <section id="education" className="py-16 md:py-20 bg-white dark:bg-[#0b0f1a] transition-colors duration-500 relative overflow-hidden">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-vibrant-blue/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none transition-colors duration-500" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-vibrant-blue/5 rounded-full blur-[120px] translate-y-1/2 pointer-events-none" />
-
+    <section id="education" className="py-16 md:py-20 bg-white dark:bg-[#060913] transition-colors duration-500 relative">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-12">
+        
+        {/* Section Header */}
+        <div className="text-center mb-12 md:mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-cyan-500/10 border border-blue-200/60 dark:border-cyan-500/20 text-blue-600 dark:text-cyan-400 text-xs font-semibold font-mono tracking-wide mb-3">
+            <GraduationCap size={13} />
+            <span>ACADEMIC FOUNDATION</span>
+          </div>
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-semibold mb-5 font-display text-gray-900 dark:text-white tracking-tight transition-colors duration-500"
+            className="text-3xl md:text-4xl font-extrabold font-display text-gray-900 dark:text-white tracking-tight mb-3"
           >
-            Academic <span className="text-vibrant-blue">Education</span>
+            Academic <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-cyan-400 dark:to-blue-400">Education</span>
           </motion.h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-sans text-lg leading-relaxed transition-colors duration-500">
-            A reflection of my academic foundation and continuous learning journey.
+          <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+            Academic milestones and higher education in Computer Science and Decision Science.
           </p>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          {/* Central Vertical Line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 dark:bg-gray-700 -translate-x-1/2 transition-colors duration-500" />
+        <div className="relative max-w-4xl mx-auto">
+          {/* Central Track */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 dark:bg-white/10 -translate-x-1/2" />
 
-          <div className="space-y-8 md:space-y-12">
+          <div className="space-y-6 md:space-y-8">
             {educationData.map((edu, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: idx * 0.1, ease: "easeOut" }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
                 className={`relative flex items-center md:justify-between ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
               >
-                {/* Timeline Connector Dot */}
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-[#0b0f1a] border-4 border-vibrant-blue z-20 transition-colors duration-500" />
+                {/* Node */}
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-white dark:bg-[#060913] border-[3px] border-blue-600 dark:border-cyan-400 z-20 shadow-xs" />
 
                 {/* Content Card */}
                 <div className="w-full md:w-[46%] ml-12 md:ml-0">
-                  <motion.div 
-                    whileHover={{ y: -5 }}
-                    className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 md:p-8 rounded-3xl hover:border-vibrant-blue/30 transition-all duration-500 group shadow-sm"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 mb-4 md:mb-6">
-                      <span className="flex items-center gap-1.5 px-3 py-1 bg-vibrant-blue/10 dark:bg-vibrant-blue/20 text-vibrant-blue text-[9px] md:text-[10px] font-bold font-mono rounded-full uppercase tracking-wider transition-colors">
-                        <Calendar size={10} /> {edu.duration}
+                  <div className="bg-white dark:bg-[#0c1222] border border-gray-200/80 dark:border-white/10 p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all duration-300">
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                      <span className="flex items-center gap-1.5 px-2.5 py-0.5 bg-blue-50 dark:bg-cyan-500/10 text-blue-700 dark:text-cyan-300 text-[11px] font-semibold font-mono rounded-md border border-blue-200/60 dark:border-cyan-500/20">
+                        <Calendar size={11} /> {edu.duration}
                       </span>
-                      <span className="flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[9px] md:text-[10px] font-bold font-mono rounded-full uppercase tracking-wider">
+                      <span className="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[11px] font-semibold font-mono rounded-md border border-emerald-200/60 dark:border-emerald-500/20">
                         {edu.status}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-4 md:gap-5 mb-4 md:mb-6">
-                      {/* Logo Container - bg-white is forced to guarantee visibility of dark logos in dark mode */}
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-gray-200 dark:border-gray-700 p-1 bg-white shadow-md shrink-0 overflow-hidden transition-all duration-500 group-hover:border-vibrant-blue/50 flex items-center justify-center">
+                    <div className="flex items-center gap-3.5 mb-3">
+                      <div className="w-10 h-10 rounded-xl border border-gray-200/80 dark:border-white/10 p-1 bg-white dark:bg-white/[0.04] shadow-xs shrink-0 overflow-hidden flex items-center justify-center">
                         {edu.logo ? (
                           <img 
                             src={edu.logo} 
                             alt={edu.institution} 
-                            className="w-full h-full rounded-full object-contain"
+                            className="w-full h-full rounded-lg object-contain"
                           />
                         ) : (
-                          <GraduationCap className="w-6 h-6 text-vibrant-blue" />
+                          <GraduationCap className="w-5 h-5 text-blue-600 dark:text-cyan-400" />
                         )}
                       </div>
                       <div>
-                        <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white font-display tracking-tight group-hover:text-vibrant-blue transition-colors duration-500">
+                        <h3 className="text-base font-bold text-gray-900 dark:text-white font-display">
                           {edu.degree}
                         </h3>
-                        <p className="text-[11px] md:text-sm font-semibold text-gray-600 dark:text-gray-400 font-display tracking-wide uppercase transition-colors duration-500">
+                        <p className="text-xs font-semibold text-blue-600 dark:text-cyan-400 font-mono tracking-wide">
                           {edu.institution}
                         </p>
                       </div>
                     </div>
 
                     {edu.specialization && (
-                      <div className="mb-4 flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
-                        <BookOpen size={16} className="mt-0.5 text-vibrant-blue shrink-0" />
-                        <span className="font-semibold">Specialization: <span className="font-normal text-gray-600 dark:text-gray-400">{edu.specialization}</span></span>
+                      <div className="mb-2.5 flex items-start gap-2 text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                        <BookOpen size={14} className="mt-0.5 text-blue-600 dark:text-cyan-400 shrink-0" />
+                        <span className="font-medium">Specialization: <span className="text-gray-600 dark:text-gray-400">{edu.specialization}</span></span>
                       </div>
                     )}
 
                     {edu.location && (
-                      <div className="mb-4 flex items-center gap-2 text-xs md:text-sm text-gray-500 dark:text-gray-400 font-sans">
-                        <MapPin size={14} className="text-gray-400" />
+                      <div className="mb-2.5 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <MapPin size={13} className="text-blue-600 dark:text-cyan-400" />
                         <span>{edu.location}</span>
                       </div>
                     )}
 
                     {edu.grade && (
-                      <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
-                        <Award size={16} className="text-vibrant-blue" />
-                        <span>Grade / Percentage: <span className="text-vibrant-blue font-mono">{edu.grade}</span></span>
+                      <div className="mb-2.5 flex items-center gap-2 text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-200">
+                        <Award size={14} className="text-blue-600 dark:text-cyan-400" />
+                        <span>Score: <span className="text-blue-600 dark:text-cyan-400 font-mono">{edu.grade}</span></span>
                       </div>
                     )}
                     
-                    <ul className="list-none space-y-2 mt-4">
+                    <ul className="list-none space-y-1.5 mt-3 pt-3 border-t border-gray-100 dark:border-white/5">
                       {edu.details.map((detail, dIdx) => (
-                        <li key={dIdx} className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-sans transition-colors duration-500 flex items-start gap-2">
-                          <span className="text-vibrant-blue mt-1.5 shrink-0 block w-1.5 h-1.5 rounded-full" />
+                        <li key={dIdx} className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed flex items-start gap-2">
+                          <span className="text-blue-600 dark:text-cyan-400 mt-1.5 shrink-0 block w-1.5 h-1.5 rounded-full" />
                           <span>{detail}</span>
                         </li>
                       ))}
                     </ul>
-                  </motion.div>
+                  </div>
                 </div>
 
-                {/* Date/Label for Desktop - hidden on mobile */}
-                <div className="hidden md:block w-[46%]">
-                    {/* Empty space to balance the layout */}
-                </div>
+                <div className="hidden md:block w-[46%]" />
               </motion.div>
             ))}
           </div>
@@ -167,3 +162,5 @@ const Education = () => {
 };
 
 export default Education;
+
+

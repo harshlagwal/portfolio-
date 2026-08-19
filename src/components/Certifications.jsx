@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Award, CheckCircle2 } from 'lucide-react';
 import CertificateModal from './CertificateModal';
-import { useTheme } from '../context/ThemeContext';
 
 const certificates = [
   {
     title: "Build with AI Mohali Bootcamp",
     company: "Google & Hack2Skills",
-    logo: "https://i.postimg.cc/02krPppm/g-download-(3).jpg",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
     link: "https://drive.google.com/file/d/1atFwqxAHDX24JzzekEqOFNUnUJTGA2aw/view?usp=drive_link",
   },
   {
@@ -20,141 +19,136 @@ const certificates = [
   {
     title: "Google For Startups Certificate",
     company: "Google & Scalar",
-    logo: "https://i.postimg.cc/02krPppm/g-download-(3).jpg",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
     link: "https://drive.google.com/file/d/1soVOoJWsWXyNXMqSV7qYnGn2Wi1FiXEU/view?usp=drivesdk",
   },
   {
     title: "ChatGPT for Everyday Certificate",
-    company: "OpenAI",
-    logo: "https://i.postimg.cc/J41B6w0s/Open-AI-Logo-PNG-Vector-(SVG)-Free-Download.jpg",
+    company: "OpenAI / ChatGPT",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
     link: "https://drive.google.com/file/d/1QtKoyZt15OQdXYCov7lMH82fk-1yBT6E/view?usp=drivesdk",
   },
   {
     title: "Google Workshop Certificate",
     company: "Google",
-    logo: "https://i.postimg.cc/02krPppm/g-download-(3).jpg",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
     link: "https://drive.google.com/file/d/1jm8SMC_guUU2T7Q9oRx5or9m9up8K5cl/view?usp=drivesdk",
   },
   {
     title: "AI & ML for Geodata Analysis Certificate",
     company: "ISRO",
-    logo: "https://i.postimg.cc/MHwjJNYy/Isro-Logo-Simple-Art-Print-by-Infinity-Studios.jpg",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Indian_Space_Research_Organisation_Logo.svg",
     link: "https://drive.google.com/file/d/1RVIpwaa5oVoHaIYE8S4MA1XCfH9Ov4NY/view?usp=drivesdk",
   },
   {
     title: "Generative AI Certificate",
     company: "NVIDIA",
-    logo: "https://i.postimg.cc/W4b7ZFLs/n-download-(3).jpg",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a4/NVIDIA_logo.svg",
     link: "https://drive.google.com/file/d/1SrmjS-cTVHlIrb7uKtRRmyfqd4EfYhq0/view?usp=drivesdk",
   },
   {
     title: "Data Visualisation: Empowering Business with Effective Insights",
     company: "TATA",
-    logo: "https://i.postimg.cc/7hv7Kbcq/Download-Tata-logo-vector-Tata-icon-free-vector.jpg",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg",
     link: "https://drive.google.com/file/d/1XWAbgsq4b2I5ZTERwjL01xqNXDNT2Zfs/view?usp=drivesdk",
   },
 ];
 
 const Certifications = () => {
   const [selected, setSelected] = useState(null);
-  const { isDark } = useTheme();
-
-  const logoBg = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)';
 
   return (
     <section
       id="certifications"
-      className="py-16 md:py-20 bg-white dark:bg-[#0b0f1a] transition-colors duration-500 relative overflow-hidden"
+      className="py-16 md:py-20 bg-gray-50/50 dark:bg-[#060913] transition-colors duration-500 relative"
     >
-      {/* Subtle background glows */}
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-vibrant-blue/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-vibrant-blue/5 rounded-full blur-[120px] translate-y-1/2 pointer-events-none" />
-
       <div className="max-w-5xl mx-auto px-6 relative z-10">
 
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 md:mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-cyan-500/10 border border-blue-200/60 dark:border-cyan-500/20 text-blue-600 dark:text-cyan-400 text-xs font-semibold font-mono tracking-wide mb-3">
+            <Award size={13} />
+            <span>INDUSTRY ACCREDITATIONS</span>
+          </div>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-semibold mb-5 font-display text-gray-900 dark:text-white tracking-tight transition-colors duration-500"
+            className="text-3xl md:text-4xl font-extrabold font-display text-gray-900 dark:text-white tracking-tight mb-3"
           >
-            Recognitions &amp; <span className="text-vibrant-blue">Certifications</span>
+            Recognitions &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-cyan-400 dark:to-blue-400">Certifications</span>
           </motion.h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto font-sans text-lg leading-relaxed transition-colors duration-500">
-            Validated expertise through globally recognised organisations.
+          <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+            Validated technical expertise from globally recognized organizations.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="flex flex-col gap-3 md:gap-4">
+        {/* Compact Clean Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {certificates.map((cert, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: idx * 0.07, ease: 'easeOut' }}
-              whileHover={{ y: -3, boxShadow: '0 12px 40px -8px rgba(37,99,235,0.15)' }}
-              className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 md:gap-4
-                         bg-gray-50 dark:bg-gray-800/70
-                         border border-gray-200/80 dark:border-gray-700/60
-                         rounded-2xl md:rounded-[20px] px-4 py-3 sm:px-6 sm:py-4
-                         hover:border-vibrant-blue/40
-                         transition-all duration-400 cursor-default shadow-sm"
-              style={{
-                backdropFilter: 'blur(4px)',
-              }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.04 }}
+              className="flex flex-col"
             >
-              {/* ── LEFT: logo + text ─────────────────────────── */}
-              <div className="flex items-center gap-3 md:gap-4 min-w-0">
+              <div
+                className="h-full group flex items-center justify-between gap-4
+                           bg-white dark:bg-[#0c1222]
+                           border border-gray-200/80 dark:border-white/10
+                           rounded-2xl p-4 sm:p-4.5
+                           hover:border-blue-500/40 dark:hover:border-cyan-500/40
+                           hover:shadow-sm
+                           transition-all duration-300"
+              >
+                {/* Logo + Text */}
+                <div className="flex items-center gap-3.5 min-w-0">
+                  {/* High contrast pure white badge container so all logos pop clearly in dark mode */}
+                  <div
+                    className="shrink-0 w-12 h-12 rounded-xl bg-white border border-gray-200/90 p-2 shadow-xs flex items-center justify-center overflow-hidden"
+                  >
+                    <img
+                      src={cert.logo}
+                      alt={cert.company}
+                      className="w-full h-full object-contain"
+                      onError={(e) => {
+                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(cert.company)}&background=2563eb&color=fff&size=64&bold=true`;
+                      }}
+                    />
+                  </div>
 
-                {/* Circular logo container */}
-                <div
-                  className="shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-gray-200 dark:border-gray-700 p-1 bg-white dark:bg-[#0b0f1a] shadow-sm overflow-hidden transition-all duration-500 group-hover:border-vibrant-blue/50"
-                >
-                  <img
-                    src={cert.logo}
-                    alt={cert.company}
-                    className="w-full h-full rounded-full object-cover"
-                    onError={(e) => {
-                      e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(cert.company)}&background=2563eb&color=fff&size=64&bold=true`;
-                    }}
-                  />
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-bold font-display text-gray-900 dark:text-white
+                                   tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-cyan-400
+                                   transition-colors duration-200 truncate">
+                      {cert.title}
+                    </h3>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <CheckCircle2 size={11} className="text-emerald-500 shrink-0" />
+                      <p className="text-[11px] font-semibold font-mono text-blue-600 dark:text-cyan-400 uppercase tracking-wider truncate">
+                        {cert.company}
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Title + company */}
-                <div className="min-w-0">
-                  <h3 className="text-sm md:text-base font-bold font-display text-gray-900 dark:text-white
-                                 tracking-tight leading-snug group-hover:text-vibrant-blue
-                                 transition-colors duration-300 truncate">
-                    {cert.title}
-                  </h3>
-                  <p className="mt-0.5 text-[9px] md:text-[10px] font-bold font-mono text-gray-400 dark:text-gray-500
-                                uppercase tracking-widest">
-                    {cert.company}
-                  </p>
+                {/* View Action Button */}
+                <div className="shrink-0">
+                  <button
+                    onClick={() => setSelected(cert.link)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold
+                               bg-gray-50 dark:bg-white/[0.06]
+                               border border-gray-200/80 dark:border-white/10
+                               text-gray-700 dark:text-gray-200
+                               hover:bg-blue-50 dark:hover:bg-cyan-500/10 hover:text-blue-600 dark:hover:text-cyan-400
+                               hover:border-blue-300 dark:hover:border-cyan-500/30 transition-all duration-200 whitespace-nowrap"
+                  >
+                    View
+                    <ExternalLink size={12} />
+                  </button>
                 </div>
-              </div>
-
-              {/* ── RIGHT: button ─────────────────────────────── */}
-              <div className="shrink-0">
-                <button
-                  onClick={() => setSelected(cert.link)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 md:py-2 rounded-xl text-[10px] md:text-xs font-bold font-sans
-                             bg-white dark:bg-[#0b0f1a]
-                             border border-gray-200 dark:border-gray-700
-                             text-gray-600 dark:text-gray-400
-                             hover:border-vibrant-blue hover:text-vibrant-blue dark:hover:text-vibrant-blue
-                             hover:shadow-sm transition-all duration-300 group/btn whitespace-nowrap w-full sm:w-auto justify-center"
-                >
-                  View Certificate
-                  <ExternalLink
-                    size={10}
-                    className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300"
-                  />
-                </button>
               </div>
             </motion.div>
           ))}
@@ -162,7 +156,7 @@ const Certifications = () => {
 
       </div>
 
-      {/* Reuse existing modal */}
+      {/* Modal */}
       <CertificateModal
         isOpen={!!selected}
         onClose={() => setSelected(null)}
@@ -173,3 +167,6 @@ const Certifications = () => {
 };
 
 export default Certifications;
+
+
+

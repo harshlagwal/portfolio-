@@ -1,152 +1,318 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail, Download } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Github, Linkedin, Mail, Download, Terminal, Search, Sparkles, Check, Copy } from 'lucide-react';
 import Navbar from './Navbar';
 import ResumeModal from './ResumeModal';
-import ParticleBackground from './ParticleBackground';
-
+import CommandPalette from './CommandPalette';
+import TerminalDrawer from './TerminalDrawer';
+import harshPhoto from '../assets/Harsh-portfolio.jpg';
 
 const HeroSection = () => {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
   const resumeLink = "https://drive.google.com/file/d/1PA8fV23UmJ2AYf7kxUGaihI88M1NWW0b/view?usp=sharing";
+  const emailAddress = "Harshlagwal2005@gmail.com";
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  // Global Keyboard Shortcuts (Ctrl+K = Search, R = Resume, T = Terminal, C = Contact)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Handle Ctrl+K / Cmd+K search palette globally
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsCommandPaletteOpen(prev => !prev);
+        return;
+      }
+
+      // Don't trigger single-letter shortcuts if typing in an input or textarea
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+      if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        setIsResumeModalOpen(true);
+      } else if ((e.key === 't' || e.key === 'T') && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        setIsTerminalOpen(prev => !prev);
+      } else if ((e.key === 'c' || e.key === 'C') && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(emailAddress);
+    setToastMessage('✓ Email copied to clipboard: ' + emailAddress);
+    setTimeout(() => setToastMessage(''), 3500);
+  };
 
   return (
-    <section id="home" className="relative min-h-[100vh] min-h-[100dvh] w-full overflow-hidden flex flex-col justify-between pt-24 md:pt-40 pb-8 bg-white dark:bg-[#0b0f1a] transition-colors duration-500">
-      <Navbar />
+    <section 
+      id="home" 
+      onMouseMove={handleMouseMove}
+      className="relative min-h-[100vh] min-h-[100dvh] w-full overflow-hidden flex flex-col justify-between pt-28 md:pt-36 pb-12 bg-white dark:bg-[#060913] text-gray-900 dark:text-white transition-colors duration-500"
+    >
+      <Navbar 
+        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        onOpenTerminal={() => setIsTerminalOpen(true)}
+      />
 
-      {/* Background Effects */}
-      <div className="absolute inset-0 z-0 opacity-100 dark:opacity-40 transition-opacity duration-500 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 grid-pattern dark:opacity-20 opacity-60"></div>
-        <div className="mesh-glow"></div>
-        <ParticleBackground />
+      {/* Interactive Cursor Spotlight Glow */}
+      <div 
+        className="mouse-spotlight hidden lg:block opacity-60 dark:opacity-0"
+        style={{
+          background: `radial-gradient(650px circle at ${mousePos.x}px ${mousePos.y}px, rgba(37, 99, 235, 0.08), transparent 80%)`,
+        }}
+      />
+      <div 
+        className="mouse-spotlight hidden lg:dark:block opacity-80"
+        style={{
+          background: `radial-gradient(650px circle at ${mousePos.x}px ${mousePos.y}px, rgba(0, 240, 255, 0.08), rgba(99, 102, 241, 0.04) 40%, transparent 75%)`,
+        }}
+      />
+
+      {/* Subtle Ambient Lighting Grid */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 cyber-grid opacity-[0.15] dark:opacity-[0.25]" />
         
-        {/* Soft Blur Circles - Reduced size for mobile */}
-        <motion.div 
-          animate={{ x: [0, 30, 0], y: [0, 20, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="blur-circle w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-sky/20 dark:bg-vibrant-blue/10 top-[-50px] left-[-50px]"
-        />
-        <motion.div 
-          animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="blur-circle w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-vibrant-blue/5 dark:bg-vibrant-blue/10 bottom-[-100px] right-[-50px]"
-        />
+        {/* Soft Ambient Blobs */}
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-blue-500/10 dark:bg-cyan-500/10 blur-[130px] top-[-100px] left-[-100px]" />
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-indigo-500/10 dark:bg-purple-600/10 blur-[140px] bottom-[-100px] right-[-100px]" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 w-full flex flex-col items-center text-center font-sans z-10 flex-grow justify-center mt-8 md:mt-12">
-        {/* Tagline */}
-        <motion.div
-           initial={{ opacity: 0, y: 10 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8 }}
-           className="mb-6 md:mb-8 flex justify-center w-full"
-        >
-          <span className="px-4 md:px-6 py-2 rounded-full bg-sky/30 dark:bg-vibrant-blue/20 backdrop-blur border border-sky/50 dark:border-vibrant-blue/30 text-vibrant-blue dark:text-vibrant-blue text-[10px] md:text-sm font-semibold tracking-wide font-mono transition-colors duration-500 shadow-sm leading-relaxed max-w-[90%] md:max-w-none">
-            AI Engineer • AI Full Stack Engineer • Generative AI
-          </span>
-        </motion.div>
 
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="space-y-4 md:space-y-6 mb-8 md:mb-12"
-        >
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[88px] font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1] md:leading-[1.05] font-display transition-colors duration-500"
-              style={{ fontSize: 'clamp(2.25rem, 8vw, 5.5rem)' }}>
-            Building Intelligent <br className="hidden sm:block" />
-            <span className="text-gradient-focus">AI Systems</span> for the Future
-          </h1>
-          <div className="text-lg md:text-2xl font-semibold text-vibrant-blue italic font-sans tracking-tight">
-            AI That Solves Real-World Problems
-          </div>
-        </motion.div>
-
-        {/* Description */}
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-base md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl font-normal leading-relaxed font-sans mb-10 md:mb-14 transition-colors duration-500"
-        >
-          Hi, I'm Harsh Lagwal — an AI Engineer passionate about building intelligent systems using Machine Learning, Generative AI, NLP, and AI automation.
-        </motion.p>
-
-        {/* Buttons & Socials Container */}
-        <div className="flex flex-col items-center gap-10 md:gap-14 w-full">
-          {/* Action Buttons */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+      {/* ── Main Clean Split Hero Layout ── */}
+      <div className="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-12 gap-12 lg:gap-8 items-center z-10 flex-grow my-auto">
+        
+        {/* Left Column: Typography & CTAs (7 cols) */}
+        <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left font-sans">
+          
+          {/* Status Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 w-full sm:w-auto"
+            transition={{ duration: 0.5 }}
+            className="mb-5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200/60 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-medium shadow-xs"
           >
-            <a 
-              href="#projects" 
-              className="px-8 md:px-10 py-4 md:py-5 rounded-full bg-gray-900 dark:bg-vibrant-blue text-white font-bold text-base md:text-lg hover:scale-105 active:scale-95 transition-all shadow-xl flex items-center gap-3 font-sans w-full sm:w-auto justify-center"
-            >
-              View Projects <ArrowRight size={20} />
-            </a>
-            <button 
-              onClick={() => setIsResumeModalOpen(true)}
-              className="px-8 md:px-10 py-4 md:py-5 rounded-full bg-white dark:bg-[#0b0f1a] text-gray-900 dark:text-white font-bold text-base md:text-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-105 active:scale-95 transition-all duration-500 font-sans shadow-sm flex items-center gap-3 w-full sm:w-auto justify-center"
-            >
-              Download Resume <Download size={20} className="opacity-80"/>
-            </button>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Available for AI / ML Roles</span>
           </motion.div>
 
-          {/* Social Icons */}
+          {/* Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-4"
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-gray-900 dark:text-white leading-[1.15] font-display">
+              Hi, I'm Harsh Lagwal. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-300">
+                AI & Machine Learning
+              </span> Engineer.
+            </h1>
+          </motion.div>
+
+          {/* Bio Description (Authentic, Clean, No Buzzword Soup) */}
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-lg leading-relaxed mb-7 font-normal"
+          >
+            Building practical, high-performance systems with Generative AI, Large Language Models, and intelligent automation.
+          </motion.p>
+
+          {/* Action Buttons Row (2 Clean, Non-crowded Buttons) */}
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex items-center gap-6 md:gap-8"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 mb-7 w-full sm:w-auto"
+          >
+            <a 
+              href="#projects" 
+              className="px-6 sm:px-7 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-100 text-white font-semibold text-sm sm:text-base hover:scale-[1.02] active:scale-95 transition-all shadow-sm flex items-center gap-2"
+            >
+              <span>Explore Projects</span>
+              <ArrowRight size={17} />
+            </a>
+
+            <button 
+              onClick={() => setIsResumeModalOpen(true)}
+              className="px-5 sm:px-6 py-3 rounded-xl bg-gray-100 hover:bg-gray-200/80 dark:bg-white/[0.08] dark:hover:bg-white/15 text-gray-900 dark:text-white font-semibold text-sm sm:text-base border border-gray-200/80 dark:border-white/10 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2 shadow-xs cursor-pointer"
+            >
+              <Download size={17} className="text-blue-600 dark:text-cyan-400" />
+              <span>Resume</span>
+            </button>
+          </motion.div>
+
+
+          {/* Social Links Row & Quick Copy Email */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5"
           >
             {[
-              { icon: Github, href: "https://github.com/harshlagwal" },
-              { icon: Linkedin, href: "https://linkedin.com/in/harsh-lagwal" },
-              { icon: Mail, href: "mailto:Harshlagwal2005@gmail.com" }
+              { icon: Github, href: "https://github.com/harshlagwal", label: "GitHub" },
+              { icon: Linkedin, href: "https://linkedin.com/in/harsh-lagwal", label: "LinkedIn" },
             ].map((social, i) => (
               <a 
                 key={i}
                 href={social.href} 
-                target={social.href.startsWith('mailto') ? '_self' : '_blank'} 
+                target="_blank" 
                 rel="noopener noreferrer" 
-                className="relative flex items-center justify-center p-3.5 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:-translate-y-1 hover:border-vibrant-blue/20 hover:text-vibrant-blue dark:hover:text-white shadow-sm hover:shadow-lg transition-all duration-500 group"
+                aria-label={social.label}
+                className="p-2.5 rounded-xl bg-gray-100/80 hover:bg-blue-50 dark:bg-white/[0.05] dark:hover:bg-white/10 border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:scale-105 transition-all shadow-xs"
               >
-                <social.icon size={22} className="group-hover:scale-110 transition-transform" />
+                <social.icon size={18} />
               </a>
             ))}
+
+            {/* 1-Click Copy Email Button */}
+            <button
+              onClick={handleCopyEmail}
+              title="Copy Harsh's Email Address"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gray-100/80 hover:bg-emerald-50 dark:bg-white/[0.05] dark:hover:bg-emerald-500/10 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-200 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-400/40 text-xs font-mono font-medium transition-all shadow-xs group cursor-pointer"
+            >
+              <Copy size={14} className="text-gray-500 group-hover:text-emerald-500 transition-colors" />
+              <span>Copy Email</span>
+            </button>
+
+            {/* Keyboard Shortcuts Hint */}
+            <div className="hidden xl:inline-flex items-center gap-1.5 text-[11px] font-mono text-gray-400 dark:text-gray-500 ml-2 pl-3 border-l border-gray-200 dark:border-white/10">
+              <span>Press</span>
+              <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 font-bold text-[10px]">R</kbd>
+              <span>Resume</span>
+              <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 font-bold text-[10px]">C</kbd>
+              <span>Contact</span>
+            </div>
           </motion.div>
         </div>
+
+        {/* Right Column: Sleek Clean Portrait (5 cols) */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="lg:col-span-5 flex justify-center select-none"
+        >
+          <div className="relative w-full max-w-[340px] sm:max-w-[380px]">
+            
+            {/* Soft Ambient Halo behind the portrait */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-blue-500/20 via-indigo-500/15 to-cyan-400/20 rounded-[2.5rem] blur-2xl -z-10" />
+
+            {/* Clean Glass Portrait Container */}
+            <div className="relative rounded-3xl p-3 bg-white/70 dark:bg-[#0c1222]/80 border border-gray-200/80 dark:border-white/10 shadow-2xl backdrop-blur-xl transition-all group">
+              
+              {/* Photo */}
+              <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-900 border border-gray-200/60 dark:border-white/5">
+                <img
+                  src={harshPhoto}
+                  alt="Harsh Lagwal"
+                  className="w-full h-full object-cover object-top filter contrast-[1.04] brightness-[0.98] group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+
+                {/* Subtle soft gradient fade at bottom */}
+                <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+
+                {/* Clean Bottom Bio Tag */}
+                <div className="absolute bottom-3 inset-x-3 p-3 rounded-xl bg-white/10 dark:bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-between shadow-lg">
+                  <div>
+                    <p className="text-sm font-bold font-display tracking-tight">Harsh Lagwal</p>
+                    <p className="text-xs text-gray-200 dark:text-cyan-300 font-sans">AI & Machine Learning Engineer</p>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 font-bold bg-emerald-500/20 px-2.5 py-1 rounded-full border border-emerald-500/30">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    OPEN
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </motion.div>
+
       </div>
 
-      {/* Scroll Indicator - Hidden on very small screens */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.2 }}
-        className="mt-8 md:mt-12 hidden sm:flex flex-col items-center gap-4 w-full"
-      >
-        <span className="text-[10px] text-gray-600 dark:text-gray-400 uppercase tracking-[0.4em] font-bold font-mono opacity-80 transition-colors duration-500">Scroll to explore</span>
-        <div className="w-1 h-12 md:h-16 bg-gray-200/50 dark:bg-white/10 rounded-full overflow-hidden relative">
+      {/* Subtle Bottom Scroll Prompt */}
+      <div className="mt-6 hidden sm:flex flex-col items-center gap-2 w-full z-10">
+        <span className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-[0.25em] font-bold font-mono">
+          Scroll to explore
+        </span>
+        <div className="w-1 h-6 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden relative">
           <motion.div 
-            animate={{ y: [-64, 64] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-transparent via-vibrant-blue to-transparent"
+            animate={{ y: [-20, 20] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 left-0 w-full h-[40%] bg-blue-600 dark:bg-cyan-400"
           />
         </div>
-      </motion.div>
+      </div>
       
+      {/* Toast Notification Container */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 30, scale: 0.95 }}
+            className="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl bg-gray-900/95 dark:bg-white/95 text-white dark:text-black shadow-2xl backdrop-blur-md border border-gray-700/50 dark:border-gray-200 flex items-center gap-2.5 text-xs font-mono font-medium"
+          >
+            <Check size={16} className="text-emerald-400 dark:text-emerald-600" />
+            <span>{toastMessage}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Resume Modal */}
       <ResumeModal 
         isOpen={isResumeModalOpen} 
         onClose={() => setIsResumeModalOpen(false)} 
         resumeLink={resumeLink} 
       />
+
+
+      {/* Command Palette (Ctrl + K) */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onOpenResume={() => setIsResumeModalOpen(true)}
+        onOpenTerminal={() => setIsTerminalOpen(true)}
+      />
+
+      {/* Terminal Drawer */}
+      <TerminalDrawer
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
+        onOpenContact={() => {
+          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        onOpenResume={() => setIsResumeModalOpen(true)}
+      />
     </section>
   );
 };
 
 export default HeroSection;
+
+
+
+
+

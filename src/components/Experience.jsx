@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Briefcase, MapPin, ExternalLink, Globe } from 'lucide-react';
-
+import { Calendar, Briefcase, ExternalLink, Globe } from 'lucide-react';
 import CertificateModal from './CertificateModal';
 
 const Experience = () => {
@@ -66,109 +65,106 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-16 md:py-20 bg-white dark:bg-[#0b0f1a] transition-colors duration-500 relative overflow-hidden">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-vibrant-blue/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none transition-colors duration-500" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-vibrant-blue/5 rounded-full blur-[120px] translate-y-1/2 pointer-events-none" />
-
+    <section id="experience" className="py-16 md:py-20 bg-white dark:bg-[#060913] transition-colors duration-500 relative">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-10">
+        
+        {/* Section Header */}
+        <div className="text-center mb-12 md:mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-cyan-500/10 border border-blue-200/60 dark:border-cyan-500/20 text-blue-600 dark:text-cyan-400 text-xs font-semibold font-mono tracking-wide mb-3">
+            <Briefcase size={13} />
+            <span>CAREER MILESTONES</span>
+          </div>
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-semibold mb-5 font-display text-gray-900 dark:text-white tracking-tight transition-colors duration-500"
+            className="text-3xl md:text-4xl font-extrabold font-display text-gray-900 dark:text-white tracking-tight mb-3"
           >
-            Professional <span className="text-vibrant-blue">Timeline</span>
+            Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-cyan-400 dark:to-blue-400">Timeline</span>
           </motion.h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-sans text-lg leading-relaxed transition-colors duration-500">
-            A chronological journey through my professional growth and technical contributions in the field of AI.
+          <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+            Industrial internships and engineering roles in AI/ML & Generative AI.
           </p>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          {/* Central Vertical Line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 dark:bg-gray-700 -translate-x-1/2 transition-colors duration-500" />
+        <div className="relative max-w-4xl mx-auto">
+          {/* Central Track */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 dark:bg-white/10 -translate-x-1/2" />
 
-          <div className="space-y-8 md:space-y-12">
+          <div className="space-y-6 md:space-y-8">
             {experiences.map((exp, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: idx * 0.1, ease: "easeOut" }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
                 className={`relative flex items-center md:justify-between ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
               >
-                {/* Timeline Connector Dot */}
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-[#0b0f1a] border-4 border-vibrant-blue z-20 transition-colors duration-500" />
+                {/* Timeline Node Indicator */}
+                <div className={`absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-[#060913] border-[3px] ${idx === 0 ? 'border-emerald-500 shadow-[0_0_10px_#10b981]' : 'border-blue-600 dark:border-cyan-400'} z-20 shadow-xs flex items-center justify-center`}>
+                  {idx === 0 && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />}
+                </div>
 
                 {/* Content Card */}
                 <div className="w-full md:w-[46%] ml-12 md:ml-0">
-                  <motion.div 
-                    whileHover={{ y: -5 }}
-                    className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 md:p-8 rounded-3xl hover:border-vibrant-blue/30 transition-all duration-500 group shadow-md"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 mb-4 md:mb-6">
-                      <span className="flex items-center gap-1.5 px-3 py-1 bg-vibrant-blue/10 dark:bg-vibrant-blue/20 text-vibrant-blue text-[9px] md:text-[10px] font-bold font-mono rounded-full uppercase tracking-wider transition-colors">
-                        <Calendar size={10} /> {exp.duration}
+                  <div className="bg-white dark:bg-[#0c1222] border border-gray-200/80 dark:border-white/10 p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-0.5 hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all duration-300">
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                      <span className={`flex items-center gap-1.5 px-2.5 py-0.5 ${idx === 0 ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200/60 dark:border-emerald-500/20' : 'bg-blue-50 dark:bg-cyan-500/10 text-blue-700 dark:text-cyan-300 border-blue-200/60 dark:border-cyan-500/20'} text-[11px] font-semibold font-mono rounded-md border`}>
+                        <Calendar size={11} /> {exp.duration}
                       </span>
-                      <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400 text-[9px] md:text-[10px] font-bold font-sans uppercase tracking-widest transition-colors duration-500">
-                         <Globe size={10} /> {exp.type}
+                      <span className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-[11px] font-medium font-mono">
+                         <Globe size={11} /> {exp.type}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-4 md:gap-5 mb-4 md:mb-6">
-                       <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-gray-200 dark:border-gray-700 p-1 bg-white dark:bg-[#0b0f1a] shadow-md shrink-0 overflow-hidden transition-all duration-500 group-hover:border-vibrant-blue/50">
+
+                    <div className="flex items-center gap-3.5 mb-3">
+                       <div className="w-10 h-10 rounded-xl border border-gray-200/80 dark:border-white/10 p-1 bg-white dark:bg-white/[0.04] shadow-xs shrink-0 overflow-hidden flex items-center justify-center">
                           <img 
                             src={exp.logo} 
                             alt={exp.company} 
-                            className="w-full h-full rounded-full object-cover"
-                            onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(exp.company)}&background=random&color=fff`; }}
+                            className="w-full h-full rounded-lg object-contain"
+                            onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(exp.company)}&background=2563eb&color=fff`; }}
                           />
                        </div>
                        <div>
-                          <h3 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white font-display tracking-tight group-hover:text-vibrant-blue transition-colors duration-500">
+                          <h3 className="text-base font-bold text-gray-900 dark:text-white font-display">
                             {exp.role}
                           </h3>
-                          <p className="text-[11px] md:text-sm font-semibold text-gray-600 dark:text-gray-400 font-display tracking-wide uppercase transition-colors duration-500">
+                          <p className="text-xs font-semibold text-blue-600 dark:text-cyan-400 font-mono tracking-wide">
                             {exp.company}
                           </p>
                        </div>
                     </div>
                     
-                    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed font-sans transition-colors duration-500 mb-4 md:mb-6">
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                       {exp.description}
                     </p>
                     
-                    <div className="flex flex-wrap justify-end gap-x-4 md:gap-x-6 gap-y-2 mt-4 md:mt-6">
+                    <div className="flex flex-wrap justify-end gap-x-4 gap-y-1.5 pt-3 border-t border-gray-100 dark:border-white/5">
                       {exp.certificate && (
                         <button 
                           onClick={() => setSelectedCertificate(exp.certificate)}
-                          className="group/cert inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 relative font-sans"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-cyan-400 hover:underline font-mono"
                         >
-                          View Certificate <ExternalLink size={10} className="group-hover/cert:translate-x-0.5 group-hover/cert:-translate-y-0.5 transition-transform" />
-                          <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-vibrant-blue transition-all duration-300 group-hover/cert:w-full"></span>
+                          View Certificate <ExternalLink size={11} />
                         </button>
                       )}
                       {exp.certificates && exp.certificates.map((cert, cIdx) => (
                         <button 
                           key={cIdx}
                           onClick={() => setSelectedCertificate(cert.link)}
-                          className="group/cert inline-flex items-center gap-1.5 text-[10px] md:text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-vibrant-blue dark:hover:text-vibrant-blue transition-colors duration-300 relative font-sans"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-cyan-400 hover:underline font-mono"
                         >
-                          View {cert.label} <ExternalLink size={10} className="group-hover/cert:translate-x-0.5 group-hover/cert:-translate-y-0.5 transition-transform" />
-                          <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-vibrant-blue transition-all duration-300 group-hover/cert:w-full"></span>
+                          View {cert.label} <ExternalLink size={11} />
                         </button>
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
 
-                {/* Date/Label for Desktop - hidden on mobile */}
-                <div className="hidden md:block w-[46%]">
-                    {/* Empty space to balance the layout */}
-                </div>
+                <div className="hidden md:block w-[46%]" />
               </motion.div>
             ))}
           </div>
