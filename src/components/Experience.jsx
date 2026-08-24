@@ -33,7 +33,8 @@ const Experience = () => {
         duration: "Jul 2025 – Sep 2025",
         type: "Remote",
         logo: "https://i.postimg.cc/PrgWT7FZ/specto-V1.jpg",
-        description: "Specialized in Generative AI workflows, developing LLM-based solutions and optimizing prompt engineering for complex tasks."
+        description: "Specialized in Generative AI workflows, developing LLM-based solutions and optimizing prompt engineering for complex tasks.",
+        certificate: "https://drive.google.com/file/d/1HqxEmc6-nWhCpVRRHlxMlusENMk1DwtW/view?usp=sharing"
     },
     {
       role: "AI Azure Intern",
