@@ -50,12 +50,12 @@
 
 ### 💼 6. Flagship AI Systems & Client Web Deliverables (8+ Projects)
 - **WanderLust.ai:** AI Travel Planner with Gemini 1.5 Pro, dynamic maps, and admin analytics.
+- **CareerCraft AI:** Next-Generation Data-Driven Career Intelligence Hub ([github.com/harshlagwal/CareerCraft-AI](https://github.com/harshlagwal/CareerCraft-AI)).
+- **CodeChaska:** The Ultimate Gamified Coding Universe with 360 missions & mini-games ([code-chaska.vercel.app](https://code-chaska.vercel.app/)).
 - **ATC Constructions Portal:** Live commercial platform for Govt. Approved Contractor Amit Thakur ([atc-constructions.vercel.app](https://atc-constructions.vercel.app/)).
 - **Healthcare Assistant Chatbot:** NLP triage engine developed during Edunet Foundation AI internship.
 - **Real-Time Object Detection:** 30+ FPS computer vision inference with SSD MobileNet v3 and OpenCV DNN.
 - **Shree Sheetla Mata Mandir Portal:** Cultural heritage community platform.
-- **Safalta Apki Chatbot:** DeepSeek API career guidance engine.
-- **Employee Salary Prediction:** 5 ML classifiers comparing Random Forest, SVM, and KNN.
 - **AlgoFlow VS Code Extension:** Real-time algorithmic flowchart visualization across 7 programming languages.
 
 ---

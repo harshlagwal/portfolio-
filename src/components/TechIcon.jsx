@@ -144,6 +144,80 @@ export const TechIcon = ({ name, size = 16, className = "" }) => {
         </svg>
       );
 
+    case 'react':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" strokeWidth="1.5" transform="rotate(0 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" strokeWidth="1.5" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" strokeWidth="1.5" transform="rotate(120 12 12)"/>
+          <circle cx="12" cy="12" r="1.8" fill="#61DAFB"/>
+        </svg>
+      );
+
+    case 'typescript':
+    case 'ts':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <rect width="24" height="24" rx="4" fill="#3178C6"/>
+          <path d="M11.5 9.5H6.5V11H8V18H10V11H11.5V9.5Z" fill="white"/>
+          <path d="M17.5 11.5C17.5 10.5 16.5 9.5 15 9.5H13V18H14.8V15H15C16.5 15 17.5 14 17.5 13V11.5ZM15.5 13C15.5 13.5 15 13.7 14.8 13.7H14.8V10.8H15C15.4 10.8 15.5 11.1 15.5 11.5V13Z" fill="white"/>
+        </svg>
+      );
+
+    case 'javascript':
+    case 'js':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <rect width="24" height="24" rx="4" fill="#F7DF1E"/>
+          <path d="M7 16.5C7.5 17.3 8.3 17.8 9.3 17.8C10.5 17.8 11.3 17.1 11.3 15.8V10H9.5V15.7C9.5 16.2 9.2 16.4 8.8 16.4C8.4 16.4 8.2 16.2 8 15.9L7 16.5ZM13.8 16.8C14.4 17.5 15.4 17.8 16.6 17.8C18.2 17.8 19.3 16.9 19.3 15.3C19.3 13.9 18.4 13.3 17.1 12.7L16.4 12.4C15.6 12.1 15.2 11.7 15.2 11.2C15.2 10.6 15.7 10.2 16.4 10.2C17 10.2 17.5 10.5 17.9 11.1L19 10.2C18.3 9.2 17.4 8.8 16.4 8.8C14.9 8.8 13.8 9.8 13.8 11.2C13.8 12.6 14.6 13.2 15.9 13.8L16.6 14.1C17.4 14.4 17.9 14.9 17.9 15.4C17.9 16.1 17.3 16.5 16.5 16.5C15.6 16.5 15 16 14.6 15.3L13.8 16.8Z" fill="#000000"/>
+        </svg>
+      );
+
+    case 'vite':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M21.5 4.5L12.5 21L3.5 4.5L11.5 6.5L21.5 4.5Z" fill="#646CFF" fillOpacity="0.8"/>
+          <path d="M12.5 2.5L3.5 4.5L12.5 21L21.5 4.5L12.5 2.5Z" stroke="#646CFF" strokeWidth="1.5"/>
+          <path d="M13.5 3L8 13H12L11 18.5L16.5 8.5H12.5L13.5 3Z" fill="#FFD62E"/>
+        </svg>
+      );
+
+    case 'tailwind css':
+    case 'tailwindcss':
+    case 'tailwind':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.335 6.182 14.974 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.335 13.382 8.974 12 6.001 12z" fill="#38BDF8"/>
+        </svg>
+      );
+
+    case 'ai engine':
+    case 'gemini ai':
+    case 'ai':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#38BDF8"/>
+          <circle cx="12" cy="12" r="2.5" fill="#FFFFFF"/>
+        </svg>
+      );
+
+    case 'web audio api':
+    case 'web audio':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none" stroke="#EC4899" strokeWidth="2" strokeLinecap="round">
+          <path d="M3 10v4M7 6v12M11 3v18M15 8v8M19 11v2M22 12v0" />
+        </svg>
+      );
+
+    case 'firebase':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M4.5 18.5L6.8 4.2c.1-.5.7-.7 1-.3l3.2 5.8-6.5 8.8z" fill="#FFA000"/>
+          <path d="M14.2 8.8L12.5 5.5c-.2-.4-.8-.4-1 0L4.5 18.5l9.7-9.7z" fill="#F57C00"/>
+          <path d="M19.5 18.5L16.2 3.2c-.1-.5-.8-.7-1.1-.3l-10.6 15.6 7.5 4.2c.6.3 1.4.3 2 0l5.5-4.2z" fill="#FFCA28"/>
+        </svg>
+      );
+
     default:
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor">

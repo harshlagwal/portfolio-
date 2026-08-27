@@ -54,9 +54,9 @@ const AIAssistantModal = () => {
       };
     }
 
-    if (q.includes('wanderlust') || q.includes('project') || q.includes('flagship') || q.includes('portfolio')) {
+    if (q.includes('wanderlust') || q.includes('project') || q.includes('flagship') || q.includes('portfolio') || q.includes('careercraft') || q.includes('codechaska')) {
       return {
-        text: "🌍 Featured Projects & AI Systems (8+ Total):\n\n• WanderLust.ai: Flagship AI travel planner powered by Gemini 1.5 Pro.\n• ATC Constructions: Live production commercial web portal.\n• Healthcare Assistant Chatbot: Real-time symptom triage with NLP.\n• Real-Time Object Detection: 30+ FPS computer vision with SSD MobileNet v3.\n• Shree Sheetla Mata Mandir: Community cultural portal.",
+        text: "🌍 Featured Projects & AI Systems (8+ Total):\n\n• WanderLust.ai: Flagship AI travel planner powered by Gemini 1.5 Pro.\n• CareerCraft AI: Data-driven career intelligence hub with ML & resume optimizer.\n• CodeChaska: Gamified cyberpunk coding universe with 360 missions (code-chaska.vercel.app).\n• ATC Constructions: Live production commercial web portal.\n• Healthcare Assistant Chatbot: Real-time symptom triage with NLP.\n• Real-Time Object Detection: 30+ FPS computer vision with SSD MobileNet v3.",
         action: { label: "Explore Projects", id: "projects" }
       };
     }

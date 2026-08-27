@@ -87,34 +87,36 @@ const Projects = () => {
       github: "https://github.com/harshlagwal/Object-Detection"
     },
     {
-      title: "Safalta Apki Chatbot",
-      tag: "GenAI & Career",
-      category: "Generative AI",
-      metrics: ["🚀 DeepSeek API", "🗺️ Career Roadmaps", "💾 SQLite Database"],
+      title: "CareerCraft AI",
+      tag: "Career Intelligence SaaS",
+      category: "Machine Learning",
+      metrics: ["🚀 Next-Gen AI", "📄 AI Resume Optimizer", "🗺️ Career Roadmaps"],
+      subtitle: "Next-Generation, Data-Driven Career Intelligence Hub",
       description: [
-        "Career Guidance Chatbot built with Python and Streamlit",
-        "User registration system to capture education, interests, and career goals",
-        "Generates personalized step-by-step career roadmaps",
-        "AI chat support powered by DeepSeek API for career queries",
-        "SQLite database used to securely store user sessions and profile information"
+        "Advanced full-stack SaaS platform designed to eliminate guesswork from career planning",
+        "Leverages deep data analysis & machine learning to evaluate skills, values, and academic background",
+        "Predicts high-probability career paths with industrial precision and personalized analytics",
+        "Multi-module suite offering real-time Market Intelligence, automated AI Resume Optimization, and step-by-step Career Roadmaps"
       ],
-      tech: ["Python", "Streamlit", "SQL", "Generative AI"],
-      github: "https://github.com/harshlagwal/Safalta--Apki-Chatbot"
+      tech: ["React", "Tailwind CSS", "AI Engine", "Machine Learning", "Python"],
+      github: "https://github.com/harshlagwal/CareerCraft-AI"
     },
     {
-      title: "Employee Salary Prediction",
-      tag: "Predictive ML",
-      category: "Machine Learning",
-      metrics: ["📊 5 ML Classifiers", "⚡ Batch CSV Predictions", "🎯 High Accuracy"],
+      title: "CodeChaska",
+      tag: "Gamified Coding Universe",
+      category: "Client & Web Apps",
+      metrics: ["🎮 360 Missions", "🕹️ 60 FPS Mini-Games", "⚡ Flow & DSA Lab"],
+      subtitle: "Stop reading boring docs. Start slaying compilers.",
       description: [
-        "End-to-End machine learning solution for employee salary prediction",
-        "Data preprocessing: handling missing values, encoding categorical data, removing outliers",
-        "Compares multiple ML models including Random Forest, Logistic Regression, SVM, and KNN",
-        "Streamlit web application for real-time predictions and batch CSV file uploads",
-        "Uses Adult Income dataset with demographic and work-related features"
+        "Turns programming education into an immersive cyberpunk adventure with 360 progressive missions (Python, C++, JS, DSA)",
+        "Interactive Terminal & Fill-In-The-Blank evaluation engine with real-time audio-visual feedback and auto-focus pills",
+        "60 FPS Infinite Bug Runner arcade mini-game dodging SyntaxErrors and StackOverflows with responsive controls",
+        "Flow Lab program execution tracer and 2D animated visualizers for Linked Lists, BST, BFS/DFS, and sorting algorithms",
+        "Full RPG gamification system with XP progression, streaks, achievement badges, and zero-dependency 8-bit Web Audio synth"
       ],
-      tech: ["Python", "Machine Learning", "Streamlit", "Data Analysis"],
-      github: "https://github.com/harshlagwal/Employee-Salary-Prediction"
+      tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Web Audio API"],
+      liveDemo: "https://code-chaska.vercel.app",
+      github: "https://github.com/harshlagwal/CodeChaska"
     },
     {
       title: "AlgoFlow VS Code Extension",

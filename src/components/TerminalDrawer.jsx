@@ -67,10 +67,10 @@ const TerminalDrawer = ({ isOpen, onClose, onOpenContact, onOpenResume }) => {
         newHistory.push(
           { text: '── [HIGHLIGHTED PROJECTS] ──', type: 'accent' },
           { text: '1. WanderLust.ai - AI Travel Planner (Gemini AI + React + TS)', type: 'info' },
-          { text: '2. Healthcare Assistant Chatbot - NLP medical assistant', type: 'info' },
-          { text: '3. Object Detection System - SSD MobileNet v3 & OpenCV DNN', type: 'info' },
-          { text: '4. Safalta Apki Chatbot - Streamlit & DeepSeek API', type: 'info' },
-          { text: '5. Employee Salary Prediction - Scikit-learn ML solution', type: 'info' },
+          { text: '2. CareerCraft AI - Career Intelligence Hub & ML Engine', type: 'info' },
+          { text: '3. CodeChaska - Gamified Cyberpunk Coding Universe (360 Missions & Mini-Games)', type: 'info' },
+          { text: '4. Healthcare Assistant Chatbot - NLP medical triage assistant', type: 'info' },
+          { text: '5. Object Detection System - SSD MobileNet v3 & OpenCV DNN', type: 'info' },
           { text: '6. AlgoFlow VS Code Extension - Interactive Algorithm Visualizer', type: 'info' }
         );
         break;
