@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Briefcase, ExternalLink, Globe } from 'lucide-react';
+import { Calendar, Briefcase, ExternalLink, Globe, CheckCircle2, Sparkles } from 'lucide-react';
 import CertificateModal from './CertificateModal';
 
 const Experience = () => {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+
   const experiences = [
     {
       role: "AI / ML Intern",
       company: "Upto Skills",
       duration: "Jan 10, 2026 – Apr 10, 2026",
       type: "Remote",
+      accentColor: "#4285f4", // Google Blue
       logo: "https://i.postimg.cc/9MC1Vk0Y/upto-skill.jpg",
-      description: "Working on cutting-edge AI/ML solutions, implementing advanced algorithms and fine-tuning models for real-world applications.",
+      description: "Architecting cutting-edge AI/ML systems, implementing advanced deep learning algorithms, fine-tuning neural networks, and optimizing predictive pipelines for enterprise deployment.",
       certificates: [
         { label: "Experience Letter", link: "https://drive.google.com/file/d/16dbN9y3l5rsR2Y70AeaLxqIT20_tEKma/view?usp=drive_link" },
         { label: "Certificate", link: "https://drive.google.com/file/d/1nlus1dHLJ44rN04BLj5MgpA2lEaH6mp6/view?usp=drive_link" }
@@ -23,35 +25,39 @@ const Experience = () => {
       company: "eDC IIT Delhi",
       duration: "Dec 2025 – Feb 2026",
       type: "Remote",
+      accentColor: "#ea4335", // Google Red
       logo: "https://i.postimg.cc/zVdWrxc9/edc-iit-delhi.jpg", 
-      description: "Represented the Entrepreneurship Development Cell of IIT Delhi, fostering innovation and technical culture among students.",
+      description: "Represented the Entrepreneurship Development Cell of IIT Delhi, driving technical hackathons, entrepreneurship mentorship, and AI innovation culture among collegiate engineering cohorts.",
       certificate: "https://drive.google.com/file/d/1tIkMYWmhuA2pzWlGqaduzdmu5AwsJGu8/view?usp=drivesdk"
     },
     {
-        role: "Generative AI Engineer",
-        company: "SpectoV",
-        duration: "Jul 2025 – Sep 2025",
-        type: "Remote",
-        logo: "https://i.postimg.cc/PrgWT7FZ/specto-V1.jpg",
-        description: "Specialized in Generative AI workflows, developing LLM-based solutions and optimizing prompt engineering for complex tasks.",
-        certificate: "https://drive.google.com/file/d/1HqxEmc6-nWhCpVRRHlxMlusENMk1DwtW/view?usp=sharing"
+      role: "Generative AI Engineer",
+      company: "SpectoV",
+      duration: "Jul 2025 – Sep 2025",
+      type: "Remote",
+      accentColor: "#fbbc04", // Google Yellow
+      logo: "https://i.postimg.cc/PrgWT7FZ/specto-V1.jpg",
+      description: "Engineered state-of-the-art Generative AI workflows, implementing custom LLM orchestration, structured output prompt architectures, and context-window optimization for high-throughput AI agents.",
+      certificate: "https://drive.google.com/file/d/1HqxEmc6-nWhCpVRRHlxMlusENMk1DwtW/view?usp=sharing"
     },
     {
       role: "AI Azure Intern",
       company: "Edunet Foundation",
       duration: "Jun 2025 – Jul 2025",
       type: "Remote",
+      accentColor: "#34a853", // Google Green
       logo: "https://i.postimg.cc/XqN2KP0r/edunet-foundation.jpg",
-      description: "Leveraged Microsoft Azure AI services to build scalable cloud-based machine learning models and cognitive solutions.",
+      description: "Leveraged Microsoft Azure Cognitive Services and Azure ML Studio to deploy scalable cloud-native machine learning models, REST endpoints, and automated computer vision pipelines.",
       certificate: "https://drive.google.com/file/d/1RptrUewLOq4PEjWw21tfNbmCULuM5-oZ/view?usp=drivesdk"
     },
     {
-      role: "Artificial Intelligence and Machine Learning Intern",
+      role: "Artificial Intelligence & ML Intern",
       company: "Edunet Foundation",
-      duration: "Jun 2025 – Jul 2025 (2 months)",
+      duration: "Jun 2025 – Jul 2025 (2 mos)",
       type: "Remote",
+      accentColor: "#4285f4", // Google Blue
       logo: "https://i.postimg.cc/XqN2KP0r/edunet-foundation.jpg",
-      description: "Focused on core AI/ML principles, data preprocessing, and training predictive models using industry-standard frameworks.",
+      description: "Mastered fundamental machine learning algorithms, advanced feature engineering, cross-validation architectures, and automated model evaluation using scikit-learn, TensorFlow, and Pandas.",
       certificate: "https://drive.google.com/file/d/1HSbd9Xg9fbVCI8o0TVt1guDC4cQJL2wf/view?usp=drivesdk"
     },
     {
@@ -59,116 +65,157 @@ const Experience = () => {
       company: "Edunet Foundation",
       duration: "Jan 2025 – Mar 2025",
       type: "Remote",
+      accentColor: "#a142f4", // Purple
       logo: "https://i.postimg.cc/XqN2KP0r/edunet-foundation.jpg",
-      description: "Explored the transformative potential of AI in education, developing intelligent learning tools and methodologies.",
+      description: "Developed adaptive AI learning methodologies and intelligent NLP assessment tools to augment educational retention and automate real-time query resolution.",
       certificate: "https://drive.google.com/file/d/1scilZSa8bJNOJCDlpnINwLbfBrjUsjZL/view?usp=drivesdk"
     }
   ];
 
   return (
-    <section id="experience" className="py-16 md:py-20 bg-white dark:bg-[#060913] transition-colors duration-500 relative">
+    <section id="experience" className="py-16 md:py-20 bg-white dark:bg-[#131314] transition-colors duration-300 relative overflow-hidden">
+      
+      {/* Subtle Ambient Background RGB Aura */}
+      <div className="absolute top-1/4 left-[-150px] w-96 h-96 rounded-full bg-gradient-to-br from-[#4285f4]/5 via-[#ea4335]/5 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-[-150px] w-96 h-96 rounded-full bg-gradient-to-tl from-[#34a853]/5 via-[#fbbc04]/5 to-transparent blur-3xl pointer-events-none" />
+
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-cyan-500/10 border border-blue-200/60 dark:border-cyan-500/20 text-blue-600 dark:text-cyan-400 text-xs font-semibold font-mono tracking-wide mb-3">
-            <Briefcase size={13} />
-            <span>CAREER MILESTONES</span>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-12 gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f0fe] dark:bg-[#8ab4f8]/10 border border-[#dadce0] dark:border-[#8ab4f8]/20 text-[#1a73e8] dark:text-[#8ab4f8] text-xs font-medium font-mono tracking-wide mb-3">
+              <Briefcase size={14} strokeWidth={1.5} />
+              <span>CAREER MILESTONES & WORK HISTORY</span>
+            </div>
+            <motion.h2 
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-medium font-display text-[#202124] dark:text-[#f1f3f4] tracking-tight"
+            >
+              Professional <span className="text-[#1a73e8] dark:text-[#8ab4f8]">Experience</span>
+            </motion.h2>
           </div>
-          <motion.h2 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-extrabold font-display text-gray-900 dark:text-white tracking-tight mb-3"
-          >
-            Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-cyan-400 dark:to-blue-400">Timeline</span>
-          </motion.h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Industrial internships and engineering roles in AI/ML & Generative AI.
+          <p className="text-[#5f6368] dark:text-[#9aa0a6] max-w-md text-xs sm:text-sm leading-relaxed">
+            Hands-on machine learning engineering, enterprise Generative AI workflows, and certified industrial roles.
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Central Track */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 dark:bg-white/10 -translate-x-1/2" />
-
-          <div className="space-y-6 md:space-y-8">
-            {experiences.map((exp, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className={`relative flex items-center md:justify-between ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-              >
-                {/* Timeline Node Indicator */}
-                <div className={`absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-[#060913] border-[3px] ${idx === 0 ? 'border-emerald-500 shadow-[0_0_10px_#10b981]' : 'border-blue-600 dark:border-cyan-400'} z-20 shadow-xs flex items-center justify-center`}>
-                  {idx === 0 && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />}
-                </div>
-
-                {/* Content Card */}
-                <div className="w-full md:w-[46%] ml-12 md:ml-0">
-                  <div className="bg-white dark:bg-[#0c1222] border border-gray-200/80 dark:border-white/10 p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-0.5 hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all duration-300">
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                      <span className={`flex items-center gap-1.5 px-2.5 py-0.5 ${idx === 0 ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200/60 dark:border-emerald-500/20' : 'bg-blue-50 dark:bg-cyan-500/10 text-blue-700 dark:text-cyan-300 border-blue-200/60 dark:border-cyan-500/20'} text-[11px] font-semibold font-mono rounded-md border`}>
-                        <Calendar size={11} /> {exp.duration}
-                      </span>
-                      <span className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-[11px] font-medium font-mono">
-                         <Globe size={11} /> {exp.type}
-                      </span>
-                    </div>
-
-
-                    <div className="flex items-center gap-3.5 mb-3">
-                       <div className="w-10 h-10 rounded-xl border border-gray-200/80 dark:border-white/10 p-1 bg-white dark:bg-white/[0.04] shadow-xs shrink-0 overflow-hidden flex items-center justify-center">
-                          <img 
-                            src={exp.logo} 
-                            alt={exp.company} 
-                            className="w-full h-full rounded-lg object-contain"
-                            onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(exp.company)}&background=2563eb&color=fff`; }}
-                          />
-                       </div>
-                       <div>
-                          <h3 className="text-base font-bold text-gray-900 dark:text-white font-display">
-                            {exp.role}
-                          </h3>
-                          <p className="text-xs font-semibold text-blue-600 dark:text-cyan-400 font-mono tracking-wide">
-                            {exp.company}
-                          </p>
-                       </div>
-                    </div>
-                    
-                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                      {exp.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap justify-end gap-x-4 gap-y-1.5 pt-3 border-t border-gray-100 dark:border-white/5">
-                      {exp.certificate && (
-                        <button 
-                          onClick={() => setSelectedCertificate(exp.certificate)}
-                          className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-cyan-400 hover:underline font-mono"
-                        >
-                          View Certificate <ExternalLink size={11} />
-                        </button>
-                      )}
-                      {exp.certificates && exp.certificates.map((cert, cIdx) => (
-                        <button 
-                          key={cIdx}
-                          onClick={() => setSelectedCertificate(cert.link)}
-                          className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 dark:text-cyan-400 hover:underline font-mono"
-                        >
-                          View {cert.label} <ExternalLink size={11} />
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="hidden md:block w-[46%]" />
-              </motion.div>
-            ))}
+        {/* Google / Apple RGB Laser Timeline Track Wrapper */}
+        <div className="relative border-t border-[#dadce0] dark:border-[#2e3134]">
+          
+          {/* Vertical RGB Laser Guide Rail (Google 4-Color Gradient) */}
+          <div className="hidden lg:block absolute left-[-24px] top-0 bottom-0 w-[2px] bg-[#dadce0]/50 dark:bg-[#2e3134]/60 overflow-hidden">
+            {/* Smooth Continuous Traveling RGB Laser Beam */}
+            <motion.div
+              animate={{
+                y: ['-100%', '350%'],
+              }}
+              transition={{
+                duration: 5.5,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              className="w-full h-56 bg-gradient-to-b from-transparent via-[#4285f4] via-[#ea4335] via-[#fbbc04] to-[#34a853] shadow-[0_0_12px_rgba(66,133,244,0.8)]"
+            />
           </div>
+
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.28, delay: idx * 0.04 }}
+              className="relative py-8 md:py-10 border-b border-[#dadce0] dark:border-[#2e3134] grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start hover:bg-[#f8f9fa]/60 dark:hover:bg-[#1a1b1e]/60 px-4 -mx-4 rounded-2xl transition-all duration-150 group"
+            >
+
+              {/* Col 1: Timeline & Meta (3 cols) */}
+              <div className="md:col-span-3 flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <span 
+                    className="font-mono text-xs font-semibold px-2 py-0.5 rounded-md border"
+                    style={{ 
+                      color: exp.accentColor, 
+                      borderColor: `${exp.accentColor}30`,
+                      backgroundColor: `${exp.accentColor}10` 
+                    }}
+                  >
+                    0{idx + 1}
+                  </span>
+                  <span className="w-1 h-1 rounded-full bg-[#dadce0] dark:bg-[#3c4043]" />
+                  <span className="text-xs font-mono font-medium text-[#202124] dark:text-[#e3e3e3] flex items-center gap-1.5">
+                    <Calendar size={12} strokeWidth={1.5} className="text-[#5f6368] dark:text-[#9aa0a6]" />
+                    {exp.duration}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#f1f3f4] dark:bg-[#252629] border border-[#dadce0] dark:border-[#3c4043] text-[11px] font-mono text-[#5f6368] dark:text-[#9aa0a6]">
+                    <Globe size={10} strokeWidth={1.5} />
+                    {exp.type}
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#e8f0fe] dark:bg-[#8ab4f8]/10 border border-[#dadce0] dark:border-[#8ab4f8]/20 text-[11px] font-mono font-medium text-[#1a73e8] dark:text-[#8ab4f8]">
+                    Completed
+                  </span>
+                </div>
+              </div>
+
+              {/* Col 2: Role, Company & Deliverables (6 cols) */}
+              <div className="md:col-span-6 flex items-start gap-4">
+                {/* Company Logo in sleek square */}
+                <div className="shrink-0 w-11 h-11 rounded-xl bg-white border border-[#dadce0] dark:border-[#3c4043] p-1.5 shadow-2xs overflow-hidden flex items-center justify-center mt-0.5 group-hover:border-[#1a73e8] dark:group-hover:border-[#8ab4f8] transition-colors">
+                  <img 
+                    src={exp.logo} 
+                    alt={exp.company} 
+                    className="w-full h-full rounded-lg object-contain"
+                    onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(exp.company)}&background=1a73e8&color=fff`; }}
+                  />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-lg sm:text-xl font-medium text-[#202124] dark:text-[#f1f3f4] font-display tracking-tight group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors">
+                    {exp.role}
+                  </h3>
+                  <div className="flex items-center gap-1.5 mt-0.5 mb-3">
+                    <span className="text-xs font-mono font-medium text-[#1a73e8] dark:text-[#8ab4f8]">
+                      {exp.company}
+                    </span>
+                    <CheckCircle2 size={12} strokeWidth={1.8} className="text-[#137333] dark:text-[#81c995]" />
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed">
+                    {exp.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Col 3: Verified Proof / Certificate Actions (3 cols) */}
+              <div className="md:col-span-3 flex md:flex-col md:items-end justify-start gap-2 pt-2 md:pt-0">
+                {exp.certificate && (
+                  <button 
+                    onClick={() => setSelectedCertificate(exp.certificate)}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#f1f3f4] hover:bg-[#e8eaed] dark:bg-[#252629] dark:hover:bg-[#303236] text-[#202124] dark:text-[#f1f3f4] border border-[#dadce0] dark:border-[#3c4043] transition-all shadow-2xs hover:scale-[1.02] active:scale-95 cursor-pointer whitespace-nowrap"
+                  >
+                    <span>View Certificate</span>
+                    <ExternalLink size={12} strokeWidth={1.8} className="text-[#1a73e8] dark:text-[#8ab4f8]" />
+                  </button>
+                )}
+                {exp.certificates && exp.certificates.map((cert, cIdx) => (
+                  <button 
+                    key={cIdx}
+                    onClick={() => setSelectedCertificate(cert.link)}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#f1f3f4] hover:bg-[#e8eaed] dark:bg-[#252629] dark:hover:bg-[#303236] text-[#202124] dark:text-[#f1f3f4] border border-[#dadce0] dark:border-[#3c4043] transition-all shadow-2xs hover:scale-[1.02] active:scale-95 cursor-pointer whitespace-nowrap"
+                  >
+                    <span>View {cert.label}</span>
+                    <ExternalLink size={12} strokeWidth={1.8} className="text-[#1a73e8] dark:text-[#8ab4f8]" />
+                  </button>
+                ))}
+              </div>
+
+            </motion.div>
+          ))}
         </div>
 
       </div>

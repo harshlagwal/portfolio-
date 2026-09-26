@@ -13,13 +13,13 @@ const Projects = () => {
       title: "WanderLust.ai",
       tag: "Flagship AI Agent",
       category: "Generative AI",
-      metrics: ["⚡ Gemini 1.5 Pro", "🗺️ Dynamic Maps", "👥 Admin Dashboard"],
+      metrics: ["Gemini 1.5 Pro", "Dynamic Maps", "Admin Dashboard"],
       description: [
-        "🌍 AI Travel Planner – Discover, plan, and organize trips with intelligent itineraries",
-        "🗺️ Smart Itinerary Generation – Powered by Google Gemini AI, tailored to preferences, budget, and duration",
-        "💾 Trip Management – Save, revisit, and share travel plans with ease",
-        "🎨 Modern UI/UX – Interactive maps, responsive design, immersive visuals",
-        "👥 Admin Dashboard – Manage users, itineraries, and search analytics"
+        "AI Travel Planner – Discover, plan, and organize trips with intelligent automated itineraries",
+        "Smart Itinerary Generation – Powered by Google Gemini AI, tailored to preferences, budget, and duration",
+        "Trip Management – Save, revisit, and share travel plans with ease",
+        "Modern UI/UX – Interactive maps, responsive design, and immersive visuals",
+        "Admin Dashboard – Manage users, itineraries, and search analytics"
       ],
       tech: ["React", "TypeScript", "Node.js", "MongoDB", "Tailwind CSS", "Firebase", "Gemini AI"],
       github: "https://github.com/harshlagwal/WanderLust.ai"
@@ -28,7 +28,7 @@ const Projects = () => {
       title: "ATC Constructions Portal",
       tag: "Client Production Web",
       category: "Client & Web Apps",
-      metrics: ["🏢 Govt. Contractor", "⚡ Live on Vercel", "📈 Lead Generation"],
+      metrics: ["Govt. Contractor", "Live on Vercel", "Lead Generation"],
       subtitle: "Engineered for Amit Thakur (Govt. Approved Contractor)",
       description: [
         "Commercial web platform designed and deployed for government-approved civil contractor Amit Thakur",
@@ -45,7 +45,7 @@ const Projects = () => {
       title: "Shree Sheetla Mata Mandir Portal",
       tag: "Community Platform",
       category: "Client & Web Apps",
-      metrics: ["🕉️ Temple Portal", "📅 Festival Schedule", "📱 Mobile First"],
+      metrics: ["Temple Portal", "Festival Schedule", "Mobile First"],
       subtitle: "Community & Cultural Heritage Platform",
       description: [
         "Dedicated digital portal for Shree Sheetla Mata Mandir to connect devotees and manage temple information",
@@ -60,7 +60,7 @@ const Projects = () => {
       title: "Healthcare Assistant Chatbot",
       tag: "Healthcare NLP",
       category: "Generative AI",
-      metrics: ["🎯 NLP Intent Engine", "⚡ Sub-100ms Inference", "🩺 Triage Guidance"],
+      metrics: ["NLP Intent Engine", "Sub-100ms Inference", "Triage Guidance"],
       subtitle: "Developed during AI Transformative Learning Internship (Edunet Foundation)",
       description: [
         "AI-powered healthcare chatbot for symptom analysis and medical guidance",
@@ -75,7 +75,7 @@ const Projects = () => {
       title: "Object Detection System",
       tag: "Computer Vision",
       category: "Computer Vision & Tools",
-      metrics: ["👁️ SSD MobileNet v3", "⚡ 30+ FPS Inference", "📦 80 COCO Classes"],
+      metrics: ["SSD MobileNet v3", "30+ FPS Inference", "80 COCO Classes"],
       description: [
         "Deep Learning & Computer Vision project for high-speed object detection",
         "Uses OpenCV’s DNN module with SSD MobileNet v3 trained on COCO dataset",
@@ -90,7 +90,7 @@ const Projects = () => {
       title: "CareerCraft AI",
       tag: "Career Intelligence SaaS",
       category: "Machine Learning",
-      metrics: ["🚀 Next-Gen AI", "📄 AI Resume Optimizer", "🗺️ Career Roadmaps"],
+      metrics: ["Next-Gen AI", "AI Resume Optimizer", "Career Roadmaps"],
       subtitle: "Next-Generation, Data-Driven Career Intelligence Hub",
       description: [
         "Advanced full-stack SaaS platform designed to eliminate guesswork from career planning",
@@ -105,7 +105,7 @@ const Projects = () => {
       title: "CodeChaska",
       tag: "Gamified Coding Universe",
       category: "Client & Web Apps",
-      metrics: ["🎮 360 Missions", "🕹️ 60 FPS Mini-Games", "⚡ Flow & DSA Lab"],
+      metrics: ["360 Missions", "60 FPS Mini-Games", "Flow & DSA Lab"],
       subtitle: "Stop reading boring docs. Start slaying compilers.",
       description: [
         "Turns programming education into an immersive cyberpunk adventure with 360 progressive missions (Python, C++, JS, DSA)",
@@ -122,7 +122,7 @@ const Projects = () => {
       title: "AlgoFlow VS Code Extension",
       tag: "Developer Tool",
       category: "Computer Vision & Tools",
-      metrics: ["🔄 Step-by-Step Flow", "⚡ Big-O Complexity", "💻 7 Languages"],
+      metrics: ["Step-by-Step Flow", "Big-O Complexity", "7 Languages"],
       description: [
         "Educational VS Code extension to visualize algorithms using flowcharts",
         "Converts code into interactive animated flowcharts instantly",
@@ -141,144 +141,179 @@ const Projects = () => {
     : projects.filter(p => p.category === selectedFilter);
 
   return (
-    <section id="projects" className="py-16 md:py-20 bg-white dark:bg-[#060913] transition-colors duration-500 relative">
+    <section id="projects" className="py-16 md:py-20 bg-white dark:bg-[#131314] transition-colors duration-300 relative">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-10 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-cyan-500/10 border border-blue-200/60 dark:border-cyan-500/20 text-blue-600 dark:text-cyan-400 text-xs font-semibold font-mono tracking-wide mb-3">
-              <FolderGit2 size={13} />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f0fe] dark:bg-[#8ab4f8]/10 border border-[#dadce0] dark:border-[#8ab4f8]/20 text-[#1a73e8] dark:text-[#8ab4f8] text-xs font-medium font-mono tracking-wide mb-3">
+              <FolderGit2 size={14} strokeWidth={1.5} />
               <span>FEATURED WORK & CLIENT DELIVERABLES</span>
             </div>
             <motion.h2 
               initial={{ opacity: 0, x: -15 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-extrabold font-display tracking-tight text-gray-900 dark:text-white"
+              className="text-3xl md:text-4xl font-medium font-display tracking-tight text-[#202124] dark:text-[#e3e3e3]"
             >
-              Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-cyan-400 dark:to-blue-400">Projects</span>
+              Featured <span className="text-[#1a73e8] dark:text-[#8ab4f8]">Projects</span>
             </motion.h2>
           </div>
-          <p className="text-gray-600 dark:text-gray-300 max-w-md text-sm sm:text-base leading-relaxed">
+          <p className="text-[#5f6368] dark:text-[#9aa0a6] max-w-md text-sm sm:text-base leading-relaxed">
             Real-world AI systems, machine learning architectures, and live client web deliverables.
           </p>
         </div>
 
-        {/* Filter Category Pills */}
+        {/* Google Antigravity Filter Category Pills with Live Counts */}
         <div className="flex flex-wrap items-center gap-2 mb-10 pb-2">
           {categories.map((cat) => {
             const isSelected = selectedFilter === cat;
+            const count = cat === 'All' ? projects.length : projects.filter(p => p.category === cat).length;
             return (
               <button
                 key={cat}
                 onClick={() => setSelectedFilter(cat)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
+                className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all duration-200 cursor-pointer select-none ${
                   isSelected
-                    ? 'bg-blue-600 dark:bg-white text-white dark:text-black font-semibold shadow-xs'
-                    : 'bg-gray-100/80 hover:bg-gray-200/80 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] text-gray-600 dark:text-gray-300 border border-gray-200/60 dark:border-white/5'
+                    ? 'bg-[#202124] text-white dark:bg-white dark:text-[#131314] font-semibold shadow-xs'
+                    : 'bg-[#f1f3f4] hover:bg-[#e8eaed] dark:bg-[#1e1f20] dark:hover:bg-[#2d3135] text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-white border border-[#dadce0] dark:border-[#2e3134]'
                 }`}
               >
-                {cat}
+                <span>{cat}</span>
+                <span className={`px-1.5 py-0.2 rounded-full text-[10.5px] font-mono ${
+                  isSelected 
+                    ? 'bg-white/20 dark:bg-black/15 text-white dark:text-black font-semibold' 
+                    : 'bg-[#dadce0]/60 dark:bg-[#2e3134] text-[#5f6368] dark:text-[#9aa0a6]'
+                }`}>
+                  {count}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Clean, Normal-Sized Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        {/* Google Antigravity Editorial Split Layout (No Boxed Cards) */}
+        <div className="border-t border-[#dadce0] dark:border-[#2e3134]">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
               <motion.div
                 key={project.title}
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.25 }}
-                className="flex flex-col"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 15 }}
+                transition={{ duration: 0.28, delay: idx * 0.04 }}
+                className="py-10 md:py-14 border-b border-[#dadce0] dark:border-[#2e3134] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
               >
-
-              <div className="h-full bg-white dark:bg-[#0c1222] border border-gray-200/80 dark:border-white/10 rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all duration-300">
-                <div className="flex flex-col justify-between flex-grow">
+                {/* Left Column: Index, Title, Problem, & Actions (7 cols) */}
+                <div className="lg:col-span-7 flex flex-col justify-between">
                   <div>
-                    {/* Top Tag & Metric Badges */}
-                    <div className="flex items-center justify-between gap-3 mb-3">
-                      <span className="text-[11px] font-mono font-medium px-2.5 py-1 rounded-md bg-blue-50 dark:bg-cyan-500/10 text-blue-700 dark:text-cyan-300 border border-blue-200/60 dark:border-cyan-500/20">
+                    {/* Index & Tag */}
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="font-mono text-sm font-semibold text-[#1a73e8] dark:text-[#8ab4f8]">
+                        0{idx + 1}
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-[#dadce0] dark:bg-[#3c4043]" />
+                      <span className="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-[#f1f3f4] dark:bg-[#252629] text-[#5f6368] dark:text-[#9aa0a6] border border-[#dadce0] dark:border-[#3c4043]">
                         {project.tag}
                       </span>
-                      <span className="text-xs font-mono text-gray-400">0{idx + 1}</span>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white font-display tracking-tight hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">
+                    {/* Project Title */}
+                    <h3 className="text-2xl sm:text-3xl font-medium tracking-tight text-[#202124] dark:text-[#f1f3f4] font-display mb-1.5">
                       {project.title}
                     </h3>
-                    
+
                     {project.subtitle && (
-                      <p className="text-blue-600 dark:text-cyan-400 text-xs font-semibold mb-2.5 italic">
+                      <p className="text-xs sm:text-sm font-medium text-[#1a73e8] dark:text-[#8ab4f8] mb-3">
                         {project.subtitle}
                       </p>
                     )}
 
-                    {/* Impact / Performance Metric Pills */}
-                    {project.metrics && (
-                      <div className="flex flex-wrap gap-1.5 mb-4">
+                    {/* Bullet Points */}
+                    <div className="space-y-2 mb-6">
+                      {project.description.map((point, pIdx) => (
+                        <div key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#1a73e8] dark:bg-[#8ab4f8] mt-2 shrink-0 opacity-80" />
+                          <span>{point}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Actions: GitHub & Live Demo */}
+                  <div className="flex flex-wrap items-center gap-3 pt-2">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#202124] hover:bg-[#303134] text-white dark:bg-white dark:text-[#131314] dark:hover:bg-[#f1f3f4] text-xs font-medium transition-all shadow-2xs hover:scale-[1.02] active:scale-95 cursor-pointer"
+                      >
+                        <Github size={14} strokeWidth={1.8} />
+                        <span>Source Code</span>
+                      </a>
+                    )}
+                    {project.liveDemo && (
+                      <a
+                        href={project.liveDemo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f1f3f4] hover:bg-[#e8eaed] dark:bg-[#1e1f20] dark:hover:bg-[#252629] text-[#202124] dark:text-[#f1f3f4] border border-[#dadce0] dark:border-[#3c4043] text-xs font-medium transition-all shadow-2xs hover:scale-[1.02] active:scale-95 cursor-pointer"
+                      >
+                        <Globe size={14} strokeWidth={1.8} className="text-[#1a73e8] dark:text-[#8ab4f8]" />
+                        <span>Live Production Web</span>
+                        <ExternalLink size={12} strokeWidth={1.8} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right Column: Architectural Highlights & Tech Stack (5 cols) */}
+                <div className="lg:col-span-5 bg-[#f8f9fa] dark:bg-[#1a1b1e] border border-[#dadce0] dark:border-[#2e3134] rounded-2xl p-6">
+                  {/* System Metrics */}
+                  {project.metrics && (
+                    <div className="mb-5">
+                      <span className="block text-[11px] font-mono uppercase tracking-wider text-[#5f6368] dark:text-[#9aa0a6] mb-2.5">
+                        Performance & Architecture
+                      </span>
+                      <div className="flex flex-wrap gap-2">
                         {project.metrics.map((metric, mIdx) => (
                           <span 
                             key={mIdx}
-                            className="text-[10px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-500/20"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-[#252629] border border-[#dadce0] dark:border-[#3c4043] hover:border-[#1a73e8] dark:hover:border-[#8ab4f8] rounded-lg text-xs font-mono font-medium text-[#202124] dark:text-[#e3e3e3] shadow-2xs hover:-translate-y-0.5 transition-all select-none cursor-default"
                           >
                             {metric}
                           </span>
                         ))}
                       </div>
-                    )}
+                    </div>
+                  )}
 
-                    <ul className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm mb-5 leading-relaxed space-y-1.5 list-disc pl-4">
-                      {project.description.map((bullet, i) => (
-                        <li key={i}>{bullet}</li>
-                      ))}
-                    </ul>
-                    
-                    <div className="flex flex-wrap gap-1.5 mb-5">
-                      {project.tech.map((t, i) => (
-                        <span key={i} className="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 bg-gray-50 dark:bg-white/[0.04] rounded-md border border-gray-200/80 dark:border-white/10 text-gray-700 dark:text-gray-300 font-medium">
-                          <TechIcon name={t} size={13} />
+                  {/* Core Technologies */}
+                  <div>
+                    <span className="block text-[11px] font-mono uppercase tracking-wider text-[#5f6368] dark:text-[#9aa0a6] mb-2.5">
+                      Technologies & Libraries
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((t, tIdx) => (
+                        <div 
+                          key={tIdx}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#252629] border border-[#dadce0] dark:border-[#3c4043] hover:border-[#1a73e8] dark:hover:border-[#8ab4f8] rounded-lg text-xs text-[#202124] dark:text-[#e3e3e3] shadow-2xs select-none hover:-translate-y-0.5 transition-all cursor-default"
+                        >
+                          <TechIcon name={t} size={15} />
                           <span>{t}</span>
-                        </span>
+                        </div>
                       ))}
                     </div>
                   </div>
-
-                  <div className="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center gap-3">
-                    {project.liveDemo && (
-                      <a 
-                        href={project.liveDemo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-100 text-white font-semibold text-xs sm:text-sm hover:scale-[1.01] active:scale-95 transition-all shadow-xs"
-                      >
-                        <Globe size={15} />
-                        <span>Live Demo ↗</span>
-                      </a>
-                    )}
-                    <a 
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`${project.liveDemo ? 'flex-1' : 'w-full'} flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gray-900 hover:bg-gray-800 dark:bg-white/[0.08] dark:hover:bg-white/15 text-white font-semibold text-xs sm:text-sm hover:scale-[1.01] active:scale-95 transition-all shadow-xs border border-gray-700/30 dark:border-white/10`}
-                    >
-                      <Github size={15} />
-                      <span>{project.liveDemo ? 'Source' : 'View Source Code'}</span>
-                    </a>
-                  </div>
                 </div>
-              </div>
 
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
 
     </div>
   </section>

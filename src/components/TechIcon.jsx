@@ -1,9 +1,10 @@
 import React from 'react';
 
 export const TechIcon = ({ name, size = 16, className = "" }) => {
+  if (!name) return null;
   const iconKey = name.toLowerCase().trim();
 
-  // Real vector brand SVGs with official colors
+  // Authentic, official vector brand SVGs
   switch (iconKey) {
     case 'python':
       return (
@@ -25,6 +26,94 @@ export const TechIcon = ({ name, size = 16, className = "" }) => {
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
           <path d="M12.002 2.002L2.005 7.776l3.998 2.308v6.928l5.999 3.464 6-3.464v-6.928l3.998-2.308-10-5.774zm0 2.31l6.002 3.465-2.004 1.157-3.998-2.308-4 2.308-2.002-1.157 6.002-3.465zm-4.002 5.774l4 2.309v8.082l-4-2.308V10.086zm8 0v8.083l-4 2.308V12.395l4-2.309z" fill="#FF6F00"/>
+        </svg>
+      );
+
+    case 'gemini ai':
+    case 'gemini':
+    case 'google gemini':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <defs>
+            <linearGradient id="geminiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1B73E8" />
+              <stop offset="45%" stopColor="#8AB4F8" />
+              <stop offset="70%" stopColor="#A50E0E" />
+              <stop offset="100%" stopColor="#EA4335" />
+            </linearGradient>
+          </defs>
+          <path d="M12 2C12 7.523 7.523 12 2 12C7.523 12 12 16.477 12 22C12 16.477 16.477 12 22 12C16.477 12 12 7.523 12 2Z" fill="url(#geminiGrad)" />
+        </svg>
+      );
+
+    case 'openai':
+    case 'chatgpt':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="currentColor">
+          <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 8.78a4.47 4.47 0 0 1 2.34-1.974v5.679a.761.761 0 0 0 .39.682l5.835 3.37-2.02 1.168a.076.076 0 0 1-.071 0L4.03 14.82a4.499 4.499 0 0 1-1.69-6.04zm16.597 3.865l-5.836-3.372 2.02-1.166a.076.076 0 0 1 .071 0l4.784 2.766a4.499 4.499 0 0 1-.676 8.01v-5.557a.795.795 0 0 0-.363-.681zm2.01-4.471l-.141-.085-4.783-2.759a.771.771 0 0 0-.78 0L9.4 8.7l-.001-2.332a.08.08 0 0 1 .033-.062l4.84-2.795a4.5 4.5 0 0 1 6.668 4.636zM8.307 14.887l-2.02-1.168a.071.071 0 0 1-.038-.052V8.084a4.504 4.504 0 0 1 7.37-3.454l-.142.08-4.778 2.758a.795.795 0 0 0-.392.681v6.738zm1.096-2.887l2.6-1.5 2.6 1.5-2.6 1.5-2.6-1.5z" />
+        </svg>
+      );
+
+    case 'claude':
+    case 'claude ai':
+    case 'anthropic':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="#D97757">
+          <path d="M13.727 3.498a.952.952 0 0 0-1.748 0L8.852 11.23l2.88 1.488 1.995-9.22zM8.358 12.383l-5.81 3.01a.952.952 0 0 0 .045 1.748l6.814 1.83 1.28-5.328-2.329-1.26zM15.42 12.658l-1.34 5.56 6.814-1.83a.952.952 0 0 0 .045-1.748l-5.519-1.982z" />
+        </svg>
+      );
+
+    case 'hugging face':
+    case 'huggingface':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <circle cx="12" cy="12" r="10" fill="#FFD21E" />
+          <circle cx="8.5" cy="10" r="1.5" fill="#000" />
+          <circle cx="15.5" cy="10" r="1.5" fill="#000" />
+          <path d="M8 14.5C9 16.5 15 16.5 16 14.5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M5 11C4 13 4 15 5.5 16M19 11C20 13 20 15 18.5 16" stroke="#FF9D00" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      );
+
+    case 'langchain':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <rect width="24" height="24" rx="4" fill="#1C3C3C"/>
+          <path d="M7 12a5 5 0 0 1 5-5h2a5 5 0 0 1 0 10h-2a5 5 0 0 1-5-5z" stroke="#00A67E" strokeWidth="2"/>
+          <circle cx="12" cy="12" r="2" fill="#F4B400"/>
+        </svg>
+      );
+
+    case 'fastapi':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <circle cx="12" cy="12" r="10" fill="#05998B"/>
+          <path d="M12 4L6 13h5l-1 7 7-10h-5l1-6z" fill="white"/>
+        </svg>
+      );
+
+    case 'docker':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="#2496ED">
+          <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.186.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.186.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.186.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186H8.1a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.136a.186.186 0 00-.186.185v1.888c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185M23.76 9.89c-.365-1.745-1.79-2.93-3.606-2.97-.24-.006-.474.02-.702.07-.36-.93-1.07-1.63-2.02-1.95L17 5l-.43.04c-.31.03-.61.1-.9.21-.4-.53-.94-.94-1.57-1.18L13.6 4l-.5.1c-.24.05-.48.12-.7.22a4.4 4.4 0 00-1.84-.42H10.1v7.21H1.54C.68 11.11 0 11.8 0 12.65c0 3.73 2.5 7.15 6.27 8.35 4.54 1.45 9.77.72 13.84-1.89 2.47-1.58 3.89-4.24 3.89-7.18 0-.69-.08-1.38-.24-2.04"/>
+        </svg>
+      );
+
+    case 'scikit-learn':
+    case 'sklearn':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <circle cx="12" cy="12" r="10" fill="#F89939"/>
+          <path d="M7 14c2-4 6-5 9-3M8 10c3 0 6 3 7 6" stroke="#3499CD" strokeWidth="2.5" strokeLinecap="round"/>
+        </svg>
+      );
+
+    case 'opencv':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <circle cx="12" cy="7" r="4" stroke="#EA4335" strokeWidth="2.5" />
+          <circle cx="7" cy="16" r="4" stroke="#34A853" strokeWidth="2.5" />
+          <circle cx="17" cy="16" r="4" stroke="#4285F4" strokeWidth="2.5" />
         </svg>
       );
 
@@ -96,54 +185,6 @@ export const TechIcon = ({ name, size = 16, className = "" }) => {
         </svg>
       );
 
-    case 'generative ai':
-    case 'genai':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
-          <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="#10A37F"/>
-        </svg>
-      );
-
-    case 'deep learning':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
-          <circle cx="6" cy="6" r="3" fill="#8B5CF6"/>
-          <circle cx="18" cy="6" r="3" fill="#8B5CF6"/>
-          <circle cx="12" cy="18" r="3" fill="#8B5CF6"/>
-          <path d="M6 6l6 12M18 6l-6 12M6 6h12" stroke="#8B5CF6" strokeWidth="1.5"/>
-        </svg>
-      );
-
-    case 'nlp':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
-          <rect x="3" y="4" width="18" height="14" rx="3" stroke="#06B6D4" strokeWidth="2" fill="none"/>
-          <path d="M7 9h10M7 13h6" stroke="#06B6D4" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-      );
-
-    case 'machine learning':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
-          <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z" fill="#3B82F6"/>
-          <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z" fill="#60A5FA"/>
-        </svg>
-      );
-
-    case 'prompt engineering':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
-          <path d="M4 17l6-6-6-6M12 19h8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      );
-
-    case 'data analysis':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
-          <path d="M18 20V10M12 20V4M6 20v-6" stroke="#6366F1" strokeWidth="2.5" strokeLinecap="round"/>
-        </svg>
-      );
-
     case 'react':
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
@@ -151,6 +192,16 @@ export const TechIcon = ({ name, size = 16, className = "" }) => {
           <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" strokeWidth="1.5" transform="rotate(60 12 12)"/>
           <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" strokeWidth="1.5" transform="rotate(120 12 12)"/>
           <circle cx="12" cy="12" r="1.8" fill="#61DAFB"/>
+        </svg>
+      );
+
+    case 'node.js':
+    case 'nodejs':
+    case 'node':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M12 2l9 5.2v10.4L12 22.8 3 17.6V7.2L12 2z" fill="#5FA04E"/>
+          <path d="M12 4.2L5 8.2v7.6l7 4 7-4V8.2l-7-4z" fill="#333333"/>
         </svg>
       );
 
@@ -173,39 +224,12 @@ export const TechIcon = ({ name, size = 16, className = "" }) => {
         </svg>
       );
 
-    case 'vite':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
-          <path d="M21.5 4.5L12.5 21L3.5 4.5L11.5 6.5L21.5 4.5Z" fill="#646CFF" fillOpacity="0.8"/>
-          <path d="M12.5 2.5L3.5 4.5L12.5 21L21.5 4.5L12.5 2.5Z" stroke="#646CFF" strokeWidth="1.5"/>
-          <path d="M13.5 3L8 13H12L11 18.5L16.5 8.5H12.5L13.5 3Z" fill="#FFD62E"/>
-        </svg>
-      );
-
     case 'tailwind css':
     case 'tailwindcss':
     case 'tailwind':
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
           <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.335 6.182 14.974 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.335 13.382 8.974 12 6.001 12z" fill="#38BDF8"/>
-        </svg>
-      );
-
-    case 'ai engine':
-    case 'gemini ai':
-    case 'ai':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
-          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#38BDF8"/>
-          <circle cx="12" cy="12" r="2.5" fill="#FFFFFF"/>
-        </svg>
-      );
-
-    case 'web audio api':
-    case 'web audio':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none" stroke="#EC4899" strokeWidth="2" strokeLinecap="round">
-          <path d="M3 10v4M7 6v12M11 3v18M15 8v8M19 11v2M22 12v0" />
         </svg>
       );
 
@@ -218,11 +242,93 @@ export const TechIcon = ({ name, size = 16, className = "" }) => {
         </svg>
       );
 
+    case 'vercel':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="currentColor">
+          <path d="M12 2L2 20h20L12 2z" />
+        </svg>
+      );
+
+    case 'generative ai':
+    case 'genai':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="#1A73E8"/>
+          <path d="M19 3l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" fill="#8AB4F8"/>
+        </svg>
+      );
+
+    case 'machine learning':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <circle cx="12" cy="5" r="3" fill="#1A73E8"/>
+          <circle cx="5" cy="18" r="3" fill="#34A853"/>
+          <circle cx="19" cy="18" r="3" fill="#EA4335"/>
+          <path d="M12 8v4m0 0l-5 4m5-4l5 4" stroke="#1A73E8" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      );
+
+    case 'deep learning':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <circle cx="6" cy="6" r="2.5" fill="#8AB4F8"/>
+          <circle cx="18" cy="6" r="2.5" fill="#8AB4F8"/>
+          <circle cx="6" cy="18" r="2.5" fill="#8AB4F8"/>
+          <circle cx="18" cy="18" r="2.5" fill="#8AB4F8"/>
+          <circle cx="12" cy="12" r="3" fill="#1A73E8"/>
+          <path d="M6 6l6 6m0 0l6-6m-6 6l-6 6m6-6l6 6" stroke="#8AB4F8" strokeWidth="1.5"/>
+        </svg>
+      );
+
+    case 'nlp':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <rect x="3" y="4" width="18" height="13" rx="3" stroke="#1A73E8" strokeWidth="2" fill="none"/>
+          <path d="M7 8.5h10M7 12h6" stroke="#34A853" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M8 17l2 3h4" stroke="#1A73E8" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+      );
+
+    case 'prompt engineering':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <rect x="2" y="3" width="20" height="18" rx="4" stroke="#FBBC04" strokeWidth="2"/>
+          <path d="M6 9l4 3-4 3M12 15h6" stroke="#1A73E8" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      );
+
+    case 'data analysis':
+    case 'data pipelines':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M18 20V10M12 20V4M6 20v-6" stroke="#1A73E8" strokeWidth="2.5" strokeLinecap="round"/>
+          <path d="M3 20h18" stroke="#DADCE0" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      );
+
+    case 'computer vision':
+    case 'computer vision & tools':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" stroke="#1A73E8" strokeWidth="2"/>
+          <circle cx="12" cy="12" r="3.5" fill="#34A853"/>
+          <circle cx="12" cy="12" r="1.5" fill="white"/>
+        </svg>
+      );
+
+    case 'terminal':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none">
+          <rect x="2" y="4" width="20" height="16" rx="3" stroke="#5F6368" strokeWidth="2"/>
+          <path d="M6 9l3 3-3 3M11 15h5" stroke="#34A853" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      );
+
     default:
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="9" strokeWidth="2"/>
-          <path d="M12 8v8M8 12h8" strokeWidth="2" strokeLinecap="round"/>
+          <circle cx="12" cy="12" r="9" strokeWidth="1.5"/>
+          <path d="M12 8v8M8 12h8" strokeWidth="1.5" strokeLinecap="round"/>
         </svg>
       );
   }
