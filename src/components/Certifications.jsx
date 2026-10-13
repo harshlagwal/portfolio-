@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Award, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Award, CheckCircle2, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import CertificateModal from './CertificateModal';
 
 const certificates = [
@@ -47,7 +46,7 @@ const certificates = [
     link: "https://drive.google.com/file/d/1SrmjS-cTVHlIrb7uKtRRmyfqd4EfYhq0/view?usp=drivesdk",
   },
   {
-    title: "Data Visualisation: Empowering Business with Effective Insights",
+    title: "Data Visualisation: Empowering Business Insights",
     company: "TATA",
     logo: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg",
     link: "https://drive.google.com/file/d/1XWAbgsq4b2I5ZTERwjL01xqNXDNT2Zfs/view?usp=drivesdk",
@@ -60,77 +59,97 @@ const Certifications = () => {
   return (
     <section
       id="certifications"
-      className="py-16 md:py-20 bg-white dark:bg-[#131314] transition-colors duration-300 relative"
+      className="py-20 md:py-24 bg-white dark:bg-[#08090d] text-slate-900 dark:text-slate-100 transition-colors duration-300 relative"
     >
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
+      {/* Ambient Radial Lighting - Hardware accelerated & Clipped */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/3 right-0 translate-x-1/3 w-96 h-96 rounded-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.12)_0%,transparent_70%)]" />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
 
         {/* Section header */}
-        <div className="text-center mb-12 md:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f0fe] dark:bg-[#8ab4f8]/10 border border-[#dadce0] dark:border-[#8ab4f8]/20 text-[#1a73e8] dark:text-[#8ab4f8] text-xs font-medium font-mono tracking-wide mb-3">
-            <Award size={14} strokeWidth={1.5} />
+        <div className="text-center mb-14 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 text-xs font-semibold font-mono tracking-wide mb-3">
+            <Award size={13} strokeWidth={1.8} />
             <span>INDUSTRY ACCREDITATIONS</span>
           </div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-medium font-display text-[#202124] dark:text-[#e3e3e3] tracking-tight mb-3"
-          >
-            Recognitions &amp; <span className="text-[#1a73e8] dark:text-[#8ab4f8]">Certifications</span>
-          </motion.h2>
-          <p className="text-[#5f6368] dark:text-[#9aa0a6] max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Validated technical expertise from globally recognized organizations.
+          <h2 className="text-3xl md:text-4xl font-bold font-sans tracking-tight text-slate-900 dark:text-white mb-3">
+            Recognitions &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300">Certifications</span>
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-xs sm:text-sm leading-relaxed font-sans">
+            Scroll down to inspect verified credentials stacked one after another. Scroll up to peel them away.
           </p>
         </div>
 
-        {/* Google Antigravity Editorial Certifications List (No Boxed Cards) */}
-        <div className="border-y border-[#dadce0] dark:border-[#2e3134] divide-y divide-[#dadce0] dark:divide-[#2e3134]">
+        {/* ── Sticky Full-Cover Stacking Cards (Each certificate cleanly overlays the previous) ── */}
+        <div className="relative pt-2 pb-20 max-w-4xl mx-auto">
           {certificates.map((cert, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.25, delay: idx * 0.03 }}
-              className="py-4.5 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-[#f8f9fa]/60 dark:hover:bg-[#1a1b1e]/60 px-4 sm:px-6 -mx-4 sm:-mx-6 rounded-xl transition-colors duration-150"
+              className="sticky top-24 sm:top-28 will-change-transform mb-12 sm:mb-16"
+              style={{
+                zIndex: idx + 1,
+              }}
             >
-              {/* Logo + Text */}
-              <div className="flex items-center gap-4 min-w-0">
-                <div className="shrink-0 w-11 h-11 rounded-xl bg-white border border-[#dadce0] dark:border-[#3c4043] p-2 shadow-2xs flex items-center justify-center overflow-hidden">
-                  <img
-                    src={cert.logo}
-                    alt={cert.company}
-                    className="w-full h-full object-contain"
-                    onError={(e) => {
-                      e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(cert.company)}&background=1a73e8&color=fff&size=64&bold=true`;
-                    }}
-                  />
+              <div className="relative rounded-2xl bg-white dark:bg-[#0c1018] border border-slate-200/95 dark:border-white/10 p-6 sm:p-7 shadow-xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] hover:border-blue-500/40 transition-colors min-h-[170px]">
+                
+                {/* Top Corner Meta Tab */}
+                <div className="flex items-center justify-between mb-4 border-b border-slate-100 dark:border-white/5 pb-2.5">
+                  <span className="text-[11px] font-mono font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                    <span>0{idx + 1}</span>
+                    <span className="text-slate-300 dark:text-white/20">//</span>
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">OFFICIAL CREDENTIAL</span>
+                  </span>
+                  <span className="text-[10px] font-mono text-slate-400 dark:text-white/30">
+                    CREDENTIAL {idx + 1} / {certificates.length}
+                  </span>
                 </div>
 
-                <div className="min-w-0">
-                  <h3 className="text-sm sm:text-base font-medium font-display text-[#202124] dark:text-[#f1f3f4] tracking-tight group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors truncate">
-                    {cert.title}
-                  </h3>
-                  <div className="flex items-center gap-2 mt-0.5">
-                    <CheckCircle2 size={12} strokeWidth={1.5} className="text-[#137333] dark:text-[#81c995] shrink-0" />
-                    <span className="text-xs font-mono font-medium text-[#1a73e8] dark:text-[#8ab4f8] uppercase tracking-wider truncate">
-                      {cert.company}
-                    </span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                  {/* Logo + Details */}
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 p-2.5 shadow-xs flex items-center justify-center overflow-hidden">
+                      <img
+                        src={cert.logo}
+                        alt={cert.company}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(cert.company)}&background=2563eb&color=fff&size=64&bold=true`;
+                        }}
+                      />
+                    </div>
+
+                    <div className="min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold font-sans text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {cert.title}
+                      </h3>
+                      <div className="flex items-center gap-2.5 mt-1.5 flex-wrap">
+                        <span className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+                          {cert.company}
+                        </span>
+                        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/20" />
+                        <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-500/20">
+                          <CheckCircle2 size={11} /> Verified Certificate
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Verify Action Button */}
+                  <div className="shrink-0 self-start sm:self-auto">
+                    <button
+                      onClick={() => setSelected(cert.link)}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-md shadow-blue-500/20 cursor-pointer whitespace-nowrap"
+                    >
+                      <span>Verify Credential</span>
+                      <ArrowUpRight size={14} />
+                    </button>
                   </div>
                 </div>
-              </div>
 
-              {/* View Action Pill Button */}
-              <div className="shrink-0 flex items-center sm:self-center self-end">
-                <button
-                  onClick={() => setSelected(cert.link)}
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-medium bg-[#f1f3f4] hover:bg-[#e8eaed] dark:bg-[#252629] dark:hover:bg-[#303236] text-[#202124] dark:text-[#f1f3f4] border border-[#dadce0] dark:border-[#3c4043] transition-all duration-150 shadow-2xs hover:scale-[1.02] active:scale-95 cursor-pointer whitespace-nowrap"
-                >
-                  <span>View Certificate</span>
-                  <ExternalLink size={12} strokeWidth={1.8} className="text-[#1a73e8] dark:text-[#8ab4f8]" />
-                </button>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -147,6 +166,3 @@ const Certifications = () => {
 };
 
 export default Certifications;
-
-
-

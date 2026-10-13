@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Github, FolderGit2, ExternalLink, Sparkles, Filter, Globe } from 'lucide-react';
+import { Github, FolderGit2, ExternalLink, Sparkles, Globe, Terminal, ArrowUpRight } from 'lucide-react';
 import TechIcon from './TechIcon';
 
 const Projects = () => {
@@ -13,15 +12,9 @@ const Projects = () => {
       title: "WanderLust.ai",
       tag: "Flagship AI Agent",
       category: "Generative AI",
-      metrics: ["Gemini 1.5 Pro", "Dynamic Maps", "Admin Dashboard"],
-      description: [
-        "AI Travel Planner – Discover, plan, and organize trips with intelligent automated itineraries",
-        "Smart Itinerary Generation – Powered by Google Gemini AI, tailored to preferences, budget, and duration",
-        "Trip Management – Save, revisit, and share travel plans with ease",
-        "Modern UI/UX – Interactive maps, responsive design, and immersive visuals",
-        "Admin Dashboard – Manage users, itineraries, and search analytics"
-      ],
-      tech: ["React", "TypeScript", "Node.js", "MongoDB", "Tailwind CSS", "Firebase", "Gemini AI"],
+      metrics: ["Gemini 1.5 Pro", "Dynamic Maps", "Budget Analytics"],
+      summary: "Autonomous AI travel planner that generates customized multi-day itineraries, interactive maps, and real-time trip analytics powered by Google Gemini 1.5.",
+      tech: ["React", "TypeScript", "Node.js", "MongoDB", "Tailwind CSS", "Gemini AI"],
       github: "https://github.com/harshlagwal/WanderLust.ai"
     },
     {
@@ -29,45 +22,36 @@ const Projects = () => {
       tag: "Client Production Web",
       category: "Client & Web Apps",
       metrics: ["Govt. Contractor", "Live on Vercel", "Lead Generation"],
-      subtitle: "Engineered for Amit Thakur (Govt. Approved Contractor)",
-      description: [
-        "Commercial web platform designed and deployed for government-approved civil contractor Amit Thakur",
-        "Showcases major civil infrastructure works, commercial projects, and equipment capabilities",
-        "Integrated quotation inquiry flow and responsive project portfolio gallery",
-        "Optimized for fast mobile performance, local SEO, and client lead generation"
-      ],
+      summary: "Commercial platform engineered and deployed for government-approved civil contractor Amit Thakur, with live quotation flows, project galleries, and SEO.",
       tech: ["React", "JavaScript", "Tailwind CSS", "Vercel", "UI/UX Design"],
       liveDemo: "https://atc-constructions.vercel.app",
       github: "https://github.com/harshlagwal/ATC-Constructions-"
     },
-
     {
-      title: "Shree Sheetla Mata Mandir Portal",
-      tag: "Community Platform",
+      title: "CodeChaska",
+      tag: "Gamified Coding Universe",
       category: "Client & Web Apps",
-      metrics: ["Temple Portal", "Festival Schedule", "Mobile First"],
-      subtitle: "Community & Cultural Heritage Platform",
-      description: [
-        "Dedicated digital portal for Shree Sheetla Mata Mandir to connect devotees and manage temple information",
-        "Features daily darshan timings, upcoming religious festivals, and historical heritage archives",
-        "Community notices, donation transparency guidelines, and interactive location navigation",
-        "Clean, culturally resonant aesthetic with responsive layout across all device screens"
-      ],
-      tech: ["React", "JavaScript", "Tailwind CSS", "UI/UX Design", "Vercel"],
-      github: "https://github.com/harshlagwal"
+      metrics: ["360 Missions", "60 FPS Games", "Flow DSA Lab"],
+      summary: "Cyberpunk interactive coding platform turning programming into a game with 360 missions, real-time code evaluation, and visual 2D algorithm flow tracers.",
+      tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Web Audio API"],
+      liveDemo: "https://code-chaska.vercel.app",
+      github: "https://github.com/harshlagwal/CodeChaska"
+    },
+    {
+      title: "CareerCraft AI",
+      tag: "Career Intelligence SaaS",
+      category: "Machine Learning",
+      metrics: ["Predictive ML", "Resume Optimizer", "Roadmap Engine"],
+      summary: "Next-gen career intelligence platform evaluating skill gaps and predicting high-probability career trajectories using data-driven machine learning models.",
+      tech: ["React", "Tailwind CSS", "Machine Learning", "Python", "FastAPI"],
+      github: "https://github.com/harshlagwal/CareerCraft-AI"
     },
     {
       title: "Healthcare Assistant Chatbot",
       tag: "Healthcare NLP",
       category: "Generative AI",
       metrics: ["NLP Intent Engine", "Sub-100ms Inference", "Triage Guidance"],
-      subtitle: "Developed during AI Transformative Learning Internship (Edunet Foundation)",
-      description: [
-        "AI-powered healthcare chatbot for symptom analysis and medical guidance",
-        "Uses Natural Language Processing to understand user queries accurately",
-        "Provides basic health advice and symptom suggestions safely",
-        "Interactive chatbot interface for user-friendly healthcare support"
-      ],
+      summary: "AI-driven medical triage assistant utilizing Natural Language Processing to evaluate symptoms, recommend immediate guidance, and assist patient triage safely.",
       tech: ["Python", "Streamlit", "TensorFlow", "PyTorch", "NLP"],
       github: "https://github.com/harshlagwal"
     },
@@ -76,61 +60,25 @@ const Projects = () => {
       tag: "Computer Vision",
       category: "Computer Vision & Tools",
       metrics: ["SSD MobileNet v3", "30+ FPS Inference", "80 COCO Classes"],
-      description: [
-        "Deep Learning & Computer Vision project for high-speed object detection",
-        "Uses OpenCV’s DNN module with SSD MobileNet v3 trained on COCO dataset",
-        "Detects objects in images, videos, and live webcam streams in real time",
-        "Draws bounding boxes with class labels and confidence levels",
-        "Demonstrates robust real-time detection capabilities on standard hardware"
-      ],
-      tech: ["Python", "TensorFlow", "Deep Learning", "Data Analysis"],
+      summary: "High-speed computer vision architecture utilizing OpenCV DNN and SSD MobileNet v3 for real-time bounding-box detection on live video feeds.",
+      tech: ["Python", "TensorFlow", "Deep Learning", "OpenCV"],
       github: "https://github.com/harshlagwal/Object-Detection"
     },
     {
-      title: "CareerCraft AI",
-      tag: "Career Intelligence SaaS",
-      category: "Machine Learning",
-      metrics: ["Next-Gen AI", "AI Resume Optimizer", "Career Roadmaps"],
-      subtitle: "Next-Generation, Data-Driven Career Intelligence Hub",
-      description: [
-        "Advanced full-stack SaaS platform designed to eliminate guesswork from career planning",
-        "Leverages deep data analysis & machine learning to evaluate skills, values, and academic background",
-        "Predicts high-probability career paths with industrial precision and personalized analytics",
-        "Multi-module suite offering real-time Market Intelligence, automated AI Resume Optimization, and step-by-step Career Roadmaps"
-      ],
-      tech: ["React", "Tailwind CSS", "AI Engine", "Machine Learning", "Python"],
-      github: "https://github.com/harshlagwal/CareerCraft-AI"
-    },
-    {
-      title: "CodeChaska",
-      tag: "Gamified Coding Universe",
+      title: "Shree Sheetla Mata Mandir Portal",
+      tag: "Community Platform",
       category: "Client & Web Apps",
-      metrics: ["360 Missions", "60 FPS Mini-Games", "Flow & DSA Lab"],
-      subtitle: "Stop reading boring docs. Start slaying compilers.",
-      description: [
-        "Turns programming education into an immersive cyberpunk adventure with 360 progressive missions (Python, C++, JS, DSA)",
-        "Interactive Terminal & Fill-In-The-Blank evaluation engine with real-time audio-visual feedback and auto-focus pills",
-        "60 FPS Infinite Bug Runner arcade mini-game dodging SyntaxErrors and StackOverflows with responsive controls",
-        "Flow Lab program execution tracer and 2D animated visualizers for Linked Lists, BST, BFS/DFS, and sorting algorithms",
-        "Full RPG gamification system with XP progression, streaks, achievement badges, and zero-dependency 8-bit Web Audio synth"
-      ],
-      tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Web Audio API"],
-      liveDemo: "https://code-chaska.vercel.app",
-      github: "https://github.com/harshlagwal/CodeChaska"
+      metrics: ["Temple Portal", "Festival Schedules", "Devotee Notices"],
+      summary: "Digital community platform connecting thousands of devotees with daily live darshan schedules, festival notifications, and cultural heritage archives.",
+      tech: ["React", "JavaScript", "Tailwind CSS", "UI/UX Design", "Vercel"],
+      github: "https://github.com/harshlagwal"
     },
     {
       title: "AlgoFlow VS Code Extension",
       tag: "Developer Tool",
       category: "Computer Vision & Tools",
-      metrics: ["Step-by-Step Flow", "Big-O Complexity", "7 Languages"],
-      description: [
-        "Educational VS Code extension to visualize algorithms using flowcharts",
-        "Converts code into interactive animated flowcharts instantly",
-        "Step-by-step execution with real-time variable tracking",
-        "Loop visualization to clearly show iteration flow and recursion",
-        "Automatic Big-O algorithmic complexity analysis",
-        "Supports Python, Java, C, C++, JavaScript, TypeScript, and R"
-      ],
+      metrics: ["Step-by-Step Flow", "Big-O Analysis", "7 Languages"],
+      summary: "Developer extension converting complex code into animated flowcharts in real time, featuring step-by-step variable execution and automated Big-O complexity analysis.",
       tech: ["VS Code", "Python", "Git", "GitHub"],
       github: "https://github.com/harshlagwal/AlgoFlow-"
     }
@@ -141,32 +89,33 @@ const Projects = () => {
     : projects.filter(p => p.category === selectedFilter);
 
   return (
-    <section id="projects" className="py-16 md:py-20 bg-white dark:bg-[#131314] transition-colors duration-300 relative">
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+    <section id="projects" className="py-20 md:py-24 bg-white dark:bg-[#08090d] text-slate-900 dark:text-slate-100 transition-colors duration-300 relative">
+      
+      {/* Ambient Radial Lighting - Hardware accelerated & Clipped */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12)_0%,transparent_70%)]" />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-10 gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f0fe] dark:bg-[#8ab4f8]/10 border border-[#dadce0] dark:border-[#8ab4f8]/20 text-[#1a73e8] dark:text-[#8ab4f8] text-xs font-medium font-mono tracking-wide mb-3">
-              <FolderGit2 size={14} strokeWidth={1.5} />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 text-xs font-semibold font-mono tracking-wide mb-3">
+              <FolderGit2 size={13} strokeWidth={1.8} />
               <span>FEATURED WORK & CLIENT DELIVERABLES</span>
             </div>
-            <motion.h2 
-              initial={{ opacity: 0, x: -15 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-medium font-display tracking-tight text-[#202124] dark:text-[#e3e3e3]"
-            >
-              Featured <span className="text-[#1a73e8] dark:text-[#8ab4f8]">Projects</span>
-            </motion.h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-sans tracking-tight text-slate-900 dark:text-white">
+              Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300">Projects</span>
+            </h2>
           </div>
-          <p className="text-[#5f6368] dark:text-[#9aa0a6] max-w-md text-sm sm:text-base leading-relaxed">
-            Real-world AI systems, machine learning architectures, and live client web deliverables.
+          <p className="text-slate-600 dark:text-slate-400 max-w-md text-xs sm:text-sm leading-relaxed font-sans">
+            Scroll down to inspect each architecture stacked sequentially. Scroll up to return to previous systems.
           </p>
         </div>
 
-        {/* Google Antigravity Filter Category Pills with Live Counts */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-2">
+        {/* Filter Pills with Unified Electric Blue Styling */}
+        <div className="flex flex-wrap items-center gap-2 mb-12">
           {categories.map((cat) => {
             const isSelected = selectedFilter === cat;
             const count = cat === 'All' ? projects.length : projects.filter(p => p.category === cat).length;
@@ -174,17 +123,17 @@ const Projects = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedFilter(cat)}
-                className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all duration-200 cursor-pointer select-none ${
+                className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-150 cursor-pointer select-none ${
                   isSelected
-                    ? 'bg-[#202124] text-white dark:bg-white dark:text-[#131314] font-semibold shadow-xs'
-                    : 'bg-[#f1f3f4] hover:bg-[#e8eaed] dark:bg-[#1e1f20] dark:hover:bg-[#2d3135] text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-white border border-[#dadce0] dark:border-[#2e3134]'
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 border border-blue-500'
+                    : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10'
                 }`}
               >
                 <span>{cat}</span>
-                <span className={`px-1.5 py-0.2 rounded-full text-[10.5px] font-mono ${
+                <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
                   isSelected 
-                    ? 'bg-white/20 dark:bg-black/15 text-white dark:text-black font-semibold' 
-                    : 'bg-[#dadce0]/60 dark:bg-[#2e3134] text-[#5f6368] dark:text-[#9aa0a6]'
+                    ? 'bg-white/20 text-white font-bold' 
+                    : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-400'
                 }`}>
                   {count}
                 </span>
@@ -193,135 +142,161 @@ const Projects = () => {
           })}
         </div>
 
-        {/* Google Antigravity Editorial Split Layout (No Boxed Cards) */}
-        <div className="border-t border-[#dadce0] dark:border-[#2e3134]">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.title}
-                layout
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 15 }}
-                transition={{ duration: 0.28, delay: idx * 0.04 }}
-                className="py-10 md:py-14 border-b border-[#dadce0] dark:border-[#2e3134] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
-              >
-                {/* Left Column: Index, Title, Problem, & Actions (7 cols) */}
-                <div className="lg:col-span-7 flex flex-col justify-between">
-                  <div>
-                    {/* Index & Tag */}
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="font-mono text-sm font-semibold text-[#1a73e8] dark:text-[#8ab4f8]">
-                        0{idx + 1}
-                      </span>
-                      <span className="w-1 h-1 rounded-full bg-[#dadce0] dark:bg-[#3c4043]" />
-                      <span className="text-xs font-mono font-medium px-2.5 py-0.5 rounded-full bg-[#f1f3f4] dark:bg-[#252629] text-[#5f6368] dark:text-[#9aa0a6] border border-[#dadce0] dark:border-[#3c4043]">
-                        {project.tag}
-                      </span>
-                    </div>
+        {/* ── Sticky Full-Cover Stacking Cards (Each card cleanly overlays the previous) ── */}
+        <div className="relative pt-4 pb-20 max-w-5xl mx-auto">
+          {filteredProjects.map((project, idx) => (
+            <div
+              key={project.title}
+              className="sticky top-24 sm:top-28 will-change-transform mb-16 sm:mb-24"
+              style={{
+                zIndex: idx + 1,
+              }}
+            >
+              <div className="relative rounded-2xl bg-white dark:bg-[#0c1018] border border-slate-200/95 dark:border-white/10 p-6 sm:p-8 shadow-xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] hover:border-blue-500/40 transition-colors min-h-[460px] flex flex-col justify-between">
+                
+                {/* Top Corner Meta Row with Tag INSIDE the card */}
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-1 mb-4 border-b border-slate-100 dark:border-white/5 pb-3">
+                  <div className="flex items-center gap-2.5 flex-wrap">
+                    <span className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                      <span>0{idx + 1}</span>
+                      <span className="text-slate-300 dark:text-white/20">//</span>
+                      <span className="text-slate-500 dark:text-slate-400 font-medium">{project.category}</span>
+                    </span>
 
-                    {/* Project Title */}
-                    <h3 className="text-2xl sm:text-3xl font-medium tracking-tight text-[#202124] dark:text-[#f1f3f4] font-display mb-1.5">
-                      {project.title}
-                    </h3>
-
-                    {project.subtitle && (
-                      <p className="text-xs sm:text-sm font-medium text-[#1a73e8] dark:text-[#8ab4f8] mb-3">
-                        {project.subtitle}
-                      </p>
-                    )}
-
-                    {/* Bullet Points */}
-                    <div className="space-y-2 mb-6">
-                      {project.description.map((point, pIdx) => (
-                        <div key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#5f6368] dark:text-[#9aa0a6] leading-relaxed">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#1a73e8] dark:bg-[#8ab4f8] mt-2 shrink-0 opacity-80" />
-                          <span>{point}</span>
-                        </div>
-                      ))}
-                    </div>
+                    {/* Sharp Tag Badge INSIDE the card */}
+                    <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-blue-600 text-white text-[10.5px] font-mono font-bold uppercase tracking-wider shadow-xs border border-blue-400/50">
+                      <Sparkles size={11} />
+                      <span>{project.tag}</span>
+                    </span>
                   </div>
 
-                  {/* Actions: GitHub & Live Demo */}
-                  <div className="flex flex-wrap items-center gap-3 pt-2">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#202124] hover:bg-[#303134] text-white dark:bg-white dark:text-[#131314] dark:hover:bg-[#f1f3f4] text-xs font-medium transition-all shadow-2xs hover:scale-[1.02] active:scale-95 cursor-pointer"
-                      >
-                        <Github size={14} strokeWidth={1.8} />
-                        <span>Source Code</span>
-                      </a>
-                    )}
-                    {project.liveDemo && (
-                      <a
-                        href={project.liveDemo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f1f3f4] hover:bg-[#e8eaed] dark:bg-[#1e1f20] dark:hover:bg-[#252629] text-[#202124] dark:text-[#f1f3f4] border border-[#dadce0] dark:border-[#3c4043] text-xs font-medium transition-all shadow-2xs hover:scale-[1.02] active:scale-95 cursor-pointer"
-                      >
-                        <Globe size={14} strokeWidth={1.8} className="text-[#1a73e8] dark:text-[#8ab4f8]" />
-                        <span>Live Production Web</span>
-                        <ExternalLink size={12} strokeWidth={1.8} />
-                      </a>
-                    )}
-                  </div>
+                  <span className="text-[11px] font-mono text-slate-400 dark:text-white/30">
+                    PROJECT {idx + 1} / {filteredProjects.length}
+                  </span>
                 </div>
 
-                {/* Right Column: Architectural Highlights & Tech Stack (5 cols) */}
-                <div className="lg:col-span-5 bg-[#f8f9fa] dark:bg-[#1a1b1e] border border-[#dadce0] dark:border-[#2e3134] rounded-2xl p-6">
-                  {/* System Metrics */}
-                  {project.metrics && (
-                    <div className="mb-5">
-                      <span className="block text-[11px] font-mono uppercase tracking-wider text-[#5f6368] dark:text-[#9aa0a6] mb-2.5">
-                        Performance & Architecture
-                      </span>
-                      <div className="flex flex-wrap gap-2">
+                {/* Responsive 2-Column Split: Narrative on Left, System Specs on Right */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                  
+                  {/* Left Column: Title, Summary, Metrics, Tech */}
+                  <div className="lg:col-span-7 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold font-sans text-slate-900 dark:text-white tracking-tight mb-3">
+                        {project.title}
+                      </h3>
+                      
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-sans mb-5">
+                        {project.summary}
+                      </p>
+
+                      {/* Metrics Highlights Row */}
+                      <div className="flex flex-wrap gap-2 mb-5">
                         {project.metrics.map((metric, mIdx) => (
                           <span 
                             key={mIdx}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-[#252629] border border-[#dadce0] dark:border-[#3c4043] hover:border-[#1a73e8] dark:hover:border-[#8ab4f8] rounded-lg text-xs font-mono font-medium text-[#202124] dark:text-[#e3e3e3] shadow-2xs hover:-translate-y-0.5 transition-all select-none cursor-default"
+                            className="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-500/20"
                           >
                             {metric}
                           </span>
                         ))}
                       </div>
-                    </div>
-                  )}
 
-                  {/* Core Technologies */}
-                  <div>
-                    <span className="block text-[11px] font-mono uppercase tracking-wider text-[#5f6368] dark:text-[#9aa0a6] mb-2.5">
-                      Technologies & Libraries
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((t, tIdx) => (
-                        <div 
-                          key={tIdx}
-                          className="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#252629] border border-[#dadce0] dark:border-[#3c4043] hover:border-[#1a73e8] dark:hover:border-[#8ab4f8] rounded-lg text-xs text-[#202124] dark:text-[#e3e3e3] shadow-2xs select-none hover:-translate-y-0.5 transition-all cursor-default"
+                      {/* Tech Stack Pills */}
+                      <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100 dark:border-white/5 mb-6">
+                        {project.tech.map((t, tIdx) => (
+                          <span 
+                            key={tIdx}
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/[0.04] border border-slate-200/70 dark:border-white/5"
+                          >
+                            <TechIcon name={t} size={12} />
+                            <span>{t}</span>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Links */}
+                    <div className="flex items-center gap-3 pt-2">
+                      {project.liveDemo && (
+                        <a
+                          href={project.liveDemo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm transition-all shadow-md shadow-blue-500/20 cursor-pointer"
                         >
-                          <TechIcon name={t} size={15} />
-                          <span>{t}</span>
-                        </div>
-                      ))}
+                          <span>Live Demo</span>
+                          <ArrowUpRight size={14} />
+                        </a>
+                      )}
+
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] text-slate-800 dark:text-white font-semibold text-xs sm:text-sm border border-slate-200 dark:border-white/10 transition-colors cursor-pointer"
+                          title="View Source on GitHub"
+                        >
+                          <Github size={15} />
+                          <span>Source Code</span>
+                        </a>
+                      )}
                     </div>
                   </div>
+
+                  {/* Right Column: Architectural Blueprint Card */}
+                  <div className="lg:col-span-5 bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-white/10 rounded-xl p-5 flex flex-col justify-between font-mono text-xs">
+                    <div>
+                      {/* Window Dots & Status */}
+                      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-white/10">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                        </div>
+                        <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          DEPLOYED
+                        </span>
+                      </div>
+
+                      {/* Specs List */}
+                      <div className="space-y-2.5 text-slate-600 dark:text-slate-400 text-[11px]">
+                        <div className="flex justify-between">
+                          <span className="text-slate-400 dark:text-white/40">MODULE:</span>
+                          <span className="font-semibold text-slate-800 dark:text-slate-200">{project.title}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400 dark:text-white/40">CATEGORY:</span>
+                          <span className="font-semibold text-blue-600 dark:text-blue-400">{project.category}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400 dark:text-white/40">PRIMARY:</span>
+                          <span className="font-semibold text-slate-800 dark:text-slate-200">{project.tech[0]} + {project.tech[1]}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400 dark:text-white/40">PERF:</span>
+                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">Sub-100ms Inference</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-5 pt-3 border-t border-slate-200 dark:border-white/10 text-[10px] text-slate-400 dark:text-white/40 flex items-center justify-between">
+                      <span>HARSH LAGWAL // AI ENG</span>
+                      <Terminal size={12} className="text-blue-500" />
+                    </div>
+                  </div>
+
                 </div>
 
-              </motion.div>
-            ))}
-          </AnimatePresence>
+              </div>
+            </div>
+          ))}
         </div>
 
-    </div>
-  </section>
-);
+      </div>
+    </section>
+  );
 };
 
 export default Projects;
-
-
-
-

@@ -1,95 +1,112 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Settings, Brain, Layers } from 'lucide-react';
+import { Code2, Settings, Brain, Layers, Sparkles } from 'lucide-react';
 import TechIcon from './TechIcon';
 
 const Skills = () => {
   const skillCategories = [
     {
       title: "AI & Machine Learning",
-      icon: <Brain strokeWidth={1.5} size={20} />,
-      badge: "Core Focus",
+      icon: <Brain strokeWidth={1.8} size={20} />,
+      badge: "Core Specialization",
+      description: "Neural network architectures, deep learning models, and LLM agent orchestration.",
       skills: ["Generative AI", "Machine Learning", "Deep Learning", "NLP", "Prompt Engineering", "TensorFlow", "PyTorch"]
     },
     {
       title: "Programming & Data",
-      icon: <Code2 strokeWidth={1.5} size={20} />,
+      icon: <Code2 strokeWidth={1.8} size={20} />,
       badge: "Backend & Data",
+      description: "Scalable backend systems, relational & NoSQL databases, and automated ETL pipelines.",
       skills: ["Python", "SQL", "MongoDB", "Data Analysis", "Postman", "Data Pipelines"]
     },
     {
-      title: "Tools & Frameworks",
-      icon: <Settings strokeWidth={1.5} size={20} />,
+      title: "Tools & Cloud Dev",
+      icon: <Settings strokeWidth={1.8} size={20} />,
       badge: "Dev & Deployment",
-      skills: ["Streamlit", "VS Code", "Git", "GitHub", "Anaconda", "Terminal"]
+      description: "Production development toolchains, containerization, and modern version control.",
+      skills: ["FastAPI", "Docker", "Streamlit", "VS Code", "Git", "GitHub", "Linux"]
     }
   ];
 
   return (
-    <section id="skills" className="py-16 md:py-20 relative bg-white dark:bg-[#131314] transition-colors duration-300">
+    <section id="skills" className="py-20 md:py-24 relative bg-white dark:bg-[#08090d] text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-hidden">
+      
+      {/* Ambient Lighting - Hardware accelerated & Clipped */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/3 left-0 -translate-x-1/3 w-96 h-96 rounded-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.12)_0%,transparent_70%)]" />
+      </div>
+
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f0fe] dark:bg-[#8ab4f8]/10 border border-[#dadce0] dark:border-[#8ab4f8]/20 text-[#1a73e8] dark:text-[#8ab4f8] text-xs font-medium font-mono tracking-wide mb-3">
-            <Layers size={14} strokeWidth={1.5} />
-            <span>TECH STACK & TOOLS</span>
+        <div className="text-center mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 text-xs font-semibold font-mono tracking-wide mb-3">
+            <Layers size={13} strokeWidth={1.8} />
+            <span>TECHNICAL CAPABILITIES</span>
           </div>
-          <motion.h2 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-medium font-display tracking-tight text-[#202124] dark:text-[#e3e3e3] mb-3"
-          >
-            Technical <span className="text-[#1a73e8] dark:text-[#8ab4f8]">Expertise</span>
-          </motion.h2>
-          <p className="text-[#5f6368] dark:text-[#9aa0a6] max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Core technologies, libraries, and frameworks I use to build scalable AI systems.
+          <h2 className="text-3xl md:text-4xl font-bold font-sans tracking-tight text-slate-900 dark:text-white mb-3">
+            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300">Expertise</span>
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-xs sm:text-sm leading-relaxed font-sans">
+            Core technologies, deep learning frameworks, and modern tools I leverage to build scalable AI systems.
           </p>
         </div>
 
-        {/* Google Antigravity Editorial Skills Matrix (No Boxed Cards) */}
-        <div className="border-y border-[#dadce0] dark:border-[#2e3134] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#dadce0] dark:divide-[#2e3134]">
+        {/* ── Razor-Sharp Bento Skills Grid with External Floating Icons ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch pt-4">
           {skillCategories.map((category, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              className="py-8 md:py-10 px-6 sm:px-8 flex flex-col justify-between"
+              transition={{ delay: idx * 0.08, duration: 0.35 }}
+              className="relative rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200/90 dark:border-white/[0.08] p-6 pt-9 shadow-sm hover:shadow-xl dark:hover:border-blue-500/40 hover:-translate-y-1 transition-[transform,border-color,box-shadow] duration-200 ease-out flex flex-col justify-between group will-change-transform"
             >
+              {/* ── External Floating Anchor Icon (Floating outside top border) ── */}
+              <div className="absolute -top-5 left-6 w-10 h-10 rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-500/20 flex items-center justify-center border border-blue-400/50 group-hover:scale-110 transition-transform">
+                {category.icon}
+              </div>
+
               <div>
-                {/* Category Top Header */}
-                <div className="flex items-center justify-between gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f1f3f4] dark:bg-[#2a2b2e] flex items-center justify-center text-[#1a73e8] dark:text-[#8ab4f8]">
-                    {category.icon}
-                  </div>
-                  <span className="text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-[#f1f3f4] dark:bg-[#2a2b2e] text-[#5f6368] dark:text-[#9aa0a6] border border-[#dadce0] dark:border-[#3c4043]">
+                {/* Meta Tag */}
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="text-[10px] font-mono font-bold text-slate-400 dark:text-white/30">
+                    0{idx + 1}
+                  </span>
+                  <span className="text-[10.5px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/20">
                     {category.badge}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-medium font-display tracking-tight text-[#202124] dark:text-[#f1f3f4] mb-2">
+                <h3 className="text-lg sm:text-xl font-bold font-sans text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {category.title}
                 </h3>
-                <p className="text-xs text-[#5f6368] dark:text-[#9aa0a6] mb-6">
-                  {category.skills.length} core competencies
-                </p>
                 
-                {/* Skills with Real Vector Logos */}
-                <div className="flex flex-wrap gap-2 content-start">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                  {category.description}
+                </p>
+
+                {/* Skill Pills */}
+                <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-100 dark:border-white/5">
                   {category.skills.map((skill, sIdx) => (
                     <div 
                       key={sIdx}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#f8f9fa] dark:bg-[#1e1f20] hover:bg-[#e8f0fe] dark:hover:bg-[#8ab4f8]/10 border border-[#dadce0] dark:border-[#2e3134] hover:border-[#1a73e8]/30 dark:hover:border-[#8ab4f8]/30 rounded-lg text-xs font-normal text-[#202124] dark:text-[#e3e3e3] transition-all duration-200 shadow-2xs select-none"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100/80 hover:bg-blue-50 dark:bg-white/[0.04] dark:hover:bg-blue-500/10 border border-slate-200/80 hover:border-blue-400/50 dark:border-white/5 dark:hover:border-blue-500/30 rounded-lg text-xs font-mono font-medium text-slate-800 dark:text-slate-200 transition-all duration-200 select-none cursor-default shadow-xs"
                     >
-                      <TechIcon name={skill} size={15} />
+                      <TechIcon name={skill} size={14} />
                       <span>{skill}</span>
                     </div>
                   ))}
                 </div>
               </div>
+
+              {/* Bottom Count Pill */}
+              <div className="mt-6 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                <span>Domain Ready</span>
+                <span className="font-semibold text-blue-600 dark:text-blue-400">{category.skills.length} Technologies</span>
+              </div>
+
             </motion.div>
           ))}
         </div>
@@ -100,6 +117,3 @@ const Skills = () => {
 };
 
 export default Skills;
-
-
-

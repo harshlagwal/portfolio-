@@ -1,6 +1,8 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
+import { ThemeProvider } from './context/ThemeContext';
 import HeroSection from './components/HeroSection';
 
 // Lazy-load everything below the fold — optimal initial paint
@@ -15,7 +17,6 @@ const Contact          = lazy(() => import('./components/Contact'));
 const Footer           = lazy(() => import('./components/Footer'));
 const ScrollToTop      = lazy(() => import('./components/ScrollToTop'));
 const AIAssistantModal = lazy(() => import('./components/AIAssistantModal'));
-const SectionWelcomeNotifier = lazy(() => import('./components/SectionWelcomeNotifier'));
 
 function App() {
   return (
@@ -26,7 +27,34 @@ function App() {
 }
 
 const AppContent = () => {
-  const { isDark } = useTheme();
+  // Ultra-smooth momentum scroll with Lenis (Apple/Google ProMotion caliber)
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.6,
+      infinite: false,
+    });
+
+    window.__lenis = lenis;
+
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.__lenis = null;
+      lenis.destroy();
+    };
+  }, []);
 
   // Dynamic Header-to-Footer scroll tracking with smooth spring damping
   const { scrollYProgress } = useScroll();
@@ -37,12 +65,12 @@ const AppContent = () => {
   });
 
   return (
-    <div className="min-h-[100vh] min-h-[100dvh] bg-[#ffffff] text-[#202124] dark:bg-[#131314] dark:text-[#e3e3e3] selection:bg-[#1a73e8]/20 selection:text-[#1a73e8] dark:selection:bg-[#8ab4f8]/20 dark:selection:text-[#8ab4f8] font-sans transition-colors duration-300">
+    <div className="min-h-[100vh] min-h-[100dvh] w-full max-w-full overflow-x-clip bg-[#ffffff] text-slate-900 dark:bg-[#08090d] dark:text-slate-100 selection:bg-blue-500/20 selection:text-blue-600 dark:selection:bg-blue-400/20 dark:selection:text-blue-300 font-sans transition-colors duration-300">
       
-      {/* Top Header-to-Footer Chromatic Laser Progress Bar */}
+      {/* Top Header-to-Footer Electric Laser Progress Bar */}
       <motion.div 
         style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#4285f4] via-[#ea4335] via-[#fbbc04] to-[#34a853] z-[100] origin-left pointer-events-none shadow-[0_0_10px_rgba(66,133,244,0.5)]" 
+        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-500 z-[100] origin-left pointer-events-none shadow-[0_0_12px_rgba(59,130,246,0.7)]" 
       />
 
       <main>
@@ -69,7 +97,6 @@ const AppContent = () => {
         <Footer />
         <ScrollToTop />
         <AIAssistantModal />
-        <SectionWelcomeNotifier />
       </Suspense>
     </div>
   );

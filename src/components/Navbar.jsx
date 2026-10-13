@@ -66,10 +66,18 @@ const Navbar = ({ onOpenResume }) => {
     const targetId = href.replace('#', '');
     const elem = document.getElementById(targetId);
     if (elem) {
-      elem.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      if (window.__lenis) {
+        window.__lenis.scrollTo(elem, {
+          offset: -40,
+          duration: 1.3,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+      } else {
+        elem.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
       window.history.pushState(null, '', href);
     }
   };

@@ -94,23 +94,23 @@ const Contact = () => {
   const mailtoLink = `mailto:Harshlagwal2005@gmail.com?subject=Contact from Portfolio: ${encodeURIComponent(formData.name || 'AI Collaboration')}&body=${encodeURIComponent(formData.message ? `${formData.message}\n\nFrom: ${formData.name} (${formData.email})` : 'Hi Harsh, I would like to connect with you regarding AI / ML opportunities.')}`;
 
   return (
-    <section id="contact" className="py-16 md:py-20 relative bg-white dark:bg-[#131314] transition-colors duration-300">
+    <section id="contact" className="py-20 md:py-24 relative bg-white dark:bg-[#08090d] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f0fe] dark:bg-[#8ab4f8]/10 border border-[#dadce0] dark:border-[#8ab4f8]/20 text-[#1a73e8] dark:text-[#8ab4f8] text-xs font-medium font-mono tracking-wide mb-3">
-              <MessageSquare size={14} strokeWidth={1.5} />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 text-xs font-semibold font-mono tracking-wide mb-3">
+              <MessageSquare size={13} strokeWidth={1.8} />
               <span>DIRECT OUTREACH & COLLABORATION</span>
             </div>
             <motion.h2 
               initial={{ opacity: 0, x: -15 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-medium font-display tracking-tight text-[#202124] dark:text-[#f1f3f4]"
+              className="text-3xl md:text-4xl font-bold font-sans tracking-tight text-slate-900 dark:text-white"
             >
-              Let's Build Something <span className="text-[#1a73e8] dark:text-[#8ab4f8]">Intelligent</span>
+              Let's Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300">Intelligent</span>
             </motion.h2>
           </div>
           <p className="text-[#5f6368] dark:text-[#9aa0a6] max-w-md text-xs sm:text-sm leading-relaxed">
