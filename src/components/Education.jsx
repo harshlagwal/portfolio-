@@ -24,7 +24,7 @@ const Education = () => {
       degree: "Master of Business Administration (MBA)",
       specialization: "Generative AI, Data Analysis & Decision Science",
       duration: "2026 – 2028",
-      logo: "https://i.postimg.cc/KzXVz8yP/iitp-logo.png",
+      logo: "/logos/iit_patna_seal.png",
       status: "In Progress",
       isCurrent: true,
       grade: "Enrolled",

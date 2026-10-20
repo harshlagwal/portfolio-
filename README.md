@@ -1,85 +1,127 @@
-# 🌟 Harsh Lagwal — AI & Machine Learning Engineering Portfolio
+#  Harsh Lagwal — Dual-Engine OS Portfolio Platform
+### macOS Sonoma Desktop & iOS 18 Mobile Operating System Architecture
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel_Production-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://harshlagwal.vercel.app/)
+[![Production Deployment](https://img.shields.io/badge/Production-Live_on_Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio-harsh-lagwal.vercel.app/)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-harshlagwal%2Fportfolio--000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/harshlagwal/portfolio-)
 [![React 19](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Vite 7](https://img.shields.io/badge/Vite_7-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
-[![Vite](https://img.shields.io/badge/Vite_7-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![WhatsApp](https://img.shields.io/badge/WhatsApp-Connect-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/916230624011)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion_12-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Three.js](https://img.shields.io/badge/Three.js-WebGL_3D-000000?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 
 <p align="center">
-  <b>A state-of-the-art, high-performance portfolio platform showcasing specialized expertise in Generative AI, Large Language Models (LLMs), Computer Vision, and Full-Stack Engineering.</b>
+  <b>A state-of-the-art, high-performance web platform simulating Apple macOS Sonoma/Sequoia for desktop devices and Apple iOS 18 for mobile devices. Engineered to showcase Harsh Lagwal's AI/ML systems, IIT Patna MBA Decision Science scholarship, and full-stack engineering achievements.</b>
 </p>
 
 </div>
 
 ---
 
-## 🚀 Key Highlights & Interactive Features
+## 🏛️ System Architecture Overview
 
-### 💊 1. Floating Dynamic Capsule Navbar
-- Minimalist centered capsule pill inspired by next-gen Silicon Valley interfaces.
-- Left circular avatar badge with high-resolution photo.
-- Seamless, dynamic dark/light mode surface switching (`bg-white/90` frosted glass in light mode, `#18181b` in dark mode).
-- Integrated quick utilities: **⌘K Search**, **Terminal CLI**, **WhatsApp Direct**, **Theme Toggle**, and high-contrast email CTA pill.
+The application features a responsive **Dual-Engine Operating System Architecture** that auto-detects viewport dimensions and renders a tailored operating system environment:
 
-### 🤖 2. Harsh AI Copilot (`✨ Ask AI`)
-- Compact floating AI Assistant at the bottom-right.
-- Built-in Knowledge Base capable of instant answering questions about Harsh's AI/ML tech stack, 8+ projects, IIT Patna academic background, 6 internships, and contact details.
-- 1-click prompt suggestion chips for effortless recruiter interaction.
+```mermaid
+flowchart TD
+    A["Device Viewport Detection (useIsMobile Hook)"] -->|Width >= 768px| B["Desktop Engine: macOS Sonoma Simulator"]
+    A -->|Width < 768px| C["Mobile Engine: iOS 18 Experience"]
 
-### 🔍 3. Global Command Search Palette (`Ctrl + K` / `⌘K`)
-- Instant keyboard-driven navigation across all sections, projects, certifications, and direct actions.
-- Real-time fuzzy query filtering with smooth keyboard navigation.
+    subgraph macOS_Desktop [" macOS Sonoma / Sequoia Engine"]
+        B --> M1["Top Menu Bar & Control Center"]
+        B --> M2["Cinematic Wallpapers Slideshow (Crossfade Sync)"]
+        B --> M3["Minimalist Analog Clock & Glass Time Widget"]
+        B --> M4["Draggable Desktop Grid (Live Real-Time Slot Swapping)"]
+        B --> M5["macOS Continuous Dock (with Magnification & Indicator Dots)"]
+        B --> M6["Multi-Window Manager (Finder, Notes, Terminal, Preview, Resume, Settings, Safari, Siri)"]
+    end
 
-### 💻 4. Interactive Hacker Terminal Drawer (`>_` / `T`)
-- Simulated Linux CLI environment with interactive commands:
-  - `help` — List all available commands
-  - `skills` — Display AI/ML technical arsenal
-  - `projects` — List flagship AI & web applications
-  - `clear` / `exit` — Manage session window
-
-### 🏛️ 5. Institutional Credibility Ribbon & Engineering Philosophy
-- Verified credential badges: **IIT Patna** *(MBA Decision Science)*, **Rayat Bahra** *(B.Tech CSE)*, **Google**, **ISRO**, **NVIDIA**, **Anthropic**, **OpenAI**, **Microsoft Azure**, and **TATA**.
-- 3 core Senior Architectural Principles:
-  1. ⚡ **Production-First AI:** Low-latency microservices with FastAPI & Docker.
-  2. 🎯 **Inference & Token Optimization:** Smart caching and quantized inference.
-  3. 🛡️ **Hallucination-Resistant Agents:** Guardrails and deterministic fallback mechanics.
-
-### 💼 6. Flagship AI Systems & Client Web Deliverables (8+ Projects)
-- **WanderLust.ai:** AI Travel Planner with Gemini 1.5 Pro, dynamic maps, and admin analytics.
-- **CareerCraft AI:** Next-Generation Data-Driven Career Intelligence Hub ([github.com/harshlagwal/CareerCraft-AI](https://github.com/harshlagwal/CareerCraft-AI)).
-- **CodeChaska:** The Ultimate Gamified Coding Universe with 360 missions & mini-games ([code-chaska.vercel.app](https://code-chaska.vercel.app/)).
-- **ATC Constructions Portal:** Live commercial platform for Govt. Approved Contractor Amit Thakur ([atc-constructions.vercel.app](https://atc-constructions.vercel.app/)).
-- **Healthcare Assistant Chatbot:** NLP triage engine developed during Edunet Foundation AI internship.
-- **Real-Time Object Detection:** 30+ FPS computer vision inference with SSD MobileNet v3 and OpenCV DNN.
-- **Shree Sheetla Mata Mandir Portal:** Cultural heritage community platform.
-- **AlgoFlow VS Code Extension:** Real-time algorithmic flowchart visualization across 7 programming languages.
+    subgraph iOS_Mobile ["📱 iOS 18 Mobile Engine"]
+        C --> I1["Apple 'hello' Splash Intro & Dynamic Scrim"]
+        C --> I2["Digital Lockscreen Clock & Date Pill"]
+        C --> I3["Frosted Glass Identity Widget (Hamirpur, HP & IIT Patna)"]
+        C --> I4["Interactive 4x2 Homescreen App Grid (Zero-Overlap Reorder)"]
+        C --> I5["Authentic 4-App Bottom Dock (Safari, Mail, GitHub, LinkedIn)"]
+        C --> I6["Gesture-Driven Bottom Sheets (60-120 FPS Drag-to-Dismiss)"]
+    end
+```
 
 ---
 
-## ⌨️ Global Keyboard Shortcuts Matrix
+## 🚀 Key Innovations & Engineering Highlights
 
-| Keybinding | Action | Description |
-| :---: | :--- | :--- |
-| <kbd>Ctrl</kbd> + <kbd>K</kbd> / <kbd>⌘K</kbd> | **Command Palette** | Open global instant search & quick action launcher |
-| <kbd>R</kbd> | **Resume Modal** | View and download official PDF Resume |
-| <kbd>T</kbd> | **Terminal Drawer** | Toggle interactive developer CLI console |
-| <kbd>C</kbd> | **Scroll to Contact** | Jump directly to Contact & Inquiry section |
-| <kbd>Esc</kbd> | **Close Active Window** | Dismiss any open modal, palette, or drawer |
+### 1. 🔄 Live Real-Time Slot Shifting & Drag Physics
+- **The Challenge**: Traditional drag-and-drop implementations either let icons overlap on top of each other or only rearrange items after the drag ends.
+- **The Solution**: 
+  - An active `onDrag` listener tracks pointer coordinates relative to all slot center positions measured via DOM bounding rects.
+  - When the pointer crosses within a 50px snap radius of a neighboring slot (throttled at 160ms for silky-smooth 60 FPS transitions), the array state immediately splices the dragged element into the target index.
+  - Neighboring icons smoothly slide out of the way into their new positions using Framer Motion's spring-physics layout engine (`damping: 25, stiffness: 350`), while the dragged element remains pinned under the user's touch.
+  - Supported identically on both **Mobile iOS Homescreen** and **Desktop macOS Canvas**.
+
+### 2. 🛡️ Bulletproof Drag vs. Tap Conflict Prevention
+- **The Challenge**: Releasing a drag gesture frequently causes mobile browsers and pointer event systems to fire an unwanted `onClick` / `onTap` event, accidentally launching modals.
+- **The Solution**:
+  - Implemented an `isDraggingRef` combined with a 6px drag movement vector threshold.
+  - When active dragging occurs, `isDraggingRef.current` locks to `true` and remains locked for a 220ms cooldown period post-release.
+  - All click and tap handlers verify `!isDraggingRef.current` before dispatching window or sheet opening events.
+  - Stationary taps open apps instantly (<5ms latency), while drag gestures never trigger accidental app launches.
+
+### 3. ⚡ 60–120 FPS Hardware-Accelerated Performance
+- **Zero Full-Viewport Rasterization**: Eliminated CSS `filter: brightness(...)` during sheet slide-ups, which previously forced mobile WebKit and Blink to re-rasterize the entire viewport on every frame.
+- **GPU Compositor Pipeline**: All modal sheets and grid translations use hardware-accelerated transforms (`transform-gpu will-change-transform`).
+- **Smooth Exit Animations**: Fully orchestrated `AnimatePresence` lifecycle handling so bottom sheets slide down seamlessly on swipe-to-dismiss without sudden unmount flashes.
+
+### 4. 🌐 3D WebGL GitHub Contribution Skyline
+- Implemented via Three.js with custom procedural geometry mapping GitHub contribution commits into extruded 3D skyscraper pillars.
+- Ambient lighting, orbit controls, custom hover raycasters, and automatic WebGL fallback for low-power mobile devices.
+
+### 5. 🔊 Web Audio Synthesizer Sound Effects
+- Pure programmatic Web Audio API sound synthesis (`soundEffects.js`):
+  - `playPop()`: Crisp Apple-style pop on slot snap and icon select.
+  - `playClick()`: Subtle tactile feedback on menu selections.
+  - `playSwoosh()`: Fluid sound on window open and maximize.
+  - `toggleSound()`: Global mute toggle persisted in settings.
+
+### 6. 🖼️ Official Apple Sonoma/Sequoia continuous-curvature Squircles
+- All app icons are framed in Apple's continuous squircle curvature (`rounded-[22.5%]`) with official macOS Sonoma/Sequoia artwork and ambient multi-layered drop shadows.
 
 ---
 
-## 🛠️ Technical Stack & Architecture
+## 📱 Mobile UI Application Layout (Zero Duplicate Apps)
 
-- **Frontend Core:** React 19, JavaScript (ESNext), Vite 7
-- **Styling Architecture:** Tailwind CSS v4, Modern Design Tokens, Frosted Glassmorphism
-- **Animation Engine:** Framer Motion 12, Spring Physics, Ambient Cursor Spotlights
-- **Icons & Typography:** Lucide React, Plus Jakarta Sans, Inter, JetBrains Mono
-- **Inquiry Processing:** Formspree API (Zero-OAuth, direct serverless delivery)
-- **SEO & Social Sharing:** Custom AI Neural SVG Favicon, OpenGraph & Twitter Large Image Preview Cards
+The mobile experience features a non-overlapping, high-utility distribution across the homescreen and the bottom dock:
+
+| Zone | Apps | Purpose |
+| :--- | :--- | :--- |
+| **Homescreen Grid (4x2)** | 1. 📁 **Projects** (`finder`) | Project Showcase & Deep Architecture Specs |
+| | 2. 📝 **About Me** (`notes`) | Bio, Experience, Tech Arsenal & Philosophy |
+| | 3. 🏅 **Certificates** (`preview`) | Verified Credentials (Google, ISRO, NVIDIA, etc.) |
+| | 4. 📟 **Terminal** (`terminal`) | Interactive iTerm2 Shell with Linux Commands |
+| | 5. 📄 **Resume (CV)** (`resume`) | High-res Google Drive Verified Embed & Actions |
+| | 6. ⚙️ **Settings** (`settings`) | Wallpapers, Appearance (Dark/Light), Audio & Specs |
+| | 7. ✨ **Siri AI** (`siri`) | Apple Intelligence Interactive Assistant |
+| | 8. 🎓 **IIT Patna** (`iitpatna`) | MBA in Decision Science & Academic Profile |
+| **Bottom Dock (4 Apps)** | 1. 🧭 **Safari** (`safari`) | Web Projects Navigator & Live Demos |
+| | 2. ✉️ **Mail Harsh** (`mail`) | Direct Email & Message Delivery (Formspree) |
+| | 3. 🐙 **GitHub 3D** (`github`) | Three.js Contribution Skyline & Repositories |
+| | 4. 💼 **LinkedIn** (`linkedin`) | Official LinkedIn Profile Direct Launch |
+
+---
+
+## 🛠️ Technology Stack & Dependencies
+
+```json
+{
+  "Core Framework": "React 19, JavaScript (ESNext), Vite 7",
+  "Styling & Tokens": "Tailwind CSS v4, Modern Design Tokens, Frosted Glassmorphism",
+  "Motion & Physics": "Framer Motion 12 (Spring Dynamics, Layout Animations)",
+  "3D Graphics": "Three.js, WebGL Raycasters, Ambient Shaders",
+  "Icons & Visuals": "Lucide React, Apple macOS Official App Icon Artwork",
+  "Sound Engine": "Web Audio API (Synthesized Real-Time Audio FX)",
+  "Deployment": "Vercel Global Edge Network with CI/CD"
+}
+```
 
 ---
 
@@ -88,77 +130,96 @@
 ```text
 portfolio-harsh-lagwal/
 ├── public/
-│   ├── favicon.svg               # Custom AI Neural SVG Favicon
-│   ├── og-image.jpg              # High-resolution Social Card Banner
-│   └── vite.svg
+│   ├── favicon.svg                   # Circular Photo Favicon with Apple Cyan Ring
+│   ├── harsh-avatar.jpg              # High-Resolution Portrait Avatar
+│   ├── og-image.jpg                  # OpenGraph & Twitter Social Card
+│   ├── apple_hello_normalized.svg    # Normalized Apple "hello" Script
+│   └── sitemap.xml                   # SEO Discovery Sitemap
 ├── src/
 │   ├── assets/
-│   │   └── Harsh-portfolio.jpg   # Official Portfolio Portrait
+│   │   ├── Harsh-portfolio.jpg       # Master Portfolio Portrait Photo
+│   │   ├── icons/                    # Official Apple macOS/iOS Squircle Icons
+│   │   └── wallpapers/               # High-Res macOS & iOS Portrait Wallpapers
 │   ├── components/
-│   │   ├── About.jsx             # Story, Stats, Trust Ribbon & Philosophy
-│   │   ├── AIAssistantModal.jsx  # Floating AI Copilot with Knowledge Base
-│   │   ├── CertificateModal.jsx  # Credential & Certificate viewer
-│   │   ├── Certifications.jsx    # ISRO, NVIDIA, Google, Anthropic Badges
-│   │   ├── CommandPalette.jsx    # Global Ctrl+K Spotlight Search
-│   │   ├── Contact.jsx           # Formspree Form, WhatsApp & Direct Channels
-│   │   ├── Education.jsx         # IIT Patna & Rayat Bahra Degree Timeline
-│   │   ├── Experience.jsx        # 6 Internships Interactive Timeline
-│   │   ├── Footer.jsx            # Clean Footer with Right Corner Scroll-To-Top
-│   │   ├── HeroSection.jsx       # Confident Hero with Ambient Cursor Glow
-│   │   ├── Navbar.jsx            # Dynamic Floating Capsule Bar & WhatsApp Link
-│   │   ├── Projects.jsx          # 8+ Project Cards with Metrics & Live Demos
-│   │   ├── ResumeModal.jsx       # PDF Resume Preview
-│   │   ├── ScrollingSkills.jsx   # Infinite Marquee Skills Stream
-│   │   ├── Skills.jsx            # Tech Categorized Arsenal
-│   │   ├── TechIcon.jsx          # SVG Tech Stacks Renderer
-│   │   └── TerminalDrawer.jsx    # Developer CLI Terminal Emulator
+│   │   ├── macos/                    # macOS Sonoma Desktop System
+│   │   │   ├── Desktop.jsx           # Canvas, Wallpapers, Live Slot Reorder
+│   │   │   ├── Dock.jsx              # macOS Magnifying Dock & Active Dots
+│   │   │   ├── MenuBar.jsx           # Top Bar, Apple Logo, Clock, Status Menus
+│   │   │   ├── WindowFrame.jsx       # Floating Windows (Traffic Lights, Minimize, Maximize)
+│   │   │   ├── MacDesktopPortfolio.jsx # Desktop Master Controller
+│   │   │   ├── SiriIntelligenceOverlay.jsx # Apple Intelligence Ambient Glow
+│   │   │   └── apps/                 # Desktop Window Applications
+│   │   │       ├── FinderApp.jsx     # Projects Directory & Details
+│   │   │       ├── NotesApp.jsx      # Story, Arsenal & Background
+│   │   │       ├── PreviewApp.jsx    # Certification Gallery
+│   │   │       ├── TerminalApp.jsx   # Interactive Linux Shell
+│   │   │       ├── ResumeApp.jsx     # Google Drive PDF Embed & Tools
+│   │   │       ├── SettingsApp.jsx   # Wallpapers, Dark/Light, Sound, Specs
+│   │   │       ├── SafariApp.jsx     # Web Browser Tabs
+│   │   │       ├── MailApp.jsx       # Contact Form
+│   │   │       ├── SiriApp.jsx       # AI Assistant Chat
+│   │   │       └── IITPatnaApp.jsx   # IIT Patna Decision Science Specs
+│   │   ├── mobile/                   # iOS 18 Mobile System
+│   │   │   ├── MobilePortfolio.jsx   # Mobile Master (4x2 Live Drag Reorder Grid)
+│   │   │   ├── MobileBottomDock.jsx  # 4-App Frosted Glass Bottom Dock
+│   │   │   ├── MobileBottomSheet.jsx # 60-120fps Gesture-Driven Bottom Sheets
+│   │   │   └── MobileIPhoneClock.jsx # Lockscreen Digital Clock & Date
+│   │   └── ui/                       # UI Components (Three.js Skyline, Dock)
 │   ├── context/
-│   │   └── ThemeContext.jsx      # Light / Dark Mode System Provider
-│   ├── App.jsx                   # Lazy-Loaded Root Composition Component
-│   ├── index.css                 # Tailwind v4 Directives & Custom Utilities
-│   └── main.jsx                  # React DOM Root Mounting
-├── index.html                    # SEO Meta Tags, OpenGraph & Favicon Links
-├── package.json
-└── vite.config.js
+│   │   ├── ThemeContext.jsx          # Dark / Light Theme Provider
+│   │   └── WindowManagerContext.jsx  # Multi-Window Coordinate & Depth State
+│   ├── data/
+│   │   └── portfolioData.js          # Master Data (Projects, Internships, Credentials)
+│   └── utils/
+│       └── soundEffects.js           # Web Audio API Synthesizer
+├── index.html                        # HTML5 Entry with Dynamic Favicon
+├── package.json                      # NPM Manifest
+└── vite.config.js                    # Vite 7 Bundler Configuration
 ```
 
 ---
 
-## ⚡ Local Development Setup
+## 💻 Local Setup & Development
 
-### 1. Clone the Repository
+### Prerequisites
+- Node.js `18.0+` or `20.0+`
+- npm `9.0+`
+
+### Quick Start
 ```bash
+# 1. Clone the repository
 git clone https://github.com/harshlagwal/portfolio-.git
 cd portfolio-
-```
 
-### 2. Install Dependencies
-```bash
+# 2. Install dependencies
 npm install
+
+# 3. Start local development server with mobile host support
+npm run dev -- --host
+
+# 4. Open in browser:
+# Local: http://localhost:5173/
+# Mobile (Same Wi-Fi): http://<your-lan-ip>:5173/
 ```
 
-### 3. Start Development Server
+### Production Build
 ```bash
-npm run dev
-```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-### 4. Build for Production
-```bash
+# Compile and optimize for production
 npm run build
+
+# Preview production build locally
+npm run preview
 ```
 
 ---
 
-## 📬 Connect with Harsh Lagwal
+## 👨‍💻 Author & Connect
 
-- **Email:** [Harshlagwal2005@gmail.com](mailto:Harshlagwal2005@gmail.com)
-- **WhatsApp:** [+91 6230624011](https://wa.me/916230624011)
-- **LinkedIn:** [linkedin.com/in/harsh-lagwal](https://linkedin.com/in/harsh-lagwal)
-- **GitHub:** [github.com/harshlagwal](https://github.com/harshlagwal)
+**Harsh Lagwal**  
+*AI & Machine Learning Engineer | MBA Decision Science Scholar @ IIT Patna*  
 
----
-
-<p align="center">
-  <b>Designed & Engineered by Harsh Lagwal © 2026</b>
-</p>
+- 🌐 **Portfolio**: [portfolio-harsh-lagwal.vercel.app](https://portfolio-harsh-lagwal.vercel.app/)
+- 💼 **LinkedIn**: [linkedin.com/in/harshlagwal](https://linkedin.com/in/harshlagwal)
+- 🐙 **GitHub**: [github.com/harshlagwal](https://github.com/harshlagwal)
+- ✉️ **Email**: [Harshlagwal2005@gmail.com](mailto:Harshlagwal2005@gmail.com)
+- 📍 **Location**: Hamirpur, Himachal Pradesh, India
