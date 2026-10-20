@@ -9,7 +9,6 @@ import { Spotlight } from './Spotlight';
 
 // App Components
 import { FinderApp } from './apps/FinderApp';
-import { SafariApp } from './apps/SafariApp';
 import { NotesApp } from './apps/NotesApp';
 import { TerminalApp } from './apps/TerminalApp';
 import { PreviewApp } from './apps/PreviewApp';
@@ -53,19 +52,6 @@ export const MacDesktopPortfolio = () => {
             defaultHeight={580}
           >
             <FinderApp />
-          </MacWindow>
-        </div>
-
-        {/* Safari (LinkedIn & Web) */}
-        <div className="pointer-events-auto">
-          <MacWindow
-            id="safari"
-            title="Safari — Portfolio Web"
-            icon={Globe}
-            defaultWidth={940}
-            defaultHeight={600}
-          >
-            <SafariApp />
           </MacWindow>
         </div>
 

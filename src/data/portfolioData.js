@@ -7,6 +7,8 @@ export const portfolioData = {
     email: "Harshlagwal2005@gmail.com",
     github: "https://github.com/harshlagwal",
     linkedin: "https://linkedin.com/in/harshlagwal",
+    phone: "+916230624011",
+    whatsapp: "https://wa.me/916230624011",
     portfolioUrl: "https://harshlagwalportfolio.netlify.app",
     resumeLink: "https://drive.google.com/file/d/1PA8fV23UmJ2AYf7kxUGaihI88M1NWW0b/view?usp=sharing",
     location: "Hamirpur, Himachal Pradesh, India",

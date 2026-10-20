@@ -11,7 +11,6 @@ import {
   MapPin,
   Sparkles,
   Sliders,
-  Globe,
   GraduationCap
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
@@ -35,7 +34,6 @@ import { ResumeApp } from '../macos/apps/ResumeApp';
 import { MailApp } from '../macos/apps/MailApp';
 import { SettingsApp } from '../macos/apps/SettingsApp';
 import { SiriApp } from '../macos/apps/SiriApp';
-import { SafariApp } from '../macos/apps/SafariApp';
 import { IITPatnaApp } from '../macos/apps/IITPatnaApp';
 
 // High-Res Portrait Wallpaper Assets for Slideshow
@@ -440,17 +438,6 @@ export const MobilePortfolio = () => {
       >
         <div className="min-h-[520px]">
           <SiriApp />
-        </div>
-      </MobileBottomSheet>
-
-      <MobileBottomSheet
-        isOpen={activeSheet === 'safari'}
-        onClose={() => setActiveSheet(null)}
-        title="Safari — Web Navigator"
-        icon={Globe}
-      >
-        <div className="min-h-[520px]">
-          <SafariApp />
         </div>
       </MobileBottomSheet>
 

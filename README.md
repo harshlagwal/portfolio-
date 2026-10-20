@@ -34,7 +34,7 @@ flowchart TD
         B --> M3["Minimalist Analog Clock & Glass Time Widget"]
         B --> M4["Draggable Desktop Grid (Live Real-Time Slot Swapping)"]
         B --> M5["macOS Continuous Dock (with Magnification & Indicator Dots)"]
-        B --> M6["Multi-Window Manager (Finder, Notes, Terminal, Preview, Resume, Settings, Safari, Siri)"]
+        B --> M6["Multi-Window Manager (Finder, Notes, Terminal, Preview, Resume, Settings, Siri)"]
     end
 
     subgraph iOS_Mobile ["📱 iOS 18 Mobile Engine"]
@@ -42,7 +42,7 @@ flowchart TD
         C --> I2["Digital Lockscreen Clock & Date Pill"]
         C --> I3["Frosted Glass Identity Widget (Hamirpur, HP & IIT Patna)"]
         C --> I4["Interactive 4x2 Homescreen App Grid (Zero-Overlap Reorder)"]
-        C --> I5["Authentic 4-App Bottom Dock (Safari, Mail, GitHub, LinkedIn)"]
+        C --> I5["Authentic 4-App Bottom Dock (Phone, Mail, GitHub, LinkedIn)"]
         C --> I6["Gesture-Driven Bottom Sheets (60-120 FPS Drag-to-Dismiss)"]
     end
 ```
@@ -102,7 +102,7 @@ The mobile experience features a non-overlapping, high-utility distribution acro
 | | 6. ⚙️ **Settings** (`settings`) | Wallpapers, Appearance (Dark/Light), Audio & Specs |
 | | 7. ✨ **Siri AI** (`siri`) | Apple Intelligence Interactive Assistant |
 | | 8. 🎓 **IIT Patna** (`iitpatna`) | MBA in Decision Science & Academic Profile |
-| **Bottom Dock (4 Apps)** | 1. 🧭 **Safari** (`safari`) | Web Projects Navigator & Live Demos |
+| **Bottom Dock (4 Apps)** | 1. 📞 **Phone** (`phone`) | Direct Call / WhatsApp (+91 6230624011) |
 | | 2. ✉️ **Mail Harsh** (`mail`) | Direct Email & Message Delivery (Formspree) |
 | | 3. 🐙 **GitHub 3D** (`github`) | Three.js Contribution Skyline & Repositories |
 | | 4. 💼 **LinkedIn** (`linkedin`) | Official LinkedIn Profile Direct Launch |

@@ -5,7 +5,6 @@ import { soundFX } from '../../utils/soundEffects';
 import MacOSDock from '../ui/mac-os-dock';
 
 import finderImg from '../../assets/icons/finder.png';
-import safariImg from '../../assets/icons/safari.png';
 import notesImg from '../../assets/icons/notes.png';
 import certificateImg from '../../assets/icons/certificate.png';
 import resumeImg from '../../assets/icons/resume.png';
@@ -27,7 +26,6 @@ export const Dock = () => {
   // Pinned persistent dock applications
   const pinnedApps = [
     { id: 'finder', name: 'Finder', icon: finderImg },
-    { id: 'safari', name: 'Safari', icon: safariImg },
     { id: 'notes', name: 'Notes', icon: notesImg },
     { id: 'terminal', name: 'Terminal', icon: terminalImg },
     { id: 'mail', name: 'Mail', icon: mailImg },

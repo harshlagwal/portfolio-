@@ -5,9 +5,10 @@ import { portfolioData } from '../../data/portfolioData';
 
 export const MobileBottomDock = ({ onOpenApp, activeApp }) => {
   const linkedinUrl = portfolioData.personal.linkedin || 'https://www.linkedin.com/in/harshlagwal';
+  const phoneUrl = 'tel:+916230624011';
 
   const dockItems = [
-    { id: 'safari', name: 'Safari', isExternal: false },
+    { id: 'phone', name: 'Phone', isExternal: true, url: phoneUrl },
     { id: 'mail', name: 'Mail', isExternal: false },
     { id: 'github', name: 'GitHub', isExternal: false },
     { id: 'linkedin', name: 'LinkedIn', isExternal: true, url: linkedinUrl },
