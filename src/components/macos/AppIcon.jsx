@@ -13,6 +13,7 @@ import githubImg from '../../assets/icons/github_official.svg';
 import certificateImg from '../../assets/icons/certificate.png';
 import resumeImg from '../../assets/icons/resume.png';
 import iitPatnaSealImg from '../../assets/icons/iit_patna_seal.png';
+import phoneImg from '../../assets/icons/phone.png';
 
 /**
  * Official Apple macOS Sonoma / Sequoia App Icons
@@ -20,6 +21,23 @@ import iitPatnaSealImg from '../../assets/icons/iit_patna_seal.png';
  * framed in Apple continuous squircle curvature with drop shadows.
  */
 export const AppIcon = ({ id, size = 52, className = '' }) => {
+  // Official iOS Phone App Icon (Apple Artwork)
+  if (id === 'phone') {
+    return (
+      <div
+        style={{ width: size, height: size }}
+        className={`relative rounded-[22.5%] overflow-hidden flex items-center justify-center transition-transform ${className}`}
+      >
+        <img
+          src={phoneImg}
+          alt="Phone"
+          className="w-full h-full object-cover pointer-events-none drop-shadow-md select-none"
+          loading="eager"
+        />
+      </div>
+    );
+  }
+
   // Slim, elegant Apple squircle for IIT Patna Scholar
   if (id === 'iitpatna') {
     return (
@@ -37,20 +55,6 @@ export const AppIcon = ({ id, size = 52, className = '' }) => {
     );
   }
 
-  // Official iOS Phone App Icon (Green Gradient with clean handset)
-  if (id === 'phone') {
-    return (
-      <div
-        style={{ width: size, height: size }}
-        className={`relative rounded-[22.5%] overflow-hidden shadow-lg border border-white/20 bg-gradient-to-b from-[#34c759] to-[#248a3d] flex items-center justify-center transition-transform ${className}`}
-      >
-        <svg className="w-1/2 h-1/2 text-white fill-current drop-shadow-xs" viewBox="0 0 24 24">
-          <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" />
-        </svg>
-      </div>
-    );
-  }
-
   const iconMap = {
     finder: finderImg,
     mail: mailImg,
@@ -64,6 +68,7 @@ export const AppIcon = ({ id, size = 52, className = '' }) => {
     github: githubImg,
     certificate: certificateImg,
     resume: resumeImg,
+    phone: phoneImg,
   };
 
   const imgSrc = iconMap[id];
