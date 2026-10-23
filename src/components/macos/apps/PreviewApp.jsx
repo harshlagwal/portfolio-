@@ -23,7 +23,7 @@ export const PreviewApp = () => {
       title: 'Build with AI Mohali Bootcamp',
       company: 'Google & Hack2Skills',
       category: 'Certifications',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
+      logo: '/logos/google-developers.svg',
       link: 'https://drive.google.com/file/d/1atFwqxAHDX24JzzekEqOFNUnUJTGA2aw/view?usp=drive_link',
       date: '2025'
     },
@@ -32,7 +32,7 @@ export const PreviewApp = () => {
       title: 'Model Context Protocol Certificate',
       company: 'Anthropic',
       category: 'Certifications',
-      logo: 'https://i.postimg.cc/hG7JzcyH/Anthropic-Logo-PNG-Vector-(SVG)-Free-Download.jpg',
+      logo: '/logos/anthropic.png',
       link: 'https://drive.google.com/file/d/1-vLv3rkLdm5cTH7fReVC0eJYZ9X9XrBw/view?usp=drivesdk',
       date: '2025'
     },
@@ -41,7 +41,7 @@ export const PreviewApp = () => {
       title: 'Google For Startups Certificate',
       company: 'Google & Scaler',
       category: 'Certifications',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
+      logo: '/logos/google-developers.svg',
       link: 'https://drive.google.com/file/d/1soVOoJWsWXyNXMqSV7qYnGn2Wi1FiXEU/view?usp=drivesdk',
       date: '2025'
     },
@@ -50,7 +50,7 @@ export const PreviewApp = () => {
       title: 'ChatGPT for Everyday Certificate',
       company: 'OpenAI / ChatGPT',
       category: 'Certifications',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+      logo: '/logos/chatgpt.svg',
       link: 'https://drive.google.com/file/d/1QtKoyZt15OQdXYCov7lMH82fk-1yBT6E/view?usp=drivesdk',
       date: '2025'
     },
@@ -59,7 +59,7 @@ export const PreviewApp = () => {
       title: 'Google Workshop Certificate',
       company: 'Google',
       category: 'Certifications',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
+      logo: '/logos/google-developers.svg',
       link: 'https://drive.google.com/file/d/1jm8SMC_guUU2T7Q9oRx5or9m9up8K5cl/view?usp=drivesdk',
       date: '2025'
     },
@@ -68,7 +68,7 @@ export const PreviewApp = () => {
       title: 'AI & ML for Geodata Analysis Certificate',
       company: 'ISRO',
       category: 'Certifications',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Indian_Space_Research_Organisation_Logo.svg',
+      logo: '/logos/isro.png',
       link: 'https://drive.google.com/file/d/1RVIpwaa5oVoHaIYE8S4MA1XCfH9Ov4NY/view?usp=drivesdk',
       date: '2025'
     },
@@ -77,7 +77,7 @@ export const PreviewApp = () => {
       title: 'Generative AI Certificate',
       company: 'NVIDIA',
       category: 'Certifications',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a4/NVIDIA_logo.svg',
+      logo: '/logos/nvidia.svg',
       link: 'https://drive.google.com/file/d/1SrmjS-cTVHlIrb7uKtRRmyfqd4EfYhq0/view?usp=drivesdk',
       date: '2025'
     },
@@ -86,7 +86,7 @@ export const PreviewApp = () => {
       title: 'Data Visualisation: Empowering Business Insights',
       company: 'TATA',
       category: 'Certifications',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg',
+      logo: '/logos/tata.png',
       link: 'https://drive.google.com/file/d/1XWAbgsq4b2I5ZTERwjL01xqNXDNT2Zfs/view?usp=drivesdk',
       date: '2025'
     },
@@ -95,7 +95,7 @@ export const PreviewApp = () => {
       title: 'AI / ML Internship Experience Letter',
       company: 'Upto Skills',
       category: 'Experience',
-      logo: 'https://i.postimg.cc/9MC1Vk0Y/upto-skill.jpg',
+      logo: '/logos/upto-skills.webp',
       link: 'https://drive.google.com/file/d/16dbN9y3l5rsR2Y70AeaLxqIT20_tEKma/view?usp=drive_link',
       date: '2026'
     },
@@ -104,7 +104,7 @@ export const PreviewApp = () => {
       title: 'AI / ML Internship Completion Certificate',
       company: 'Upto Skills',
       category: 'Experience',
-      logo: 'https://i.postimg.cc/9MC1Vk0Y/upto-skill.jpg',
+      logo: '/logos/upto-skills.webp',
       link: 'https://drive.google.com/file/d/1nlus1dHLJ44rN04BLj5MgpA2lEaH6mp6/view?usp=drive_link',
       date: '2026'
     },
@@ -113,7 +113,7 @@ export const PreviewApp = () => {
       title: 'Campus Ambassador Certificate',
       company: 'eDC IIT Delhi',
       category: 'Experience',
-      logo: 'https://i.postimg.cc/zVdWrxc9/edc-iit-delhi.jpg',
+      logo: '/logos/edc-iit-delhi.png',
       link: 'https://drive.google.com/file/d/1tIkMYWmhuA2pzWlGqaduzdmu5AwsJGu8/view?usp=drivesdk',
       date: '2026'
     },
@@ -122,7 +122,7 @@ export const PreviewApp = () => {
       title: 'Generative AI Engineer Experience',
       company: 'SpectoV',
       category: 'Experience',
-      logo: 'https://i.postimg.cc/PrgWT7FZ/specto-V1.jpg',
+      logo: '/logos/spectov.svg',
       link: 'https://drive.google.com/file/d/1HqxEmc6-nWhCpVRRHlxMlusENMk1DwtW/view?usp=sharing',
       date: '2025'
     },
@@ -131,7 +131,7 @@ export const PreviewApp = () => {
       title: 'AI Azure Internship Certificate',
       company: 'Edunet Foundation / Microsoft',
       category: 'Experience',
-      logo: 'https://i.postimg.cc/XqN2KP0r/edunet-foundation.jpg',
+      logo: '/logos/edunet-foundation.png',
       link: 'https://drive.google.com/file/d/1RptrUewLOq4PEjWw21tfNbmCULuM5-oZ/view?usp=drivesdk',
       date: '2025'
     }
@@ -220,7 +220,7 @@ export const PreviewApp = () => {
 
             {/* Document Info Bar */}
             <div className="px-4 py-2 bg-white dark:bg-[#141620] border-b border-black/5 dark:border-white/5 flex items-center gap-2.5 shrink-0">
-              <div className="w-8 h-8 rounded-lg bg-slate-50 dark:bg-white/10 p-1 flex items-center justify-center shrink-0 border border-black/5 dark:border-white/10">
+              <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 border border-black/5 dark:border-white/20 shadow-2xs">
                 <img
                   src={selectedCert.logo}
                   alt={selectedCert.company}
@@ -299,7 +299,7 @@ export const PreviewApp = () => {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-11 h-11 rounded-xl bg-white dark:bg-white/10 p-1.5 flex items-center justify-center shrink-0 border border-black/5 dark:border-white/10 shadow-xs">
+                      <div className="w-11 h-11 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 border border-black/5 dark:border-white/20 shadow-2xs">
                         <img
                           src={cert.logo}
                           alt={cert.company}
@@ -423,7 +423,7 @@ export const PreviewApp = () => {
                 >
                   {/* Official Company Logo */}
                   <div className={`w-10 h-10 rounded-lg p-1.5 shrink-0 flex items-center justify-center overflow-hidden border ${
-                    isSelected ? 'bg-white border-white/20' : 'bg-slate-50 dark:bg-white/[0.05] border-black/5 dark:border-white/10'
+                    isSelected ? 'bg-white border-white/20' : 'bg-white border-black/5 dark:border-white/20 shadow-2xs'
                   }`}>
                     <img
                       src={cert.logo}

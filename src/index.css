@@ -1,107 +1,58 @@
-/* Google Antigravity Theme & Typography System */
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #202124;
-  --color-secondary: #f8f9fa;
-  --color-accent: #1a73e8;
-  --color-sky: #e8f0fe;
-  --color-google-blue: #1a73e8;
-  --color-google-dark-blue: #8ab4f8;
-  --color-google-green: #34a853;
-  --color-google-yellow: #fbbc04;
-  --color-google-red: #ea4335;
+  --color-ink: #1f1f1f;
+  --color-ink-deep: #121317;
+  --color-ink-secondary: #3c4043;
+  --color-ink-tertiary: #5f6368;
+  --color-brand-blue: #1a73e8;
+  --color-brand-soft: #b7bfd9;
+  --color-pill-neutral: #f0f4f9;
+  --color-pill-hover: #e2e7ef;
+  --color-hairline: #e5e7eb;
+  --color-page: #ffffff;
+  --color-surface-soft: #f8f9fc;
+  --color-error: #d93025;
 
-  /* Google Antigravity Light & Dark Mode Tokens */
+  /* Dark mode counterpart */
   --color-dark-bg: #131314;
   --color-dark-surface: #1e1f20;
+  --color-dark-soft: #252629;
   --color-dark-border: #2e3134;
   --color-dark-text: #e3e3e3;
   --color-dark-secondary: #9aa0a6;
+  --color-dark-accent: #8ab4f8;
 
-  --color-light-bg: #ffffff;
-  --color-light-surface: #f8f9fa;
-  --color-light-border: #dadce0;
-  --color-light-text: #202124;
-  --color-light-secondary: #5f6368;
-  
-  --font-sans: "Google Sans", "Google Sans Text", "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: "Google Sans Text", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Google Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-heading: "Google Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Google Sans Flex", "Google Sans", "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Google Sans Text", "Google Sans", "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Google Sans Flex", "Google Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Google Sans Flex", "Google Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-  --font-pixel: "Silkscreen", "Space Grotesk", monospace;
-  --font-space: "Space Grotesk", sans-serif;
-  
-  --background-image-vibrant-gradient: linear-gradient(135deg, #e8f0fe 0%, #f8f9fa 50%, #ffffff 100%);
-  --background-image-hero-mesh: radial-gradient(at 0% 0%, rgba(26, 115, 232, 0.12) 0, transparent 50%), 
-                                radial-gradient(at 100% 0%, rgba(138, 180, 248, 0.08) 0, transparent 50%);
 }
 
-.font-pixel, span.font-pixel, div.font-pixel, h1.font-pixel {
-  font-family: "Silkscreen", "Press Start 2P", monospace !important;
-  letter-spacing: 0.03em;
-}
-
-.font-cursive, span.font-cursive, div.font-cursive, h1.font-cursive {
-  font-family: "Great Vibes", "Alex Brush", "Dancing Script", cursive !important;
-}
-
-.font-space {
-  font-family: "Space Grotesk", sans-serif !important;
-}
-
-/* Google RGB 4-color gradient utilities */
-.google-rgb-gradient {
-  background: linear-gradient(90deg, #4285F4 0%, #EA4335 32%, #FBBC05 65%, #34A853 100%);
-}
-
-.google-rgb-text {
-  background: linear-gradient(90deg, #4285F4 0%, #EA4335 32%, #FBBC05 65%, #34A853 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Cinematic horizontal motion streaks */
-.cinematic-streaks {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    transparent 4px,
-    rgba(255, 255, 255, 0.015) 5px,
-    transparent 6px
-  );
-}
-
-.dark .cinematic-streaks {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    transparent 4px,
-    rgba(255, 255, 255, 0.035) 5px,
-    transparent 6px
-  );
+*, *::before, *::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 :root {
   font-family: var(--font-sans);
-  background-color: #ffffff;
-  color: #202124;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #f0f2f5;
+  color: #0d0f12;
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 :root.dark {
-  background-color: #131314;
-  color: #e3e3e3;
+  background-color: #090a0d;
+  color: #ffffff;
 }
 
 html {
+  scroll-behavior: smooth;
   overflow-x: clip;
   max-width: 100%;
 }
@@ -117,15 +68,28 @@ body {
   font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: -0.01em;
+  background-color: #f0f2f5;
+  color: #2b303a;
 }
 
-/* Headings in Google Sans / Plus Jakarta Sans */
+.dark body {
+  background-color: #090a0d;
+  color: #c5cad6;
+}
+
+/* Headings in Google Sans Flex - crisp letter spacing & 500 weight */
 h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
   font-family: var(--font-display) !important;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: #0d0f12;
 }
 
-/* Body, descriptions & labels */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark .font-display, .dark .font-heading {
+  color: #ffffff;
+}
+
+/* Body & descriptions */
 p, span, div, a, button, input, textarea, li, label {
   font-family: var(--font-body);
 }
@@ -134,236 +98,374 @@ p, span, div, a, button, input, textarea, li, label {
   font-family: var(--font-mono);
 }
 
-
-
-/* ── Google Antigravity Architectural Dot Matrix Canvas ── */
-.dot-matrix-canvas {
-  background-size: 28px 28px;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1.2px, transparent 1.2px);
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 35%, transparent 90%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 35%, transparent 90%);
+/* Crisp SVG vector icons */
+svg {
+  shape-rendering: geometricPrecision;
 }
 
-.dark .dot-matrix-canvas {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px);
+/* Section scroll margin for fixed navbar offset */
+section {
+  scroll-margin-top: 88px;
 }
 
-/* ── Cyber HUD & Grid Backgrounds ── */
-.cyber-grid {
-  background-size: 50px 50px;
-  background-image: 
-    linear-gradient(to right, rgba(37, 99, 235, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+/* ── Studio Cards matching Reference Aesthetic (Light: #dadde3 / Dark: #171920) ── */
+.hairline-card {
+  background-color: #dadde3;
+  border: 1px solid #cbd0d9;
+  border-radius: 1.6rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark .cyber-grid {
-  background-image: 
-    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+.dark .hairline-card {
+  background-color: #171920;
+  border: 1px solid #262933;
 }
 
-.radial-glow-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 15%, rgba(0, 240, 255, 0.08) 0%, rgba(37, 99, 235, 0.04) 40%, transparent 80%);
-  pointer-events: none;
+.hairline-card:hover {
+  border-color: #9fa6b6;
+  box-shadow: 0 6px 24px -2px rgba(13, 15, 18, 0.06);
 }
 
-/* ── Futuristic Border Beam ── */
-.border-beam-card {
-  position: relative;
-  overflow: hidden;
+.dark .hairline-card:hover {
+  border-color: #3b3f4d;
+  box-shadow: 0 6px 28px -2px rgba(0, 0, 0, 0.55);
 }
 
-.border-beam-card::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: linear-gradient(90deg, transparent 0%, #00f0ff 50%, #8b5cf6 80%, transparent 100%);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-
-  pointer-events: none;
-  opacity: 0.6;
-  background-size: 200% 200%;
-  animation: border-beam 4s linear infinite;
+/* Studio Tinted Bento Surface */
+.studio-card-tinted {
+  background-color: #dadde3;
+  border: 1px solid #cbd0d9;
+  border-radius: 1.65rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes border-beam {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.dark .studio-card-tinted {
+  background-color: #171920;
+  border: 1px solid #262933;
 }
 
-/* ── Google Antigravity Cards & Surfaces ── */
-.google-card,
-.cyber-card {
-  position: relative;
-  background: #ffffff;
-  border: 1px solid #dadce0;
-  border-radius: 1rem;
-  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.dark .google-card,
-.dark .cyber-card {
-  background: #1e1f20;
-  border: 1px solid #2e3134;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-.google-card:hover,
-.cyber-card:hover {
-  border-color: #1a73e8;
-  box-shadow: 0 6px 20px rgba(26, 115, 232, 0.12);
-  transform: translateY(-2px);
-}
-
-.dark .google-card:hover,
-.dark .cyber-card:hover {
-  border-color: #8ab4f8;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 14px rgba(138, 180, 248, 0.12);
-  transform: translateY(-2px);
-}
-
-/* Google Antigravity Minimalist Outline Icon */
-.google-outline-icon {
-  stroke-width: 1.5;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-/* ── Text Gradients (Google Blue-Violet Palette) ── */
-.text-gradient-focus {
-  background: linear-gradient(135deg, #1a73e8 0%, #4285f4 50%, #8ab4f8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  display: inline-block;
-}
-
-.text-cyber-glow {
-  background: linear-gradient(135deg, #8ab4f8 0%, #4285f4 50%, #c58af9 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* ── HUD Telemetry Tag ── */
-.hud-tag {
+/* Studio Large Tactile Pill Buttons (Portfolio & Contact blocks in reference images) */
+.studio-btn-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.75rem;
+  min-height: 54px;
+  border-radius: 1rem;
+  background-color: #dadde3;
+  color: #0d0f12;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: -0.015em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid #cbd0d9;
+}
+
+.studio-btn-pill:hover {
+  background-color: #cfd3da;
+  transform: translateY(-1px);
+}
+
+.dark .studio-btn-pill {
+  background-color: #1c1e25;
+  color: #ffffff;
+  border: 1px solid #2a2d37;
+}
+
+.dark .studio-btn-pill:hover {
+  background-color: #252832;
+  border-color: #383c4a;
+  transform: translateY(-1px);
+}
+
+/* Tactical Corner Bracket Tag [ Capturing raw emotion ] */
+.studio-tag-corner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  background: rgba(37, 99, 235, 0.08);
-  border: 1px solid rgba(37, 99, 235, 0.25);
-  color: #2563eb;
-  backdrop-filter: blur(12px);
+  letter-spacing: 0.03em;
+  color: #494f5c;
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 1px solid #cbd0d9;
 }
 
-.dark .hud-tag {
-  background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  color: #00f0ff;
+.dark .studio-tag-corner {
+  color: #9fa6b6;
+  background-color: rgba(22, 24, 31, 0.75);
+  border: 1px solid #262933;
 }
 
-/* ── Live Pulse ── */
+/* ── Pill Controls matching the exact studio style in user image ── */
+.pill-btn-google {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  min-height: 46px;
+  border-radius: 9999px;
+  background-color: #dadde3;
+  color: #0d0f12;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid #cbd0d9;
+}
+
+.pill-btn-google:hover {
+  background-color: #cfd3da;
+  transform: translateY(-1px);
+}
+
+.dark .pill-btn-google {
+  background-color: #1c1e25;
+  color: #ffffff;
+  border: 1px solid #2a2d37;
+}
+
+.dark .pill-btn-google:hover {
+  background-color: #252832;
+  border-color: #383c4a;
+}
+
+/* Primary Ink Button */
+.pill-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  min-height: 46px;
+  border-radius: 9999px;
+  background-color: #0d0f12;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid #0d0f12;
+}
+
+.pill-btn-dark:hover {
+  background-color: #23272f;
+  border-color: #23272f;
+  transform: translateY(-1px);
+}
+
+.dark .pill-btn-dark {
+  background-color: #ffffff;
+  color: #0d0f12;
+  border-color: #ffffff;
+}
+
+.dark .pill-btn-dark:hover {
+  background-color: #eaecef;
+  border-color: #eaecef;
+}
+
+.pill-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  min-height: 46px;
+  border-radius: 9999px;
+  background-color: #dadde3;
+  color: #0d0f12;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid #cbd0d9;
+}
+
+.pill-btn-primary:hover {
+  background-color: #cfd3da;
+  transform: translateY(-1px);
+}
+
+.dark .pill-btn-primary {
+  background-color: #1c1e25;
+  color: #ffffff;
+  border-color: #2a2d37;
+}
+
+.dark .pill-btn-primary:hover {
+  background-color: #252832;
+  border-color: #383c4a;
+}
+
+.pill-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  min-height: 46px;
+  border-radius: 9999px;
+  background-color: #0d0f12;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid #0d0f12;
+}
+
+.pill-btn-secondary:hover {
+  background-color: #23272f;
+  border-color: #23272f;
+
+  transform: translateY(-1px);
+}
+
+.dark .pill-btn-secondary {
+  background-color: #ffffff;
+  color: #121317;
+  border-color: #ffffff;
+}
+
+.dark .pill-btn-secondary:hover {
+  background-color: #f1f3f4;
+  border-color: #f1f3f4;
+}
+
+.pill-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  min-height: 40px;
+  border-radius: 9999px;
+  background-color: transparent;
+  color: #1f1f1f;
+  border: 1px solid #e5e7eb;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: -0.01em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dark .pill-btn-outline {
+  color: #e3e3e3;
+  border-color: #2e3134;
+}
+
+.pill-btn-outline:hover {
+  background-color: #f8f9fc;
+  border-color: #b7bfd9;
+}
+
+.dark .pill-btn-outline:hover {
+  background-color: #252629;
+  border-color: #8ab4f8;
+}
+
+/* ── Minimalist Status Indicator ── */
 .pulse-indicator {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background-color: #10b981;
-  box-shadow: 0 0 10px #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
   animation: live-pulse 2s infinite;
 }
 
 @keyframes live-pulse {
   0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
   100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
-/* ── Smooth Scroll & Section Margins ── */
-html {
-  scroll-behavior: smooth;
-}
-
-section {
-  scroll-margin-top: 90px;
-}
-
-/* ── Futuristic Custom Scrollbar ── */
+/* ── Clean Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #060913;
+  background: #f8f9fc;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #131314;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #dadce0;
   border-radius: 999px;
-  border: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #2e3134;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
-  box-shadow: 0 0 8px #2563eb;
+  background: #b7bfd9;
 }
 
-/* ── Infinite Scrolling Skills Marquee ── */
-.animate-scroll {
-  animation: scroll 35s linear infinite;
-}
-
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 1.5rem)); }
-}
-
-/* ── 3D Card Perspective & Interactive Glow ── */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-/* ── Interactive Spotlight Background ── */
-.mouse-spotlight {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  transition: opacity 0.4s ease;
-}
-
-/* ── Mobile Touch Safe Padding ── */
-.pb-safe {
-  padding-bottom: env(safe-area-inset-bottom, 1rem);
-}
-
-.pt-safe {
-  padding-top: env(safe-area-inset-top, 1rem);
-}
-
-/* ── Active Touch Spring ── */
+/* ── Micro-spring tap feedback ── */
 .tap-spring {
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tap-spring:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
+/* ── Infinite Smooth Logo Marquee ── */
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-scroll-reverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-smooth {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-reverse 36s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-smooth:hover,
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
 

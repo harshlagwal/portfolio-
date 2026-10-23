@@ -2,19 +2,29 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Download, ExternalLink } from 'lucide-react';
 
-const ResumeModal = ({ isOpen, onClose, resumeLink }) => {
-  // Prevent body scroll when modal is open
+export const ResumeModal = ({ isOpen, onClose, resumeLink }) => {
+  // Prevent body scroll and listen for Escape key
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isOpen]);
+    if (!isOpen) return;
 
-  // Convert the drive link to a preview link and download link if possible
-  // Robustly convert any Drive share URL → embed preview URL
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  if (!resumeLink) return null;
+
+  // Convert the drive link to a preview link and download link
   const previewLink = resumeLink.replace(/\/view.*$/, '/preview');
   
   // Extract ID and create a direct download link
@@ -26,66 +36,75 @@ const ResumeModal = ({ isOpen, onClose, resumeLink }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
           {/* Backdrop */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/50 backdrop-blur-xs"
           />
 
-          {/* Modal Content */}
+          {/* Modal Card */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.96, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", duration: 0.5 }}
-            className="relative w-full max-w-4xl max-h-[90vh] max-h-[90dvh] flex flex-col bg-white dark:bg-[#0b0f1a] border border-gray-200 dark:border-gray-700/50 rounded-2xl shadow-2xl overflow-hidden z-10"
+            exit={{ opacity: 0, scale: 0.96, y: 12 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full max-w-4xl max-h-[90vh] max-h-[90dvh] flex flex-col bg-[#ffffff] dark:bg-[#16181f] border border-[#cbd0d9] dark:border-[#262933] rounded-3xl shadow-2xl overflow-hidden z-10"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-[#0b0f1a]/50">
-              <h3 className="text-xl font-semibold font-display text-gray-900 dark:text-white tracking-tight">
-                Resume <span className="text-vibrant-blue">Preview</span>
-              </h3>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#cbd0d9] dark:border-[#262933] bg-[#dadde3] dark:bg-[#171920]">
+              <div>
+                <h3 className="text-lg font-semibold text-[#0d0f12] dark:text-white font-display">
+                  Harsh Lagwal — Résumé
+                </h3>
+                <span className="text-xs text-[#494f5c] dark:text-[#9fa6b6] font-mono font-medium">
+                  AI &amp; Machine Learning Engineer • IIT Patna MBA Scholar
+                </span>
+              </div>
               <button 
+                type="button"
                 onClick={onClose}
-                className="p-2 rounded-full text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors"
-                aria-label="Close modal"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[#0d0f12] dark:text-[#ffffff] hover:bg-[#cbd0d9] dark:hover:bg-[#20232d] transition-colors cursor-pointer"
+                aria-label="Close résumé preview"
               >
-                <X size={20} />
+                <X size={18} strokeWidth={1.8} />
               </button>
             </div>
 
             {/* Iframe Container */}
-            <div className="flex-1 w-full bg-gray-100 dark:bg-gray-900 overflow-hidden min-h-[50vh] min-h-[50dvh] md:min-h-[60vh] md:min-h-[60dvh] relative">
+            <div className="flex-1 w-full bg-[#eceef2] dark:bg-[#0c0d10] overflow-hidden min-h-[55vh] min-h-[55dvh] md:min-h-[65vh] md:min-h-[65dvh] relative">
               <iframe 
                 src={previewLink} 
                 className="absolute inset-0 w-full h-full border-0"
-                title="Resume Preview"
+                title="Harsh Lagwal Resume Preview"
                 allow="autoplay"
               />
             </div>
 
-            {/* Footer / Buttons */}
-            <div className="p-6 bg-white dark:bg-[#0b0f1a] border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-end gap-4">
+            {/* Footer Actions */}
+            <div className="p-4 sm:p-5 bg-[#ffffff] dark:bg-[#16181f] border-t border-[#cbd0d9] dark:border-[#262933] flex flex-col sm:flex-row items-center justify-end gap-3">
               <a 
                 href={resumeLink} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2 font-sans text-sm"
+                className="w-full sm:w-auto pill-btn-secondary"
               >
-                <ExternalLink size={18} /> Open in New Tab
+                <ExternalLink size={14} />
+                <span>Open in Drive</span>
               </a>
+
               <a 
                 href={directDownloadLink}
                 target="_blank" 
                 rel="noopener noreferrer"
                 download
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-vibrant-blue text-white font-medium hover:bg-blue-600 hover:shadow-lg hover:shadow-vibrant-blue/20 transition-all flex items-center justify-center gap-2 font-sans text-sm"
+                className="w-full sm:w-auto pill-btn-dark"
               >
-                <Download size={18} /> Download PDF
+                <Download size={15} strokeWidth={2} />
+                <span>Download PDF</span>
               </a>
             </div>
           </motion.div>

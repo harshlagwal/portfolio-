@@ -1,87 +1,53 @@
 import React from 'react';
-import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
+import HalftoneWordmarkFooter from './ui/halftone-wordmark-footer';
+import { useTheme } from '../context/ThemeContext';
 
-const Footer = () => {
+export const Footer = () => {
+  const { isDark } = useTheme();
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
+  // Single horizontal line navbar sections only (no live projects)
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Education', href: '#education' },
-    { name: 'Certifications', href: '#certifications' },
-    { name: 'Contact', href: '#contact' },
+    { label: "About", href: "#about" },
+    { label: "Projects", href: "#projects" },
+    { label: "Skills", href: "#skills" },
+    { label: "Experience", href: "#experience" },
+    { label: "Education", href: "#education" },
+    { label: "Certifications", href: "#certifications" },
+    { label: "Contact", href: "#contact" }
   ];
 
+  // Theme-adaptive palette matching site dark (#08090b) and light (#dadde3) backgrounds
+  const palette = isDark
+    ? {
+        background: "#08090b",
+        ink: "#ffffff",
+        warm: "#ff5a1f" // Energetic warm ember glow when cursor moves over dots
+      }
+    : {
+        background: "#dadde3",
+        ink: "#0d0f12",
+        warm: "#1a73e8" // Crisp Antigravity blue glow in light mode
+      };
+
   return (
-    <footer 
-      className="py-10 bg-white dark:bg-[#08090d] text-slate-900 dark:text-slate-100 border-t border-slate-200/90 dark:border-white/10 transition-colors duration-300 relative overflow-hidden"
-    >
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          
-          {/* Bottom Left: Brand Signature & Status */}
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-medium text-[#202124] dark:text-white font-display">
-              Harsh Lagwal
-            </span>
-            <span className="text-xs text-[#5f6368] dark:text-[#9aa0a6]">
-              • AI & Machine Learning Engineer
-            </span>
-          </div>
-
-          {/* Bottom Center / Right: Clean Google Antigravity Navigation Links */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-[13px] text-[#5f6368] dark:text-[#9aa0a6]">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] transition-colors duration-150"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          {/* Social Icons & Scroll to top */}
-          <div className="flex items-center gap-2.5">
-            {[
-              { icon: Github, href: "https://github.com/harshlagwal", label: "GitHub" },
-              { icon: Linkedin, href: "https://www.linkedin.com/in/harshlagwal", label: "LinkedIn" },
-              { icon: Mail, href: "mailto:Harshlagwal2005@gmail.com", label: "Email" }
-            ].map((social, i) => (
-              <a 
-                key={i}
-                href={social.href} 
-                target={social.href.startsWith('mailto') ? '_self' : '_blank'} 
-                rel="noopener noreferrer" 
-                aria-label={social.label}
-                className="w-8 h-8 rounded-full bg-[#f1f3f4] dark:bg-[#1e1f20] border border-[#dadce0] dark:border-[#2e3134] flex items-center justify-center text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] hover:scale-105 shadow-xs transition-all"
-              >
-                <social.icon size={14} strokeWidth={1.5} />
-              </a>
-            ))}
-
-            <button
-              onClick={scrollToTop}
-              className="ml-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#f1f3f4] dark:bg-[#1e1f20] hover:bg-[#e8eaed] dark:hover:bg-[#252629] border border-[#dadce0] dark:border-[#2e3134] text-xs font-mono text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] transition-all cursor-pointer shadow-xs group"
-            >
-              <span>Back to top</span>
-              <ArrowUp size={12} strokeWidth={1.5} className="group-hover:-translate-y-0.5 transition-transform" />
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-    </footer>
+    <div className="w-full border-t border-[#cbd0d9] dark:border-[#262933] overflow-hidden">
+      <HalftoneWordmarkFooter
+        wordmark="harsh"
+        label="Harsh Lagwal"
+        meta="© 2026"
+        navLinks={navLinks}
+        backToTop={true}
+        preset={isDark ? "night" : "paper"}
+        palette={palette}
+        dotGap={6}
+        radius={85}
+        crop={0.22}
+        grain={0.35}
+        interactive={true}
+        height="480px"
+        className="w-full"
+      />
+    </div>
   );
 };
 

@@ -1,300 +1,635 @@
-import React, { useState } from 'react';
-import { Github, FolderGit2, ExternalLink, Sparkles, Globe, Terminal, ArrowUpRight } from 'lucide-react';
-import TechIcon from './TechIcon';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { 
+  ExternalLink, 
+  Github, 
+  Sparkles, 
+  Globe, 
+  Terminal, 
+  ArrowUpRight, 
+  Building2, 
+  Code2, 
+  Church,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
+  BookOpen,
+  Cpu
+} from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
+import { ProjectMockup } from './projects/ProjectMockups';
 
-const Projects = () => {
-  const [selectedFilter, setSelectedFilter] = useState('All');
+const projectIconMap = {
+  'master-ai': Sparkles,
+  'codeink': BookOpen,
+  'pyviz-sandbox': Cpu,
+  'codechaska': Code2,
+  'atc-constructions': Building2,
+  'sheetla-mata-mandir': Church,
+  'algoflow': Terminal
+};
 
-  const categories = ['All', 'Generative AI', 'Machine Learning', 'Computer Vision & Tools', 'Client & Web Apps'];
+export const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const projects = [
-    {
-      title: "WanderLust.ai",
-      tag: "Flagship AI Agent",
-      category: "Generative AI",
-      metrics: ["Gemini 1.5 Pro", "Dynamic Maps", "Budget Analytics"],
-      summary: "Autonomous AI travel planner that generates customized multi-day itineraries, interactive maps, and real-time trip analytics powered by Google Gemini 1.5.",
-      tech: ["React", "TypeScript", "Node.js", "MongoDB", "Tailwind CSS", "Gemini AI"],
-      github: "https://github.com/harshlagwal/WanderLust.ai"
-    },
-    {
-      title: "ATC Constructions Portal",
-      tag: "Client Production Web",
-      category: "Client & Web Apps",
-      metrics: ["Govt. Contractor", "Live on Vercel", "Lead Generation"],
-      summary: "Commercial platform engineered and deployed for government-approved civil contractor Amit Thakur, with live quotation flows, project galleries, and SEO.",
-      tech: ["React", "JavaScript", "Tailwind CSS", "Vercel", "UI/UX Design"],
-      liveDemo: "https://atc-constructions.vercel.app",
-      github: "https://github.com/harshlagwal/ATC-Constructions-"
-    },
-    {
-      title: "CodeChaska",
-      tag: "Gamified Coding Universe",
-      category: "Client & Web Apps",
-      metrics: ["360 Missions", "60 FPS Games", "Flow DSA Lab"],
-      summary: "Cyberpunk interactive coding platform turning programming into a game with 360 missions, real-time code evaluation, and visual 2D algorithm flow tracers.",
-      tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Web Audio API"],
-      liveDemo: "https://code-chaska.vercel.app",
-      github: "https://github.com/harshlagwal/CodeChaska"
-    },
-    {
-      title: "CareerCraft AI",
-      tag: "Career Intelligence SaaS",
-      category: "Machine Learning",
-      metrics: ["Predictive ML", "Resume Optimizer", "Roadmap Engine"],
-      summary: "Next-gen career intelligence platform evaluating skill gaps and predicting high-probability career trajectories using data-driven machine learning models.",
-      tech: ["React", "Tailwind CSS", "Machine Learning", "Python", "FastAPI"],
-      github: "https://github.com/harshlagwal/CareerCraft-AI"
-    },
-    {
-      title: "Healthcare Assistant Chatbot",
-      tag: "Healthcare NLP",
-      category: "Generative AI",
-      metrics: ["NLP Intent Engine", "Sub-100ms Inference", "Triage Guidance"],
-      summary: "AI-driven medical triage assistant utilizing Natural Language Processing to evaluate symptoms, recommend immediate guidance, and assist patient triage safely.",
-      tech: ["Python", "Streamlit", "TensorFlow", "PyTorch", "NLP"],
-      github: "https://github.com/harshlagwal"
-    },
-    {
-      title: "Object Detection System",
-      tag: "Computer Vision",
-      category: "Computer Vision & Tools",
-      metrics: ["SSD MobileNet v3", "30+ FPS Inference", "80 COCO Classes"],
-      summary: "High-speed computer vision architecture utilizing OpenCV DNN and SSD MobileNet v3 for real-time bounding-box detection on live video feeds.",
-      tech: ["Python", "TensorFlow", "Deep Learning", "OpenCV"],
-      github: "https://github.com/harshlagwal/Object-Detection"
-    },
-    {
-      title: "Shree Sheetla Mata Mandir Portal",
-      tag: "Community Platform",
-      category: "Client & Web Apps",
-      metrics: ["Temple Portal", "Festival Schedules", "Devotee Notices"],
-      summary: "Digital community platform connecting thousands of devotees with daily live darshan schedules, festival notifications, and cultural heritage archives.",
-      tech: ["React", "JavaScript", "Tailwind CSS", "UI/UX Design", "Vercel"],
-      github: "https://github.com/harshlagwal"
-    },
-    {
-      title: "AlgoFlow VS Code Extension",
-      tag: "Developer Tool",
-      category: "Computer Vision & Tools",
-      metrics: ["Step-by-Step Flow", "Big-O Analysis", "7 Languages"],
-      summary: "Developer extension converting complex code into animated flowcharts in real time, featuring step-by-step variable execution and automated Big-O complexity analysis.",
-      tech: ["VS Code", "Python", "Git", "GitHub"],
-      github: "https://github.com/harshlagwal/AlgoFlow-"
-    }
+  const containerRef = useRef(null);
+  const isManualJumping = useRef(false);
+
+  const categories = [
+    'All',
+    'Generative AI',
+    'Developer Tools',
+    'Client & Web Apps'
   ];
 
-  const filteredProjects = selectedFilter === 'All'
-    ? projects
-    : projects.filter(p => p.category === selectedFilter);
+  const filteredProjects = activeFilter === 'All'
+    ? portfolioData.projects
+    : portfolioData.projects.filter(p => p.category === activeFilter);
+
+  const handleFilterSelect = (cat) => {
+    setActiveFilter(cat);
+    setActiveIndex(0);
+  };
+
+  // Framer Motion scroll tracking for desktop sticky stage
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end']
+  });
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (isManualJumping.current) return;
+    const total = filteredProjects.length;
+    if (total <= 1) {
+      setActiveIndex(0);
+      return;
+    }
+    // Map scroll percentage directly to project index
+    const computedIndex = Math.min(Math.floor(latest * total), total - 1);
+    if (computedIndex >= 0 && computedIndex !== activeIndex) {
+      setActiveIndex(computedIndex);
+    }
+  });
+
+  // Direct smooth jump to project
+  const scrollToProject = useCallback((targetIdx) => {
+    const total = filteredProjects.length;
+    const clampedIdx = Math.max(0, Math.min(targetIdx, total - 1));
+    setActiveIndex(clampedIdx);
+
+    if (!containerRef.current) return;
+    isManualJumping.current = true;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const containerTop = window.scrollY + rect.top;
+    const scrollableRange = containerRef.current.offsetHeight - window.innerHeight;
+    
+    // Position slightly past the segment threshold for stable focus
+    const targetY = scrollableRange > 0 
+      ? containerTop + (clampedIdx / total) * scrollableRange + 20
+      : containerTop;
+
+    if (window.__lenis) {
+      window.__lenis.scrollTo(targetY, {
+        duration: 0.85,
+        onComplete: () => {
+          setTimeout(() => {
+            isManualJumping.current = false;
+          }, 120);
+        }
+      });
+    } else {
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+      setTimeout(() => {
+        isManualJumping.current = false;
+      }, 850);
+    }
+  }, [filteredProjects.length]);
+
+  const handlePrev = useCallback(() => {
+    if (activeIndex > 0) {
+      scrollToProject(activeIndex - 1);
+    }
+  }, [activeIndex, scrollToProject]);
+
+  const handleNext = useCallback(() => {
+    if (activeIndex < filteredProjects.length - 1) {
+      scrollToProject(activeIndex + 1);
+    }
+  }, [activeIndex, filteredProjects.length, scrollToProject]);
+
+  // Keyboard navigation when user is focused on the section
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Only react if section is in viewport
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        if (activeIndex < filteredProjects.length - 1) {
+          e.preventDefault();
+          scrollToProject(activeIndex + 1);
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        if (activeIndex > 0) {
+          e.preventDefault();
+          scrollToProject(activeIndex - 1);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeIndex, filteredProjects.length, scrollToProject]);
+
+  const safeActiveIndex = Math.min(activeIndex, Math.max(0, filteredProjects.length - 1));
+  const currentProject = filteredProjects[safeActiveIndex] || filteredProjects[0];
+  const IconComponent = currentProject ? (projectIconMap[currentProject.id] || Sparkles) : Sparkles;
+
+  // Calculate dynamic height for desktop sticky track based on projects count
+  const desktopTrackHeight = `${Math.max(filteredProjects.length, 1) * 90}vh`;
 
   return (
-    <section id="projects" className="py-20 md:py-24 bg-white dark:bg-[#08090d] text-slate-900 dark:text-slate-100 transition-colors duration-300 relative">
-      
-      {/* Ambient Radial Lighting - Hardware accelerated & Clipped */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.12)_0%,transparent_70%)]" />
-      </div>
-
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-12 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 text-xs font-semibold font-mono tracking-wide mb-3">
-              <FolderGit2 size={13} strokeWidth={1.8} />
-              <span>FEATURED WORK & CLIENT DELIVERABLES</span>
+    <section 
+      id="projects" 
+      className="bg-[#f0f2f5] dark:bg-[#090a0d] text-[#0d0f12] dark:text-[#ffffff] border-t border-[#cbd0d9] dark:border-[#262933] transition-colors duration-250"
+    >
+      {/* Section Entry Header (Sticky top context) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] text-xs font-mono text-[#494f5c] dark:text-[#9fa6b6] mb-3 font-semibold">
+              <Sparkles size={12} className="text-[#0d0f12] dark:text-white" />
+              <span>SELECTED WORK</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold font-sans tracking-tight text-slate-900 dark:text-white">
-              Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300">Projects</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0d0f12] dark:text-white font-display">
+              Engineering ideas into digital products.
             </h2>
+            <p className="text-sm sm:text-base text-[#494f5c] dark:text-[#9fa6b6] leading-relaxed mt-2.5">
+              Autonomous agents, computer vision pipelines, and deployed production applications.
+            </p>
           </div>
-          <p className="text-slate-600 dark:text-slate-400 max-w-md text-xs sm:text-sm leading-relaxed font-sans">
-            Scroll down to inspect each architecture stacked sequentially. Scroll up to return to previous systems.
-          </p>
+
+          {/* Quick Counter */}
+          <div className="flex items-center gap-3">
+            <div className="text-xs font-mono px-3.5 py-1.5 rounded-full bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] text-[#494f5c] dark:text-[#9fa6b6] whitespace-nowrap">
+              Active Focus: <strong className="text-[#0d0f12] dark:text-white font-bold">0{activeIndex + 1}</strong> / 0{filteredProjects.length}
+            </div>
+          </div>
         </div>
 
-        {/* Filter Pills with Unified Electric Blue Styling */}
-        <div className="flex flex-wrap items-center gap-2 mb-12">
+        {/* Category Filter Bar */}
+        <div className="flex flex-wrap items-center gap-2 pb-2">
           {categories.map((cat) => {
-            const isSelected = selectedFilter === cat;
-            const count = cat === 'All' ? projects.length : projects.filter(p => p.category === cat).length;
+            const isSelected = activeFilter === cat;
+            const count = cat === 'All' 
+              ? portfolioData.projects.length 
+              : portfolioData.projects.filter(p => p.category === cat).length;
+
             return (
               <button
                 key={cat}
-                onClick={() => setSelectedFilter(cat)}
-                className={`inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-150 cursor-pointer select-none ${
+                type="button"
+                onClick={() => handleFilterSelect(cat)}
+                className={`px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-medium transition-all duration-150 cursor-pointer flex items-center gap-1.5 ${
                   isSelected
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 border border-blue-500'
-                    : 'bg-slate-100 hover:bg-slate-200/80 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10'
+                    ? 'bg-[#0d0f12] text-white dark:bg-white dark:text-[#0d0f12] shadow-xs font-bold'
+                    : 'bg-[#dadde3] dark:bg-[#171920] text-[#0d0f12] dark:text-[#ffffff] hover:bg-[#cfd3da] dark:hover:bg-[#252832] border border-[#cbd0d9] dark:border-[#262933]'
                 }`}
               >
                 <span>{cat}</span>
-                <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                  isSelected 
-                    ? 'bg-white/20 text-white font-bold' 
-                    : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-400'
-                }`}>
+                <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? 'bg-white/20 dark:bg-black/20 text-white dark:text-[#0d0f12]' : 'opacity-60'}`}>
                   {count}
                 </span>
               </button>
             );
           })}
         </div>
+      </div>
 
-        {/* ── Sticky Full-Cover Stacking Cards (Each card cleanly overlays the previous) ── */}
-        <div className="relative pt-4 pb-20 max-w-5xl mx-auto">
-          {filteredProjects.map((project, idx) => (
-            <div
-              key={project.title}
-              className="sticky top-24 sm:top-28 will-change-transform mb-16 sm:mb-24"
-              style={{
-                zIndex: idx + 1,
-              }}
-            >
-              <div className="relative rounded-2xl bg-white dark:bg-[#0c1018] border border-slate-200/95 dark:border-white/10 p-6 sm:p-8 shadow-xl dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)] hover:border-blue-500/40 transition-colors min-h-[460px] flex flex-col justify-between">
-                
-                {/* Top Corner Meta Row with Tag INSIDE the card */}
-                <div className="flex flex-wrap items-center justify-between gap-2 pt-1 mb-4 border-b border-slate-100 dark:border-white/5 pb-3">
-                  <div className="flex items-center gap-2.5 flex-wrap">
-                    <span className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
-                      <span>0{idx + 1}</span>
-                      <span className="text-slate-300 dark:text-white/20">//</span>
-                      <span className="text-slate-500 dark:text-slate-400 font-medium">{project.category}</span>
-                    </span>
+      {/* ========================================================================= */}
+      {/* DESKTOP: CINEMATIC STICKY SCROLL-DRIVEN SHOWCASE (lg:block)               */}
+      {/* ========================================================================= */}
+      <div 
+        ref={containerRef} 
+        className="relative hidden lg:block w-full"
+        style={{ height: desktopTrackHeight }}
+      >
+        <div className="sticky top-20 h-[calc(100vh-5.5rem)] max-h-[880px] min-h-[660px] max-w-7xl mx-auto px-4 sm:px-6 flex flex-col justify-between pb-6">
+          
+          {/* Main 2-Column Product Showcase Stage */}
+          <div className="flex-1 grid grid-cols-12 gap-8 items-center min-h-0 py-2">
+            
+            {/* Left Column: Editorial & Engineering Specs (5 Cols) */}
+            <div className="col-span-5 flex flex-col justify-between h-full max-h-[580px] pr-2">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentProject ? currentProject.id : 'empty'}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col justify-between h-full"
+                >
+                  <div>
+                    {/* Meta Top: Monospace Index + Category + Sub-tag */}
+                    <div className="flex items-center justify-between gap-3 mb-3">
+                      <div className="flex items-center gap-2.5">
+                        <span className="font-mono text-2xl font-black text-[#0d0f12]/30 dark:text-white/30 tracking-tight">
+                          0{activeIndex + 1}
+                        </span>
+                        <div className="h-4 w-px bg-[#cbd0d9] dark:border-[#262933]" />
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] text-xs font-mono font-semibold text-[#0d0f12] dark:text-white">
+                          <IconComponent size={13} className="shrink-0" />
+                          <span>{currentProject.category}</span>
+                        </div>
+                      </div>
 
-                    {/* Sharp Tag Badge INSIDE the card */}
-                    <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-blue-600 text-white text-[10.5px] font-mono font-bold uppercase tracking-wider shadow-xs border border-blue-400/50">
-                      <Sparkles size={11} />
-                      <span>{project.tag}</span>
-                    </span>
+                      {currentProject.tag && (
+                        <span className="text-xs font-mono font-semibold text-[#494f5c] dark:text-[#9fa6b6]">
+                          {currentProject.tag}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-2xl xl:text-3xl font-bold tracking-tight text-[#0d0f12] dark:text-white font-display mb-2">
+                      {currentProject.title}
+                    </h3>
+
+                    {/* Factual Narrative Summary */}
+                    <p className="text-xs sm:text-[13px] text-[#2b303a] dark:text-[#c5cad6] leading-relaxed mb-3">
+                      {currentProject.summary}
+                    </p>
+
+                    {/* Problem & Solution Specs Box (Apple-style Engineering Insights) */}
+                    <div className="space-y-2 mb-3">
+                      {currentProject.problem && (
+                        <div className="p-2.5 rounded-xl bg-[#dadde3]/60 dark:bg-[#171920]/60 border border-[#cbd0d9] dark:border-[#262933]">
+                          <div className="text-[10px] font-mono uppercase tracking-wider text-[#494f5c] dark:text-[#9fa6b6] font-bold mb-0.5">
+                            Challenge
+                          </div>
+                          <p className="text-[11px] text-[#2b303a] dark:text-[#c5cad6] leading-relaxed">
+                            {currentProject.problem}
+                          </p>
+                        </div>
+                      )}
+
+                      {currentProject.solution && (
+                        <div className="p-2.5 rounded-xl bg-[#dadde3]/60 dark:bg-[#171920]/60 border border-[#cbd0d9] dark:border-[#262933]">
+                          <div className="text-[10px] font-mono uppercase tracking-wider text-[#494f5c] dark:text-[#9fa6b6] font-bold mb-0.5">
+                            Engineered Architecture
+                          </div>
+                          <p className="text-[11px] text-[#2b303a] dark:text-[#c5cad6] leading-relaxed">
+                            {currentProject.solution}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Verified Metrics Row */}
+                    {currentProject.metrics && currentProject.metrics.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-1.5 mb-3">
+                        {currentProject.metrics.map((metric, mIdx) => (
+                          <span 
+                            key={mIdx} 
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] text-[11px] font-mono text-[#0d0f12] dark:text-[#e3e6ed] font-medium"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                            <span>{metric}</span>
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  <span className="text-[11px] font-mono text-slate-400 dark:text-white/30">
-                    PROJECT {idx + 1} / {filteredProjects.length}
-                  </span>
-                </div>
-
-                {/* Responsive 2-Column Split: Narrative on Left, System Specs on Right */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-                  
-                  {/* Left Column: Title, Summary, Metrics, Tech */}
-                  <div className="lg:col-span-7 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold font-sans text-slate-900 dark:text-white tracking-tight mb-3">
-                        {project.title}
-                      </h3>
-                      
-                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-sans mb-5">
-                        {project.summary}
-                      </p>
-
-                      {/* Metrics Highlights Row */}
-                      <div className="flex flex-wrap gap-2 mb-5">
-                        {project.metrics.map((metric, mIdx) => (
-                          <span 
-                            key={mIdx}
-                            className="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-500/20"
-                          >
-                            {metric}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Tech Stack Pills */}
-                      <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100 dark:border-white/5 mb-6">
-                        {project.tech.map((t, tIdx) => (
-                          <span 
-                            key={tIdx}
-                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/[0.04] border border-slate-200/70 dark:border-white/5"
-                          >
-                            <TechIcon name={t} size={12} />
-                            <span>{t}</span>
-                          </span>
-                        ))}
-                      </div>
+                  {/* Architecture & Stack + CTAs */}
+                  <div className="pt-2 border-t border-[#cbd0d9] dark:border-[#262933] mt-auto">
+                    {/* Tech Chips */}
+                    <div className="flex flex-wrap items-center gap-1.5 mb-3">
+                      {currentProject.tech.map((t, tIdx) => (
+                        <span 
+                          key={tIdx} 
+                          className="px-2 py-0.5 rounded-md bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9]/60 dark:border-[#262933] text-[10px] font-mono font-medium text-[#0d0f12] dark:text-white"
+                        >
+                          {t}
+                        </span>
+                      ))}
                     </div>
 
                     {/* Action Links */}
-                    <div className="flex items-center gap-3 pt-2">
-                      {project.liveDemo && (
+                    <div className="flex items-center gap-2.5">
+                      {currentProject.liveDemo ? (
                         <a
-                          href={project.liveDemo}
+                          href={currentProject.liveDemo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm transition-all shadow-md shadow-blue-500/20 cursor-pointer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0d0f12] hover:bg-[#23272f] text-white dark:bg-white dark:text-[#0d0f12] dark:hover:bg-[#eaecef] text-xs font-semibold transition-all shadow-xs"
                         >
-                          <span>Live Demo</span>
-                          <ArrowUpRight size={14} />
+                          <Globe size={13} strokeWidth={2} />
+                          <span>Live Site</span>
+                          <ArrowUpRight size={12} />
                         </a>
-                      )}
-
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] text-slate-800 dark:text-white font-semibold text-xs sm:text-sm border border-slate-200 dark:border-white/10 transition-colors cursor-pointer"
-                          title="View Source on GitHub"
-                        >
-                          <Github size={15} />
-                          <span>Source Code</span>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Right Column: Architectural Blueprint Card */}
-                  <div className="lg:col-span-5 bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-white/10 rounded-xl p-5 flex flex-col justify-between font-mono text-xs">
-                    <div>
-                      {/* Window Dots & Status */}
-                      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-white/10">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                        </div>
-                        <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          DEPLOYED
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] text-[11px] font-mono text-[#494f5c] dark:text-[#9fa6b6]">
+                          <CheckCircle2 size={12} className="text-emerald-500" />
+                          <span>Production Code Verified</span>
                         </span>
-                      </div>
+                      )}
 
-                      {/* Specs List */}
-                      <div className="space-y-2.5 text-slate-600 dark:text-slate-400 text-[11px]">
-                        <div className="flex justify-between">
-                          <span className="text-slate-400 dark:text-white/40">MODULE:</span>
-                          <span className="font-semibold text-slate-800 dark:text-slate-200">{project.title}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-400 dark:text-white/40">CATEGORY:</span>
-                          <span className="font-semibold text-blue-600 dark:text-blue-400">{project.category}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-400 dark:text-white/40">PRIMARY:</span>
-                          <span className="font-semibold text-slate-800 dark:text-slate-200">{project.tech[0]} + {project.tech[1]}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-400 dark:text-white/40">PERF:</span>
-                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">Sub-100ms Inference</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-5 pt-3 border-t border-slate-200 dark:border-white/10 text-[10px] text-slate-400 dark:text-white/40 flex items-center justify-between">
-                      <span>HARSH LAGWAL // AI ENG</span>
-                      <Terminal size={12} className="text-blue-500" />
+                      {currentProject.github && (
+                        <a
+                          href={currentProject.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#dadde3] dark:bg-[#171920] hover:bg-[#cfd3da] dark:hover:bg-[#252832] border border-[#cbd0d9] dark:border-[#262933] text-xs font-semibold text-[#0d0f12] dark:text-white transition-colors"
+                        >
+                          <Github size={13} strokeWidth={2} />
+                          <span>Repository</span>
+                          <ExternalLink size={11} className="opacity-70" />
+                        </a>
+                      )}
                     </div>
                   </div>
 
-                </div>
-
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
-          ))}
+
+            {/* Right Column: Dominant Interactive UI Window Mockup (7 Cols) */}
+            <div className="col-span-7 h-full max-h-[580px] flex items-center justify-center p-1">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentProject ? currentProject.id : 'empty-mockup'}
+                  initial={{ opacity: 0, scale: 0.98, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98, y: -12 }}
+                  transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full h-full max-h-[560px]"
+                >
+                  <ProjectMockup projectId={currentProject.id} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+          </div>
+
+          {/* Bottom Persistent Scrubber & Navigation Track */}
+          <div className="mt-4 pt-3 border-t border-[#cbd0d9] dark:border-[#262933] flex items-center justify-between gap-4">
+            
+            {/* Quick-Jump Index Pills (01 - 08) */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-[11px] font-mono text-[#494f5c] dark:text-[#9fa6b6] mr-1 hidden xl:inline">
+                INDEX:
+              </span>
+              {filteredProjects.map((proj, pIdx) => {
+                const isActive = pIdx === activeIndex;
+                return (
+                  <button
+                    key={proj.id}
+                    type="button"
+                    onClick={() => scrollToProject(pIdx)}
+                    aria-label={`Jump to project 0${pIdx + 1}: ${proj.title}`}
+                    className={`px-2.5 py-1 rounded-full text-xs font-mono transition-all duration-150 cursor-pointer flex items-center gap-1.5 ${
+                      isActive
+                        ? 'bg-[#0d0f12] text-white dark:bg-white dark:text-[#0d0f12] font-bold shadow-xs scale-105'
+                        : 'bg-[#dadde3] dark:bg-[#171920] text-[#494f5c] dark:text-[#9fa6b6] hover:text-[#0d0f12] dark:hover:text-white border border-[#cbd0d9] dark:border-[#262933]'
+                    }`}
+                  >
+                    <span>0{pIdx + 1}</span>
+                    <span className="hidden 2xl:inline text-[11px] font-sans font-medium truncate max-w-[90px]">
+                      {proj.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Stepper Controls: Prev / Next */}
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="text-xs font-mono text-[#494f5c] dark:text-[#9fa6b6] mr-2">
+                Use <kbd className="px-1.5 py-0.5 rounded bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] text-[10px]">←</kbd> <kbd className="px-1.5 py-0.5 rounded bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] text-[10px]">→</kbd> keys
+              </span>
+
+              <button
+                type="button"
+                onClick={handlePrev}
+                disabled={activeIndex === 0}
+                aria-label="Previous project"
+                className="p-2 rounded-full bg-[#dadde3] dark:bg-[#171920] hover:bg-[#cfd3da] dark:hover:bg-[#252832] disabled:opacity-40 disabled:cursor-not-allowed border border-[#cbd0d9] dark:border-[#262933] text-[#0d0f12] dark:text-white transition-all cursor-pointer"
+              >
+                <ChevronLeft size={16} />
+              </button>
+
+              <button
+                type="button"
+                onClick={handleNext}
+                disabled={activeIndex === filteredProjects.length - 1}
+                aria-label="Next project"
+                className="p-2 rounded-full bg-[#dadde3] dark:bg-[#171920] hover:bg-[#cfd3da] dark:hover:bg-[#252832] disabled:opacity-40 disabled:cursor-not-allowed border border-[#cbd0d9] dark:border-[#262933] text-[#0d0f12] dark:text-white transition-all cursor-pointer"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* MOBILE & TABLET: FLUID INTERACTIVE ADAPTIVE SHOWCASE (< lg)                */}
+      {/* ========================================================================= */}
+      <div className="lg:hidden max-w-2xl mx-auto px-4 sm:px-6 pb-20">
+        
+        {/* Mobile Navigation Header */}
+        <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#cbd0d9] dark:border-[#262933]">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-lg font-bold text-[#0d0f12] dark:text-white">
+              0{activeIndex + 1}
+            </span>
+            <span className="text-xs font-mono text-[#494f5c] dark:text-[#9fa6b6]">
+              of 0{filteredProjects.length}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={handlePrev}
+              disabled={activeIndex === 0}
+              aria-label="Previous project"
+              className="p-1.5 rounded-full bg-[#dadde3] dark:bg-[#171920] disabled:opacity-30 border border-[#cbd0d9] dark:border-[#262933] text-[#0d0f12] dark:text-white cursor-pointer"
+            >
+              <ChevronLeft size={15} />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={activeIndex === filteredProjects.length - 1}
+              aria-label="Next project"
+              className="p-1.5 rounded-full bg-[#dadde3] dark:bg-[#171920] disabled:opacity-30 border border-[#cbd0d9] dark:border-[#262933] text-[#0d0f12] dark:text-white cursor-pointer"
+            >
+              <ChevronRight size={15} />
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Card Container */}
+        <div className="bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] rounded-[24px] p-5 sm:p-6 shadow-sm">
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentProject ? currentProject.id : 'mob-empty'}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25 }}
+            >
+              {/* Category + Tag */}
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <div className="flex items-center gap-1.5">
+                  <IconComponent size={14} className="text-[#0d0f12] dark:text-white shrink-0" />
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#494f5c] dark:text-[#9fa6b6] font-semibold">
+                    {currentProject.category}
+                  </span>
+                </div>
+                {currentProject.tag && (
+                  <span className="text-xs font-mono font-medium text-[#0d0f12] dark:text-white">
+                    {currentProject.tag}
+                  </span>
+                )}
+              </div>
+
+              {/* Title & Summary */}
+              <h3 className="text-xl sm:text-2xl font-bold text-[#0d0f12] dark:text-white font-display mb-2">
+                {currentProject.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#2b303a] dark:text-[#c5cad6] leading-relaxed mb-4">
+                {currentProject.summary}
+              </p>
+
+              {/* Mobile Bespoke UI Window Mockup */}
+              <div className="h-[280px] sm:h-[320px] w-full my-4">
+                <ProjectMockup projectId={currentProject.id} />
+              </div>
+
+              {/* Challenge & Solution */}
+              <div className="space-y-2 my-4">
+                {currentProject.problem && (
+                  <div className="p-3 rounded-xl bg-[#f0f2f5]/80 dark:bg-[#090a0d]/80 border border-[#cbd0d9] dark:border-[#262933]">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#494f5c] dark:text-[#9fa6b6] font-bold mb-1">
+                      Challenge
+                    </div>
+                    <p className="text-xs text-[#2b303a] dark:text-[#c5cad6] leading-relaxed">
+                      {currentProject.problem}
+                    </p>
+                  </div>
+                )}
+                {currentProject.solution && (
+                  <div className="p-3 rounded-xl bg-[#f0f2f5]/80 dark:bg-[#090a0d]/80 border border-[#cbd0d9] dark:border-[#262933]">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#494f5c] dark:text-[#9fa6b6] font-bold mb-1">
+                      Architecture
+                    </div>
+                    <p className="text-xs text-[#2b303a] dark:text-[#c5cad6] leading-relaxed">
+                      {currentProject.solution}
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Verified Metrics */}
+              {currentProject.metrics && currentProject.metrics.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5 my-3">
+                  {currentProject.metrics.map((metric, mIdx) => (
+                    <span 
+                      key={mIdx} 
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f0f2f5] dark:bg-[#090a0d] border border-[#cbd0d9] dark:border-[#262933] text-[11px] font-mono text-[#0d0f12] dark:text-[#e3e6ed]"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <span>{metric}</span>
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Tech Stack */}
+              <div className="flex flex-wrap items-center gap-1.5 my-3">
+                {currentProject.tech.map((t, tIdx) => (
+                  <span 
+                    key={tIdx} 
+                    className="px-2 py-0.5 rounded-md bg-[#f0f2f5] dark:bg-[#090a0d] border border-[#cbd0d9]/60 dark:border-[#262933] text-[10px] font-mono font-medium text-[#0d0f12] dark:text-white"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* CTAs */}
+              <div className="flex items-center gap-3 pt-3 border-t border-[#cbd0d9] dark:border-[#262933] mt-4">
+                {currentProject.liveDemo ? (
+                  <a
+                    href={currentProject.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0d0f12] text-white dark:bg-white dark:text-[#0d0f12] text-xs font-semibold shadow-xs"
+                  >
+                    <Globe size={13} strokeWidth={2} />
+                    <span>Live Site</span>
+                    <ArrowUpRight size={12} />
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f0f2f5] dark:bg-[#090a0d] border border-[#cbd0d9] dark:border-[#262933] text-[11px] font-mono text-[#494f5c] dark:text-[#9fa6b6]">
+                    <CheckCircle2 size={12} className="text-emerald-500" />
+                    <span>Verified Code</span>
+                  </span>
+                )}
+
+                {currentProject.github && (
+                  <a
+                    href={currentProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#f0f2f5] dark:bg-[#090a0d] border border-[#cbd0d9] dark:border-[#262933] text-xs font-semibold text-[#0d0f12] dark:text-white"
+                  >
+                    <Github size={13} strokeWidth={2} />
+                    <span>Repo</span>
+                    <ExternalLink size={11} className="opacity-70" />
+                  </a>
+                )}
+              </div>
+
+            </motion.div>
+          </AnimatePresence>
+
+        </div>
+
+        {/* Mobile Quick Scrubber Pills */}
+        <div className="flex items-center justify-center gap-1.5 mt-5 flex-wrap">
+          {filteredProjects.map((p, idx) => {
+            const isCur = idx === activeIndex;
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => setActiveIndex(idx)}
+                className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                  isCur
+                    ? 'bg-[#0d0f12] text-white dark:bg-white dark:text-[#0d0f12] font-bold shadow-xs'
+                    : 'bg-[#dadde3] dark:bg-[#171920] text-[#494f5c] dark:text-[#9fa6b6] border border-[#cbd0d9] dark:border-[#262933]'
+                }`}
+              >
+                0{idx + 1}
+              </button>
+            );
+          })}
         </div>
 
       </div>
+
     </section>
   );
 };

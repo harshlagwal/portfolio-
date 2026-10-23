@@ -30,62 +30,67 @@ export const NotesApp = () => {
     {
       name: "Google",
       role: "AI Certified & Startups",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+      logo: "/logos/google-developers.svg"
     },
     {
       name: "NVIDIA",
       role: "Generative AI & DLI",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/a/a4/NVIDIA_logo.svg"
+      logo: "/logos/nvidia.svg"
     },
     {
       name: "ISRO",
       role: "Geodata Remote Sensing",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Indian_Space_Research_Organisation_Logo.svg"
+      logo: "/logos/isro.png"
     },
     {
       name: "Microsoft",
       role: "Azure AI Fundamentals",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+      logo: "/logos/microsoft-azure.svg"
     },
     {
       name: "Anthropic",
       role: "Model Context Protocol",
-      logo: "https://i.postimg.cc/hG7JzcyH/Anthropic-Logo-PNG-Vector-(SVG)-Free-Download.jpg"
+      logo: "/logos/anthropic.png"
     },
     {
-      name: "OpenAI",
+      name: "ChatGPT",
       role: "ChatGPT & Prompt Eng.",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+      logo: "/logos/chatgpt.svg"
     },
     {
       name: "TATA",
       role: "Data Insights Visualisation",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg"
+      logo: "/logos/tata.png"
     },
     {
       name: "IIT Delhi (eDC)",
       role: "Ambassador & Hackathons",
-      logo: "https://i.postimg.cc/zVdWrxc9/edc-iit-delhi.jpg"
+      logo: "/logos/edc-iit-delhi.png"
     },
     {
       name: "SpectoV",
       role: "Generative AI Engineer",
-      logo: "https://i.postimg.cc/PrgWT7FZ/specto-V1.jpg"
+      logo: "/logos/spectov.svg"
     },
     {
       name: "Upto Skills",
       role: "AI / ML Engineering",
-      logo: "https://i.postimg.cc/9MC1Vk0Y/upto-skill.jpg"
+      logo: "/logos/upto-skills.webp"
     },
     {
       name: "Edunet Foundation",
       role: "Microsoft Cloud AI",
-      logo: "https://i.postimg.cc/XqN2KP0r/edunet-foundation.jpg"
+      logo: "/logos/edunet-foundation.png"
     },
     {
       name: "IIT Patna",
       role: "MBA in Decision Science",
-      logo: "/logos/iit_patna_seal.png"
+      logo: "/logos/iit-patna.png"
+    },
+    {
+      name: "Rayat Bahra Univ.",
+      role: "B.Tech Computer Science",
+      logo: "/logos/rayat-bahra-seal.webp"
     }
   ];
 
@@ -324,7 +329,7 @@ export const NotesApp = () => {
                     className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 flex items-center justify-between gap-3 shadow-2xs hover:border-blue-500/30 transition-all group"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-10 h-10 rounded-xl bg-white dark:bg-white/10 p-1.5 flex items-center justify-center shrink-0 border border-black/5 dark:border-white/10 shadow-xs group-hover:scale-105 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 border border-black/5 dark:border-white/20 shadow-2xs group-hover:scale-105 transition-transform">
                         <img
                           src={org.logo}
                           alt={org.name}

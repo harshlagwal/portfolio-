@@ -1,362 +1,305 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail, Download, Sparkles, Check, Copy, Zap } from 'lucide-react';
-import Navbar from './Navbar';
-import ResumeModal from './ResumeModal';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  FolderGit2, 
+  MessageSquare, 
+  Copy, 
+  Check, 
+  ExternalLink, 
+  GraduationCap, 
+  Cpu, 
+  ArrowRight,
+  Github,
+  Linkedin,
+  Mail
+} from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
 import harshCutout from '../assets/harsh-cutout.png';
+import harshPhoto from '../assets/Harsh-portfolio.jpg';
 
-const HeroSection = () => {
-  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const [hasCopiedBio, setHasCopiedBio] = useState(false);
-  
-  const heroRef = useRef(null);
-
-  // Parallax / 3D Tilt calculation
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 120 };
-  const smoothMouseX = useSpring(mouseX, springConfig);
-  const smoothMouseY = useSpring(mouseY, springConfig);
-
-  const portraitRotateX = useTransform(smoothMouseY, [-0.5, 0.5], [6, -6]);
-  const portraitRotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-7, 7]);
-  const streakShiftX = useTransform(smoothMouseX, [-0.5, 0.5], [-20, 20]);
-  const headingShiftX = useTransform(smoothMouseX, [-0.5, 0.5], [12, -12]);
-
-  const resumeLink = "https://drive.google.com/file/d/1PA8fV23UmJ2AYf7kxUGaihI88M1NWW0b/view?usp=sharing";
-  const emailAddress = "Harshlagwal2005@gmail.com";
-
-  const handleMouseMove = (e) => {
-    if (!heroRef.current) return;
-    const rect = heroRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
-  // Keyboard Shortcuts (R = Resume, C = Contact)
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-
-      if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey) {
-        e.preventDefault();
-        setIsResumeModalOpen(true);
-      } else if ((e.key === 'c' || e.key === 'C') && !e.ctrlKey && !e.metaKey) {
-        e.preventDefault();
-        scrollToContact();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+export const HeroSection = ({ onOpenResume }) => {
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const emailAddress = portfolioData.personal.email;
+  const githubLink = portfolioData.personal.github;
+  const linkedinLink = portfolioData.personal.linkedin;
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
-    setToastMessage('✓ Email copied to clipboard: ' + emailAddress);
-    setTimeout(() => setToastMessage(''), 3500);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
   };
 
-  const handleCopyBio = () => {
-    const recruiterSummary = "Harsh Lagwal | AI & ML Engineer | MBA in Decision Science (IIT Patna, 2026–2028) | Core: Generative AI, PyTorch, Gemini 1.5, Deep Learning, FastAPI, Cloud ML | Email: Harshlagwal2005@gmail.com | Portfolio: harshlagwalportfolio.netlify.app";
-    navigator.clipboard.writeText(recruiterSummary);
-    setHasCopiedBio(true);
-    setToastMessage('✓ Recruiter bio summary copied to clipboard!');
-    setTimeout(() => {
-      setToastMessage('');
-      setHasCopiedBio(false);
-    }, 3500);
-  };
-
-  const scrollToContact = () => {
-    const el = document.getElementById('contact');
-    if (el) {
+  const handleScrollToProjects = (e) => {
+    e.preventDefault();
+    const elem = document.getElementById('projects');
+    if (elem) {
       if (window.__lenis) {
-        window.__lenis.scrollTo(el, { offset: -40, duration: 1.3 });
+        window.__lenis.scrollTo(elem, { offset: -50, duration: 1.1 });
       } else {
-        el.scrollIntoView({ behavior: 'smooth' });
+        elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  const handleScrollToContact = (e) => {
+    e.preventDefault();
+    const elem = document.getElementById('contact');
+    if (elem) {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(elem, { offset: -50, duration: 1.1 });
+      } else {
+        elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  const handleScrollToAbout = (e) => {
+    e.preventDefault();
+    const elem = document.getElementById('about');
+    if (elem) {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(elem, { offset: -50, duration: 1.1 });
+      } else {
+        elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   };
 
   return (
     <section 
-      ref={heroRef}
-      id="home" 
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative min-h-[100vh] min-h-[100dvh] w-full overflow-hidden flex flex-col justify-between pt-24 md:pt-28 pb-8 bg-white dark:bg-[#08090d] text-slate-900 dark:text-slate-100 transition-colors duration-300"
+      id="home"
+      className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 overflow-hidden bg-[#f0f2f5] dark:bg-[#090a0d] text-[#0d0f12] dark:text-[#ffffff] transition-colors duration-250"
     >
-      <Navbar 
-        onOpenResume={() => setIsResumeModalOpen(true)}
-      />
-
-      {/* ── Cinematic Ambient Background & Motion Streaks ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-        {/* Subtle dot matrix & fine grain */}
-        <div className="absolute inset-0 dot-matrix-canvas opacity-15 dark:opacity-40" />
-        <div className="absolute inset-0 cinematic-streaks opacity-20 dark:opacity-80" />
-
-        {/* Horizontal Motion Light Streaks (Cyan left, Orange right - matching reference image) */}
-        <motion.div 
-          style={{ x: streakShiftX }}
-          className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[280px] md:h-[360px] pointer-events-none flex items-center justify-center opacity-30 dark:opacity-100"
-        >
-          {/* Cyan Glow (Left & Center) */}
-          <div className="absolute left-[3%] md:left-[10%] w-[380px] md:w-[650px] h-[150px] md:h-[230px] bg-gradient-to-r from-transparent via-[#55DFFF]/20 dark:via-[#55DFFF]/30 to-transparent blur-[50px] md:blur-[75px] transform -skew-x-12" />
-          
-          {/* Warm Amber / Orange Flare (Right & Center) */}
-          <div className="absolute right-[3%] md:right-[10%] w-[400px] md:w-[700px] h-[160px] md:h-[250px] bg-gradient-to-r from-transparent via-[#FF9868]/25 dark:via-[#FF9868]/35 to-transparent blur-[55px] md:blur-[80px] transform skew-x-12" />
-
-          {/* Deep horizontal beam streak lines */}
-          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#55DFFF]/30 dark:via-[#55DFFF]/45 to-transparent absolute top-[30%]" />
-          <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#FF9868]/35 dark:via-[#FF9868]/50 to-transparent absolute bottom-[35%]" />
-          <div className="w-[85%] h-[1px] bg-gradient-to-r from-transparent via-black/10 dark:via-white/20 to-transparent absolute top-[50%]" />
-        </motion.div>
-
-        {/* Soft Vignette around screen edges */}
-        <div className="absolute inset-0 bg-radial from-transparent via-transparent to-black/10 dark:to-black/80 pointer-events-none" />
-      </div>
-
-      {/* ── Main 3-Column Hero Composition ── */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 my-auto flex flex-col justify-center relative py-4 lg:py-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         
-        {/* ── Oversized Cinematic Signature Heading Layered Tight Behind Center Portrait ── */}
-        <motion.div 
-          style={{ x: headingShiftX }}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="absolute top-[3%] sm:top-[2%] md:top-[1%] lg:top-[2%] left-1/2 -translate-x-1/2 w-full max-w-[560px] sm:max-w-[660px] md:max-w-[740px] lg:max-w-[800px] xl:max-w-[860px] px-4 flex items-center justify-between select-none pointer-events-none z-10"
-        >
-          <span 
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[115px] font-cursive tracking-normal text-slate-950 dark:text-white/90 drop-shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:drop-shadow-[0_4px_30px_rgba(255,255,255,0.22)] leading-none"
-          >
-            Harsh
-          </span>
-          <span 
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[115px] font-cursive tracking-normal text-slate-950 dark:text-white/90 drop-shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:drop-shadow-[0_4px_30px_rgba(255,255,255,0.22)] leading-none"
-          >
-            Lagwal
-          </span>
-        </motion.div>
+        {/* ── Studio Hero Bento Layout (Matching User Reference Image) ── */}
+        <div className="flex flex-col gap-4 sm:gap-5">
 
-        {/* ── 3-Column Grid ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center pt-8 sm:pt-10 md:pt-12 lg:pt-10">
-          
-          {/* 1. Left Column: Pure, Clean, Professional Tech Specs & Socials (3 cols) */}
-          <motion.div 
-            initial={{ opacity: 0, x: -35 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left z-20 order-2 lg:order-1"
-          >
-            {/* Clean Professional Skill Cards - High Contrast in Light Mode */}
-            <div className="space-y-3 sm:space-y-3.5 font-sans mb-7 w-full max-w-xs sm:max-w-sm lg:max-w-none">
-              {[
-                { title: "AI & ML Engineering", sub: "Deep Learning • PyTorch", idx: "01", accent: "hover:border-blue-500/50 dark:hover:border-[#55DFFF]/40 group-hover:text-blue-600 dark:group-hover:text-[#55DFFF]" },
-                { title: "Generative AI & LLMs", sub: "Agents • RAG • Gemini", idx: "02", accent: "hover:border-indigo-500/50 dark:hover:border-[#8ab4f8]/40 group-hover:text-indigo-600 dark:group-hover:text-[#8ab4f8]" },
-                { title: "Intelligent Web Systems", sub: "FastAPI • React • Cloud ML", idx: "03", accent: "hover:border-amber-500/50 dark:hover:border-[#FF9868]/40 group-hover:text-amber-600 dark:group-hover:text-[#FF9868]" },
-              ].map((item, i) => (
-                <div 
-                  key={i} 
-                  className={`group relative p-3 sm:p-3.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-300 dark:border-white/[0.08] shadow-sm dark:shadow-none ${item.accent} transition-all duration-300 hover:translate-x-1 backdrop-blur-xs text-left cursor-default`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white transition-colors">
-                      {item.title}
-                    </span>
-                    <span className="text-[10px] font-mono font-semibold text-slate-500 dark:text-white/40">{item.idx}</span>
-                  </div>
-                  <span className="text-xs text-slate-700 dark:text-slate-300 font-mono block font-medium">
-                    {item.sub}
-                  </span>
+          {/* Top Row: Portrait Box + Main Bento Profile Card */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch">
+            
+            {/* Left Bento: Clean Elevated Portrait Card (4 Cols) */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-4 bg-white dark:bg-[#16181f] border border-[#cbd0d9] dark:border-[#262933] rounded-[28px] p-3 sm:p-4 relative flex flex-col justify-between items-center shadow-xs overflow-hidden min-h-[380px] lg:min-h-[430px]"
+            >
+              {/* Subtle top ambient glow */}
+              <div className="absolute inset-0 bg-radial from-[#cbd0d9]/20 dark:from-[#262933]/30 via-transparent to-transparent pointer-events-none" />
+
+              {/* Status Pill on Top */}
+              <div className="w-full flex items-center justify-between z-10">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-[#20232d] border border-[#cbd0d9] dark:border-[#2a2d37] text-[11px] font-semibold text-[#0d0f12] dark:text-[#e3e6ed] shadow-2xs">
+                  <span className="pulse-indicator" />
+                  <span>Available for AI Roles</span>
                 </div>
-              ))}
-            </div>
+                <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white dark:bg-[#20232d] border border-[#cbd0d9] dark:border-[#2a2d37] text-[10.5px] font-mono text-[#494f5c] dark:text-[#9fa6b6] shadow-2xs">
+                  <GraduationCap size={12} />
+                  <span>IIT Patna</span>
+                </div>
+              </div>
 
-            {/* Social Icons Row */}
-            <div className="flex items-center gap-3 pt-1">
-              {[
-                { icon: Github, href: "https://github.com/harshlagwal", label: "GitHub" },
-                { icon: Linkedin, href: "https://linkedin.com/in/harsh-lagwal", label: "LinkedIn" },
-                { icon: Mail, href: "mailto:Harshlagwal2005@gmail.com", label: "Email" },
-              ].map((item, idx) => (
-                <a
-                  key={idx}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={item.label}
-                  className="w-10 h-10 rounded-full bg-white hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/15 border border-slate-300 dark:border-white/10 hover:border-blue-600 dark:hover:border-[#8ab4f8] flex items-center justify-center text-slate-800 hover:text-blue-600 dark:text-white/80 dark:hover:text-[#8ab4f8] transition-all hover:scale-110 shadow-xs"
-                >
-                  <item.icon size={18} strokeWidth={1.8} />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* 2. Center Column: Pure Cutout Portrait with Smooth Fade (6 cols) */}
-          <motion.div 
-            style={{ 
-              rotateX: portraitRotateX,
-              rotateY: portraitRotateY,
-              transformStyle: "preserve-3d" 
-            }}
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.1 }}
-            className="lg:col-span-6 flex flex-col items-center justify-center relative z-30 select-none order-1 lg:order-2"
-          >
-            <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[380px] lg:max-w-[420px] flex justify-center">
-              
-              {/* Dual-tone cinematic rim light glow behind portrait (soft in light mode) */}
-              <div className="absolute -inset-8 bg-gradient-to-r from-[#55DFFF]/20 via-transparent to-[#FF9868]/25 dark:from-[#55DFFF]/25 dark:to-[#FF9868]/30 blur-3xl -z-10 pointer-events-none opacity-50 dark:opacity-100" />
-
-              {/* Pure cutout portrait feathering smoothly at bottom */}
-              <div 
-                className="relative w-full overflow-hidden flex justify-center"
-                style={{
-                  maskImage: 'linear-gradient(to bottom, black 70%, rgba(0,0,0,0.8) 82%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 70%, rgba(0,0,0,0.8) 82%, transparent 100%)',
-                }}
-              >
-                <img
-                  src={harshCutout}
-                  alt="Harsh Lagwal"
-                  className="w-full h-auto max-h-[460px] sm:max-h-[510px] lg:max-h-[550px] object-contain object-top transition-transform duration-700 ease-out hover:scale-[1.02] filter contrast-[1.05] brightness-[1.0] drop-shadow-[0_20px_35px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_25px_40px_rgba(0,0,0,0.7)]"
+              {/* Authentic Portrait Image Frame */}
+              <div className="relative w-full flex-1 flex items-end justify-center pt-4 z-0">
+                <img 
+                  src={harshCutout || harshPhoto} 
+                  alt="Harsh Lagwal" 
+                  className="w-full max-h-[340px] sm:max-h-[360px] object-cover object-top filter contrast-[1.03] transition-transform duration-500 hover:scale-[1.02]"
                 />
               </div>
 
-            </div>
-          </motion.div>
+              {/* Bottom Credential Tag */}
+              <div className="w-full pt-2 flex items-center justify-between border-t border-[#cbd0d9]/70 dark:border-[#262933] z-10 text-[11px] text-[#494f5c] dark:text-[#9fa6b6]">
+                <span className="font-semibold text-[#0d0f12] dark:text-white">Harsh Lagwal</span>
+                <span className="font-mono text-[10px]">Decision Science (2026–28)</span>
+              </div>
+            </motion.div>
 
-          {/* 3. Right Column: Introduction, High-Impact Headline & Premium CTA (3 cols) */}
-          <motion.div 
-            initial={{ opacity: 0, x: 35 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="lg:col-span-3 flex flex-col items-center lg:items-end text-center lg:text-right z-20 order-3"
-          >
-            {/* Status Pill - High Contrast in Light & Dark Mode */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold bg-sky-100 text-sky-900 border border-sky-300 dark:bg-[#55DFFF]/10 dark:text-[#55DFFF] dark:border-[#55DFFF]/25 mb-4 shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-600 dark:bg-[#55DFFF] animate-pulse" />
-              Available for AI Roles
-            </div>
+            {/* Right Bento: Studio Tinted Info Card (8 Cols - Exactly matching Marco Lee Card) */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-8 bg-[#dadde3] dark:bg-[#171920] border border-[#cbd0d9] dark:border-[#262933] rounded-[28px] p-6 sm:p-9 relative flex flex-col justify-between shadow-xs"
+            >
+              <div>
+                {/* Header Row: Corner Bracket Tag */}
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-[#0d0f12] dark:text-[#ffffff] bg-white dark:bg-[#20232d] border border-[#cbd0d9] dark:border-[#2a2d37] px-3 py-1 rounded-md shadow-2xs">
+                    <span>AI Engineering</span>
+                    <span>•</span>
+                    <span>Decision Science</span>
+                  </div>
 
-            {/* Premium Readable Headline with High-Contrast Gradient */}
-            <h2 className="text-base sm:text-lg md:text-xl font-semibold tracking-tight text-slate-900 dark:text-white leading-snug max-w-sm mb-6 font-sans">
-              AI & Machine Learning Engineer developing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-amber-600 dark:from-[#55DFFF] dark:via-[#8ab4f8] dark:to-[#FF9868]">Generative AI, LLM Agents</span> & scalable high-performance systems.
-            </h2>
+                  {/* Signature Corner Framing Tag like [ Capturing raw emotion ] */}
+                  <div className="hidden sm:inline-flex items-center font-mono text-xs text-[#0d0f12] dark:text-[#ffffff] bg-white dark:bg-[#20232d] border border-[#cbd0d9] dark:border-[#2a2d37] px-3 py-1 rounded-lg shadow-2xs select-none">
+                    <span className="text-[#494f5c] dark:text-[#9fa6b6] font-mono mr-1.5">[</span>
+                    <span>Autonomous Systems &amp; LLM Pipelines</span>
+                  </div>
+                </div>
 
-            {/* Luminous Modern CTA - High Contrast in Light Mode, Glowing in Dark Mode */}
-            <div className="flex items-center gap-2.5 mb-5">
-              {/* Lightning Icon Circle Button */}
-              <button
-                onClick={scrollToContact}
-                aria-label="Contact Harsh Lagwal"
-                className="w-11 h-11 rounded-full bg-slate-900 text-[#55DFFF] dark:bg-black border border-slate-800 dark:border-white/20 flex items-center justify-center hover:scale-105 transition-all shadow-md cursor-pointer"
-              >
-                <Zap size={18} className="fill-[#55DFFF] text-[#55DFFF]" />
-              </button>
+                {/* Primary Name Heading */}
+                <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-[#0d0f12] dark:text-white font-display leading-[1.1] mb-1.5">
+                  Harsh Lagwal
+                </h1>
 
-              {/* Pill Button "Hire Me" */}
-              <button
-                onClick={scrollToContact}
-                className="group px-6 py-2.5 rounded-full bg-slate-950 hover:bg-slate-800 text-white dark:bg-white dark:hover:bg-slate-100 dark:text-slate-950 font-bold text-sm sm:text-base tracking-wide transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-md dark:shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:shadow-lg dark:hover:shadow-[0_0_30px_rgba(85,223,255,0.5)] cursor-pointer flex items-center gap-2 border border-slate-800 dark:border-white/60"
-              >
-                <span>Hire Me</span>
-                <ArrowRight size={16} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
+                {/* Subtitle Role */}
+                <div className="text-base sm:text-xl font-normal tracking-tight text-[#494f5c] dark:text-[#9fa6b6] font-display mb-5">
+                  AI &amp; Machine Learning Engineer • MBA Scholar at IIT Patna
+                </div>
 
-            {/* Clean Single-Line Text Links */}
-            <div className="flex items-center gap-3 text-xs sm:text-sm font-mono text-slate-800 dark:text-white/70 font-medium">
-              <button
-                onClick={() => setIsResumeModalOpen(true)}
-                className="hover:underline hover:text-blue-600 dark:hover:text-[#55DFFF] cursor-pointer transition-colors"
-              >
-                Resume
-              </button>
+                {/* Narrative Bio Copy */}
+                <p className="text-sm sm:text-base text-[#2b303a] dark:text-[#c5cad6] leading-relaxed max-w-2xl mb-6 font-sans">
+                  Decision Science Scholar at <strong className="font-semibold text-[#0d0f12] dark:text-white">IIT Patna</strong> with a B.Tech in CSE. Designing end-to-end autonomous agent architectures, fine-tuned Generative AI workflows, and resilient microservices with FastAPI, PyTorch, and Docker.
+                </p>
+              </div>
 
-              <span className="text-slate-400 dark:text-white/30">•</span>
+              {/* Bottom Exploration Link */}
+              <div className="pt-4 border-t border-[#cbd0d9]/70 dark:border-[#262933]/70 flex flex-wrap items-center justify-between gap-3">
+                <a
+                  href="#about"
+                  onClick={handleScrollToAbout}
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#0d0f12] dark:text-white hover:underline group cursor-pointer"
+                >
+                  <span>Explore Engineering Standards &amp; Background</span>
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </a>
 
-              <button
-                onClick={handleCopyBio}
-                title="Copy recruiter bio"
-                className="hover:underline hover:text-blue-600 dark:hover:text-[#55DFFF] cursor-pointer transition-colors"
-              >
-                {hasCopiedBio ? '✓ Bio Copied' : 'Recruiter Bio'}
-              </button>
+                <div className="flex items-center gap-2 text-xs text-[#494f5c] dark:text-[#9fa6b6] font-mono">
+                  <Cpu size={13} className="text-[#0d0f12] dark:text-[#e3e6ed]" />
+                  <span>Sub-100ms Inference Focus</span>
+                </div>
+              </div>
 
-              <span className="text-slate-400 dark:text-white/30">•</span>
+            </motion.div>
 
-              <button
-                onClick={handleCopyEmail}
-                title="Copy email address"
-                className="hover:underline hover:text-blue-600 dark:hover:text-[#55DFFF] cursor-pointer transition-colors"
-              >
-                Copy Email
-              </button>
-            </div>
-          </motion.div>
+          </div>
 
-        </div>
-
-      </div>
-
-      {/* ── Bottom Scroll Prompt - Visible in both Light and Dark Mode ── */}
-      <div className="hidden sm:flex flex-col items-center gap-2 w-full z-10 select-none">
-        <span className="text-[10px] text-slate-600 dark:text-white/40 uppercase tracking-[0.25em] font-bold font-mono">
-          Scroll to explore
-        </span>
-        <div className="w-1 h-5 bg-slate-300 dark:bg-white/10 rounded-full overflow-hidden relative">
-          <motion.div 
-            animate={{ y: [-20, 20] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 left-0 w-full h-[50%] bg-blue-600 dark:bg-[#55DFFF]"
-          />
-        </div>
-      </div>
-
-      {/* Toast Notification Container */}
-      <AnimatePresence>
-        {toastMessage && (
+          {/* Middle Row: Two Large Tactile Pill Buttons (Portfolio & Contact blocks in reference images) */}
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl bg-slate-900 text-white dark:bg-[#121515] dark:text-white shadow-2xl backdrop-blur-md border border-slate-700 dark:border-[#55DFFF]/30 flex items-center gap-2.5 text-xs font-mono font-medium"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
           >
-            <Check size={16} className="text-emerald-400 dark:text-[#55DFFF]" />
-            <span>{toastMessage}</span>
+            {/* Portfolio Pill Card Button */}
+            <a
+              href="#projects"
+              onClick={handleScrollToProjects}
+              className="studio-btn-pill tap-spring flex items-center justify-center gap-3 py-4 sm:py-5 px-6 rounded-2xl"
+            >
+              <FolderGit2 size={19} strokeWidth={1.9} />
+              <span className="text-base sm:text-lg font-medium font-display">Explore Projects (8+ Production)</span>
+            </a>
+
+            {/* Contact Pill Card Button */}
+            <a
+              href="#contact"
+              onClick={handleScrollToContact}
+              className="studio-btn-pill tap-spring flex items-center justify-center gap-3 py-4 sm:py-5 px-6 rounded-2xl"
+            >
+              <MessageSquare size={19} strokeWidth={1.9} />
+              <span className="text-base sm:text-lg font-medium font-display">Get in Touch / Contact</span>
+            </a>
           </motion.div>
-        )}
-      </AnimatePresence>
 
-      {/* Resume Modal */}
-      <ResumeModal 
-        isOpen={isResumeModalOpen} 
-        onClose={() => setIsResumeModalOpen(false)} 
-        resumeLink={resumeLink} 
-      />
+          {/* Bottom Row: Secondary Pill Action & Socials Bar (Matching the bottom pill bar in reference image) */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap items-center justify-between gap-3 pt-1"
+          >
+            {/* Left CTAs: Résumé & Email */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <button
+                type="button"
+                onClick={onOpenResume}
+                className="pill-btn-dark tap-spring text-xs sm:text-sm font-medium py-2.5 px-5"
+              >
+                <span>View Résumé</span>
+                <ExternalLink size={13} strokeWidth={2} />
+              </button>
 
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-mono bg-white hover:bg-[#f5f6f8] dark:bg-[#20232d] dark:hover:bg-[#282c38] text-[#0d0f12] dark:text-[#e3e6ed] border border-[#cbd0d9] dark:border-[#2a2d37] shadow-2xs transition-all cursor-pointer tap-spring"
+                title="Copy email address"
+              >
+                {copiedEmail ? (
+                  <>
+                    <Check size={13} className="text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-emerald-600 dark:text-emerald-400 font-medium">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={13} />
+                    <span>{emailAddress}</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Right: Connected Profiles & Quick Links Pill Box */}
+            <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white dark:bg-[#20232d] border border-[#cbd0d9] dark:border-[#262933] text-xs sm:text-sm shadow-2xs">
+              <a
+                href={`mailto:${emailAddress}`}
+                title="Send Email"
+                className="text-[#494f5c] dark:text-[#9fa6b6] hover:text-[#0d0f12] dark:hover:text-white transition-colors"
+              >
+                <Mail size={16} />
+              </a>
+              <span className="text-[#cbd0d9] dark:text-[#262933]">•</span>
+              <a
+                href={githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-[#494f5c] dark:text-[#9fa6b6] hover:text-[#0d0f12] dark:hover:text-white transition-colors"
+              >
+                GitHub
+              </a>
+              <span className="text-[#cbd0d9] dark:text-[#262933]">•</span>
+              <a
+                href={linkedinLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-[#494f5c] dark:text-[#9fa6b6] hover:text-[#0d0f12] dark:hover:text-white transition-colors"
+              >
+                LinkedIn
+              </a>
+              <span className="text-[#cbd0d9] dark:text-[#262933]">•</span>
+              <a
+                href={`https://wa.me/916230624011?text=${encodeURIComponent("Hi Harsh, I saw your portfolio and would like to connect!")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-[#494f5c] dark:text-[#9fa6b6] hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+              >
+                WhatsApp
+              </a>
+            </div>
+
+          </motion.div>
+
+          {/* Micro Focus Tags */}
+          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-[#494f5c] dark:text-[#9fa6b6]">
+            <span className="font-mono text-[11px] uppercase tracking-wider font-semibold">Specialization:</span>
+            {["Generative AI", "PyTorch", "Decision Science", "FastAPI", "Full-Stack & Agentic AI"].map((tag, i) => (
+              <span
+                key={i}
+                className="px-2.5 py-0.5 rounded-lg bg-white dark:bg-[#1c1e25] border border-[#cbd0d9] dark:border-[#2a2d37] text-[11px] font-medium text-[#0d0f12] dark:text-[#e3e6ed]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+        </div>
+
+      </div>
     </section>
   );
 };
 
 export default HeroSection;
-
-
-
-
-
